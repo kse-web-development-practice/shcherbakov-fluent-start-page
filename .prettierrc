@@ -5,6 +5,5 @@
 	"printWidth": 150,
 	"trailingComma": "none",
 	"endOfLine": "lf",
-	"semi": true,
-	"insertFinalNewline": true
+	"semi": true
 }

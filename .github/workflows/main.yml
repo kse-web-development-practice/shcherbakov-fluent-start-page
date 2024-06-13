@@ -32,5 +32,4 @@ jobs:
                   path: dist
     publish:
         needs: build
-        if: github.ref == 'refs/heads/master'
         uses: ./.github/workflows/github-pages.yml
