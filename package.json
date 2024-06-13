@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "webpack serve --env dev",
 		"build": "webpack",
-		"lint": "eslint src/**",
+		"lint": "eslint --no-error-on-unmatched-pattern src/**",
 		"lint:fix": "eslint --fix",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"storybook": "storybook dev -p 6006",
