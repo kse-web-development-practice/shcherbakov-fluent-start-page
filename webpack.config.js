@@ -1,0 +1,70 @@
+/* eslint-disable no-undef */
+
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const EslintWebpackPlugin = require('eslint-webpack-plugin');
+
+module.exports = (env) => ({
+	mode: env.dev ? 'development' : 'production',
+	entry: './src/index.js',
+	output: {
+		filename: 'main.js',
+		path: path.resolve(__dirname, 'dist')
+	},
+	resolve: {
+		extensions: ['.js', '.jsx']
+	},
+	devtool: env.dev ? 'eval-source-map' : 'source-map',
+	devServer: {
+		static: {
+			directory: path.resolve(__dirname, 'public')
+		},
+		port: 3000,
+		compress: false,
+		// Для легшої маршрутизації
+		historyApiFallback: {
+			index: 'index.html'
+		}
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: 'public/index.html',
+			inject: false // Зупинити дублювання стилів https://stackoverflow.com/a/75313687
+		}),
+		new EslintWebpackPlugin({
+			exclude: ['node_modules', 'dist', 'public'],
+			context: path.resolve(__dirname, 'src')
+		})
+	],
+	module: {
+		rules: [
+			{
+				test: /.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['@babel/preset-env', '@babel/preset-react']
+					}
+				}
+			},
+			{
+				test: /\.(sa|sc|c)ss$/i,
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							importLoaders: 1,
+							modules: {
+								localIdentName: '[local]--[name]--[hash:base64:5]'
+							}
+						}
+					},
+					'postcss-loader',
+					'sass-loader'
+				]
+			}
+		]
+	}
+});
