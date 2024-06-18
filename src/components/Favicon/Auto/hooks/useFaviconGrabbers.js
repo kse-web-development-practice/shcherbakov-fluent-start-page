@@ -36,6 +36,7 @@ const getFaviconWithDuckDuckGo = (url) => {
 };
 
 // https://developer.chrome.com/docs/extensions/how-to/ui/favicons
+// To make the website's favicon show properly, the user should visit the website at least once
 const getFaviconWithChromeExtensionApi = (url, size = 64) => {
 	return new Promise((resolve, reject) => {
 		if (!window.chrome || !chrome.runtime || !chrome.runtime.id) {
