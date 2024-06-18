@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Item from '../Item/index';
+import Item from '../Item';
 import * as styles from './group.module.scss';
 
-const Group = ({ name, bookmarks, maxColumns, renderBookmarkItem }) => {
+const Group = ({ name, bookmarks = [], maxColumns = 6, renderBookmarkItem }) => {
 	return (
 		<div
 			className={styles.group}
@@ -15,11 +15,6 @@ const Group = ({ name, bookmarks, maxColumns, renderBookmarkItem }) => {
 			<div className={styles.group__layout}>{bookmarks.map((bookmark) => renderBookmarkItem(bookmark))}</div>
 		</div>
 	);
-};
-
-Group.defaultProps = {
-	bookmarks: [],
-	maxColumns: 6
 };
 
 Group.propTypes = {

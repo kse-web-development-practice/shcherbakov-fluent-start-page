@@ -1,7 +1,7 @@
 import React from 'react';
-import BookmarkGroup from './index';
+import BookmarkGroup from '.';
+import BookmarkItem from '../Item';
 import defaultData from '../../../constants/defaultData';
-import Item from '../Item';
 
 export default {
 	title: 'Bookmark/Group',
@@ -15,7 +15,7 @@ export default {
 export const SampleGroup = {
 	args: {
 		...defaultData.groups[0],
-		maxColumns: BookmarkGroup.defaultProps.maxColumns,
-		renderBookmarkItem: (bookmark) => <Item {...bookmark} />
+		maxColumns: 6,
+		renderBookmarkItem: (bookmark) => <BookmarkItem key={bookmark.id} {...bookmark} />
 	}
 };

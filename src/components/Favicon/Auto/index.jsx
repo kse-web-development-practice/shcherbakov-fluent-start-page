@@ -30,8 +30,6 @@ const FaviconAuto = ({ url }) => {
 			.finally(() => setIsLoading(false));
 	}, []);
 
-	console.log(faviconUrl, faviconUrl === null);
-
 	if (isLoading) {
 		return <p>loading...</p>;
 	}

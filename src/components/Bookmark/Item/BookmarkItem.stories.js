@@ -1,15 +1,15 @@
 import React from 'react';
+
 import BookmarkGroup from '../Group';
-import BookmarkItem from '../Item/index';
+import BookmarkItem from '.';
 
 export default {
 	title: 'Bookmark/Item',
 	component: BookmarkItem,
 	decorators: [
-		(Story, { args }) => {
-			console.log(args);
-			return <BookmarkGroup bookmarks={[args]} renderBookmarkItem={(bookmark) => <BookmarkItem {...bookmark} />} />;
-		}
+		(Story, { args }) => (
+			<BookmarkGroup id="0" bookmarks={[args]} renderBookmarkItem={(bookmark) => <BookmarkItem key={bookmark.id} {...bookmark} />} />
+		)
 	],
 	parameters: {
 		layout: 'padded'

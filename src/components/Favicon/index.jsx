@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FaviconAuto from './Auto';
 
-const Favicon = ({ type }) => {
+const Favicon = ({ type = 'none' }) => {
 	switch (type) {
 		case 'auto':
 			return <FaviconAuto />;
@@ -13,10 +13,6 @@ const Favicon = ({ type }) => {
 		default:
 			return <p>Not supported</p>;
 	}
-};
-
-Favicon.defaultProps = {
-	type: 'none'
 };
 
 Favicon.propTypes = {

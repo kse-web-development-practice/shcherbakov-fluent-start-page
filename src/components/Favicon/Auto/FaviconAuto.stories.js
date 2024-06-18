@@ -5,8 +5,14 @@ export default {
 	component: FaviconAuto
 };
 
-export const FaviconSample = {
+export const WebsiteExists = {
 	args: {
 		url: 'https://kse-nmt.com'
+	}
+};
+
+export const WebsiteNotExists = {
+	args: {
+		url: 'https://iahgiushfgsiufg.ua'
 	}
 };
