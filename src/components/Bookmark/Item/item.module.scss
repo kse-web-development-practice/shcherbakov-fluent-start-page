@@ -41,7 +41,6 @@ $item-sizes: (
 	border-radius: 4px;
 	text-decoration: none;
 
-
 	@each $size-name, $sizings in $item-sizes {
 		&_#{$size-name} {
 			width: get-bookmark-real-size(map-get($sizings, horizontal-scale));
