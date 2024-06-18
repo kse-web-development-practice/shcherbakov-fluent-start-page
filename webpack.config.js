@@ -3,6 +3,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const EslintWebpackPlugin = require('eslint-webpack-plugin');
+const { DefinePlugin } = require('webpack');
 
 module.exports = (env) => ({
 	mode: env.dev ? 'development' : 'production',
@@ -34,6 +35,9 @@ module.exports = (env) => ({
 		new EslintWebpackPlugin({
 			exclude: ['node_modules', 'dist', 'public'],
 			context: path.resolve(__dirname, 'src')
+		}),
+		new DefinePlugin({
+			'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL)
 		})
 	],
 	module: {

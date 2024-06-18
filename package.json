@@ -6,11 +6,27 @@
 	"scripts": {
 		"dev": "webpack serve --env dev",
 		"build": "webpack",
-		"lint": "eslint src/**",
+		"lint": "eslint --no-error-on-unmatched-pattern src/**",
 		"lint:fix": "eslint --fix",
+		"prettier": "prettier --write --ignore-unknown ./src/**",
+		"prepare": "husky",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.js": [
+			"npm run prettier",
+			"npm run lint"
+		],
+		"*.css": [
+			"npm run prettier"
+		]
 	},
 	"keywords": [],
 	"author": "Andrii Shcherbakov (https://shcherbadev.github.io)",
@@ -52,6 +68,8 @@
 		"eslint-plugin-storybook": "^0.8.0",
 		"eslint-webpack-plugin": "^4.2.0",
 		"html-webpack-plugin": "^5.6.0",
+		"husky": "^9.0.11",
+		"lint-staged": "^15.2.7",
 		"mini-css-extract-plugin": "^2.9.0",
 		"node-sass": "^9.0.0",
 		"postcss-loader": "^8.1.1",
