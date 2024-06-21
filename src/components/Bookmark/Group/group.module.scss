@@ -1,12 +1,4 @@
-$gap: 4px;
-
 .group {
 	display: flex;
 	flex-direction: column;
-
-	&__layout {
-		display: inline-grid;
-		justify-content: flex-start;
-		gap: $gap;
-	}
 }

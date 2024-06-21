@@ -1,0 +1,26 @@
+// Modified version of node_modules/react-grid-layout/css/style.css
+// Resizing handles were removed because they are not needed
+
+.react-grid {
+	&-layout {
+		position: relative;
+		transition: height 200ms ease;
+	}
+
+	&-item {
+		transition: all 200ms ease;
+
+		&.react-draggable-dragging {
+			transition: none;
+			z-index: 3;
+			will-change: transform;
+			pointer-events: none; // Prevent from opening a link after dragging
+		}
+
+		&.react-grid-placeholder {
+			z-index: 2;
+			user-select: none;
+			pointer-events: none;
+		}
+	}
+}

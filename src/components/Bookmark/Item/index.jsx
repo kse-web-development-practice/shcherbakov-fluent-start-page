@@ -1,27 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { tileSizes } from '../../../constants/tileSizes';
 import * as styles from './item.module.scss';
 
-const Item = ({ text, link, size, row, column }) => {
-	const sizing = tileSizes[size];
+// eslint-disable-next-line no-unused-vars
+const Item = React.forwardRef(({ text, link, size, className, row, column, ...props }, ref) => {
+	// const [isDragging, setIsDragging] = useState(false);
 
 	return (
 		<a
+			ref={ref}
 			href={link}
-			className={`${styles.item} ${styles[`item_${size}`]}`}
-			style={{
-				gridRowStart: row,
-				gridRowEnd: row + sizing.rows,
-				gridColumnStart: column,
-				gridColumnEnd: column + sizing.columns,
-				aspectRatio: sizing.aspectRatio
-			}}
+			className={`${styles.item} ${className}`}
+			draggable={false} // Solves the issue with drag start on Firefox
+			{...props}
 		>
 			{size !== 'small' && text}
 		</a>
 	);
-};
+});
+
+Item.displayName = 'BookmarkItem';
 
 Item.propTypes = {
 	id: PropTypes.string.isRequired,

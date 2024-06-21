@@ -6,6 +6,13 @@ import defaultData from '../../../constants/defaultData';
 export default {
 	title: 'Bookmark/Group',
 	component: BookmarkGroup,
+	decorators: [
+		(Story) => (
+			<div style={{ width: 400 }}>
+				<Story />
+			</div>
+		)
+	],
 	parameters: {
 		layout: 'padded'
 	},
