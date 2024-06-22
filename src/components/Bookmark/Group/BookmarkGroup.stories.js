@@ -8,7 +8,7 @@ export default {
 	component: BookmarkGroup,
 	decorators: [
 		(Story) => (
-			<div style={{ width: 400 }}>
+			<div style={{ width: 420 }}>
 				<Story />
 			</div>
 		)
@@ -23,6 +23,8 @@ export const SampleGroup = {
 	args: {
 		...defaultData.groups[0],
 		maxColumns: 6,
-		renderBookmarkItem: (bookmark) => <BookmarkItem key={bookmark.id} {...bookmark} />
+		renderBookmarkItem: (bookmark, showDraggableHandle) => (
+			<BookmarkItem key={bookmark.id} showDraggableHandle={showDraggableHandle} {...bookmark} />
+		)
 	}
 };

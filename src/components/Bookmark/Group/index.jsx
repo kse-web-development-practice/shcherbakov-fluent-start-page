@@ -1,23 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ReactGridLayout, { WidthProvider } from 'react-grid-layout';
 import Item from '../Item';
+import useSquareLayoutItems from './hooks/useSquareLayoutItems';
+import useMobileCheck from '../../../hooks/useMobileCheck';
 import * as styles from './group.module.scss';
 import { tileSizes } from '../../../constants/tileSizes';
 
 const ResponsiveReactGridLayout = WidthProvider(ReactGridLayout);
 
 const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4, renderBookmarkItem, onChange }) => {
-	// Implementation of aspect ratio for layout
-	// because react-grid-layout does not support it
-	// https://github.com/react-grid-layout/react-grid-layout/issues/644
-	const [layoutRowHeight, setLayoutRowHeight] = useState(undefined);
-	const layoutContainerRef = useRef(null);
-
-	useEffect(() => {
-		const layoutContainer = layoutContainerRef.current.elementRef.current;
-		setLayoutRowHeight(layoutContainer.clientWidth / maxColumns - layoutGap);
-	}, [layoutContainerRef]);
+	const isMobile = useMobileCheck();
+	const { layoutRowHeight, layoutContainerRef } = useSquareLayoutItems(maxColumns, layoutGap);
 
 	const handleLayoutChange = (layout) => {
 		onChange?.(
@@ -47,8 +41,9 @@ const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4
 				containerPadding={[0, 0]}
 				rowHeight={layoutRowHeight}
 				onLayoutChange={handleLayoutChange}
+				draggableHandle={isMobile ? '.draggable-handle' : undefined}
 			>
-				{bookmarks.map(renderBookmarkItem)}
+				{bookmarks.map((item) => renderBookmarkItem(item, isMobile))}
 			</ResponsiveReactGridLayout>
 		</div>
 	);
@@ -64,7 +59,7 @@ BookmarkGroup.propTypes = {
 	renderBookmarkItem: PropTypes.func.isRequired,
 
 	/**
-	 * (groupId: string, layout: Array<{ id: string; row: number; column: number; size: string; text: string; link: string }>) => void
+	 * (groupId: string, layout: Array<{ id: string; row: number; column: number; size: string; }>) => void
 	 */
 	onChange: PropTypes.func
 };
