@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import * as styles from './item.module.scss';
 
 // eslint-disable-next-line no-unused-vars
-const Item = React.forwardRef(({ text, link, size, className, row, column, ...props }, ref) => {
-	// const [isDragging, setIsDragging] = useState(false);
-
+const BookmarkItem = React.forwardRef(({ text, link, size, className, row, column, ...props }, ref) => {
 	return (
 		<a
 			ref={ref}
 			href={link}
-			className={`${styles.item} ${className}`}
+			className={`${styles['bookmark-item']} ${className}`}
 			draggable={false} // Solves the issue with drag start on Firefox
 			{...props}
 		>
@@ -19,9 +17,9 @@ const Item = React.forwardRef(({ text, link, size, className, row, column, ...pr
 	);
 });
 
-Item.displayName = 'BookmarkItem';
+BookmarkItem.displayName = 'BookmarkItem';
 
-Item.propTypes = {
+BookmarkItem.propTypes = {
 	id: PropTypes.string.isRequired,
 	link: PropTypes.string.isRequired,
 	size: PropTypes.oneOf(['small', 'medium', 'wide', 'large']).isRequired,
@@ -30,4 +28,4 @@ Item.propTypes = {
 	text: PropTypes.string
 };
 
-export default Item;
+export default BookmarkItem;

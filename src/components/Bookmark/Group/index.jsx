@@ -7,7 +7,7 @@ import { tileSizes } from '../../../constants/tileSizes';
 
 const ResponsiveReactGridLayout = WidthProvider(ReactGridLayout);
 
-const Group = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4, renderBookmarkItem, onChange }) => {
+const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4, renderBookmarkItem, onChange }) => {
 	// Implementation of aspect ratio for layout
 	// because react-grid-layout does not support it
 	// https://github.com/react-grid-layout/react-grid-layout/issues/644
@@ -31,7 +31,7 @@ const Group = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4, render
 	};
 
 	return (
-		<div className={styles.group}>
+		<div className={styles['bookmark-group']}>
 			{name && <h1>{name}</h1>}
 			<ResponsiveReactGridLayout
 				ref={layoutContainerRef}
@@ -54,7 +54,7 @@ const Group = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4, render
 	);
 };
 
-Group.propTypes = {
+BookmarkGroup.propTypes = {
 	id: PropTypes.string.isRequired,
 	name: PropTypes.string,
 	bookmarks: PropTypes.arrayOf(PropTypes.shape(Item.propTypes)),
@@ -69,4 +69,4 @@ Group.propTypes = {
 	onChange: PropTypes.func
 };
 
-export default Group;
+export default BookmarkGroup;
