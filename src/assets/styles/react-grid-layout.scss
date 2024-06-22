@@ -13,7 +13,6 @@
 			transition: none;
 			z-index: 3;
 			will-change: transform;
-			pointer-events: none; // Prevent from opening a link after dragging
 		}
 
 		&.react-grid-placeholder {

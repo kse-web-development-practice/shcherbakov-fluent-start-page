@@ -1,1 +1,10 @@
 @import './react-grid-layout';
+
+@font-face {
+	font-family: OpenSans;
+	src: url(../fonts/OpenSans-VariableFont.ttf);
+}
+
+body {
+	font-family: OpenSans, Tahoma, Geneva, Verdana, sans-serif;
+}

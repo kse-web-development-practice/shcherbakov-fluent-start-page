@@ -23,7 +23,7 @@ const useSquareLayoutItems = (maxColumns, layoutGap) => {
 
 		const layoutContainer = layoutContainerRef.current.elementRef.current;
 		setLayoutRowHeight(layoutContainer.clientWidth / maxColumns - layoutGap);
-	}, [layoutContainerRef]);
+	}, [layoutContainerRef, maxColumns]);
 
 	return { layoutRowHeight, layoutContainerRef };
 };

@@ -22,7 +22,6 @@ export default {
 export const SampleGroup = {
 	args: {
 		...defaultData.groups[0],
-		maxColumns: 6,
 		renderBookmarkItem: (bookmark, showDraggableHandle) => (
 			<BookmarkItem key={bookmark.id} showDraggableHandle={showDraggableHandle} {...bookmark} />
 		)
