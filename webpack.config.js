@@ -60,6 +60,7 @@ module.exports = (env) => ({
 						loader: 'css-loader',
 						options: {
 							importLoaders: 1,
+							esModule: false,
 							modules: {
 								localIdentName: '[local]--[name]--[hash:base64:5]'
 							}

@@ -18,7 +18,10 @@ const config = {
 							'style-loader',
 							{
 								loader: 'css-loader',
-								options: { importLoaders: 1 }
+								options: {
+									importLoaders: 1,
+									esModule: false
+								}
 							},
 							'postcss-loader',
 							'sass-loader'
