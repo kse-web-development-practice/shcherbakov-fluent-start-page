@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './item.module.scss';
 import useLinkClickFix from './hooks/useLinkClickFix';
@@ -8,7 +9,7 @@ const BookmarkItem = React.forwardRef(({ id, text, link, size, className, row, c
 	const linkClickFix = useLinkClickFix();
 
 	return (
-		<div ref={ref} className={`${styles.bookmarkItem} ${className}`} {...props}>
+		<div ref={ref} className={classNames(styles.bookmarkItem, className)} {...props}>
 			{showDraggableHandle && <button className="draggable-handle" aria-hidden></button>}
 			<a href={link} className={styles.bookmarkItemLink} {...linkClickFix}>
 				<span className={styles.bookmarkItemText}>{size !== 'small' && text}</span>
