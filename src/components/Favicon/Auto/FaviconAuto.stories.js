@@ -2,7 +2,12 @@ import FaviconAuto from '.';
 
 export default {
 	title: 'Favicon/Auto',
-	component: FaviconAuto
+	component: FaviconAuto,
+	argTypes: {
+		url: {
+			control: 'text'
+		}
+	}
 };
 
 export const WebsiteExists = {

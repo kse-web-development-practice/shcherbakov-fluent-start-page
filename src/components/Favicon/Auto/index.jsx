@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useFaviconGrabbers from './hooks/useFaviconGrabbers';
+import UrlService from '../../../services/UrlService';
 
 const FaviconAuto = ({ url }) => {
 	const [faviconUrl, setFaviconUrl] = useState(null);
@@ -9,6 +10,11 @@ const FaviconAuto = ({ url }) => {
 	const { getFaviconWithChromeExtensionApi, getFaviconWithDuckDuckGo, getFaviconFromWebsite } = useFaviconGrabbers();
 
 	useEffect(() => {
+		if (!UrlService.isValid(url)) {
+			setIsLoading(false);
+			return;
+		}
+
 		Promise.any([
 			getFaviconWithChromeExtensionApi(url),
 			getFaviconWithDuckDuckGo(url),

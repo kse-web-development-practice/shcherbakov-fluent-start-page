@@ -1,4 +1,12 @@
 class UrlService {
+	static isValid(url) {
+		try {
+			return Boolean(new URL(url));
+		} catch (e) {
+			return false;
+		}
+	}
+
 	static getOrigin(url) {
 		return new URL(url).origin;
 	}
