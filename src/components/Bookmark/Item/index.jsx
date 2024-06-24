@@ -3,6 +3,9 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './item.module.scss';
 import useLinkClickFix from './hooks/useLinkClickFix';
+import FaviconAuto from '../../Favicon/Auto';
+import FaviconIcon from '../../Favicon/Icon';
+import FaviconText from '../../Favicon/Text';
 
 // eslint-disable-next-line no-unused-vars
 const BookmarkItem = React.forwardRef(({ id, text, link, size, className, row, column, showDraggableHandle, ...props }, ref) => {
@@ -27,6 +30,12 @@ BookmarkItem.propTypes = {
 	row: PropTypes.number.isRequired,
 	column: PropTypes.number.isRequired,
 	text: PropTypes.string,
+	favicon: PropTypes.oneOfType([
+		PropTypes.shape({ type: 'none' }),
+		PropTypes.shape({ type: 'auto', data: PropTypes.shape(FaviconAuto.propTypes) }),
+		PropTypes.shape({ type: 'icon', data: PropTypes.shape(FaviconIcon.propTypes) }),
+		PropTypes.shape({ type: 'text', data: PropTypes.shape(FaviconText.propTypes) })
+	]),
 	showDraggableHandle: PropTypes.bool
 };
 

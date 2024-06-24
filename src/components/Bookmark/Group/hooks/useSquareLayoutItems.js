@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from 'react';
  * @param {number} layoutGap
  * @returns {{
  * 	layoutRowHeight: number?;
- * 	layoutContainerRef: React.MutableRefObject<null>
+ * 	layoutContainerRef: React.MutableRefObject<null>;
  * }}
  */
 const useSquareLayoutItems = (maxColumns, layoutGap) => {

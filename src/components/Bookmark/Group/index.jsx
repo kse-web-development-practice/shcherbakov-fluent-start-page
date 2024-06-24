@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactGridLayout, { WidthProvider } from 'react-grid-layout';
+import Header from './Header';
 import Item from '../Item';
 import useSquareLayoutItems from './hooks/useSquareLayoutItems';
 import useMobileCheck from '../../../hooks/useMobileCheck';
@@ -9,7 +10,16 @@ import { tileSizes } from '../../../constants/tileSizes';
 
 const ResponsiveReactGridLayout = WidthProvider(ReactGridLayout);
 
-const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4, renderGroupHeader, renderBookmarkItem, onChange }) => {
+const BookmarkGroup = ({
+	id,
+	name,
+	bookmarks = [],
+	maxColumns = 6,
+	layoutGap = 4,
+	renderGroupHeader = (group) => <Header {...group} />,
+	renderBookmarkItem = (bookmark, showDraggableHandle) => <Item key={bookmark.id} showDraggableHandle={showDraggableHandle} {...bookmark} />,
+	onChange
+}) => {
 	const isMobile = useMobileCheck();
 	const { layoutRowHeight, layoutContainerRef } = useSquareLayoutItems(maxColumns, layoutGap);
 
@@ -57,11 +67,11 @@ BookmarkGroup.propTypes = {
 	layoutGap: PropTypes.number,
 
 	/**
-	 * (id, name) => React.ReactNode;
+	 * ({ id: string, name: string }) => React.ReactNode;
 	 */
 	renderGroupHeader: PropTypes.func,
 
-	renderBookmarkItem: PropTypes.func.isRequired,
+	renderBookmarkItem: PropTypes.func,
 
 	/**
 	 * (groupId: string, layout: Array<{ id: string; row: number; column: number; size: string; }>) => void

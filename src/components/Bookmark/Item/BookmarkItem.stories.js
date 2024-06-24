@@ -8,7 +8,9 @@ export default {
 	component: BookmarkItem,
 	decorators: [
 		(Story, { args }) => (
-			<BookmarkGroup id="0" bookmarks={[args]} renderBookmarkItem={(bookmark) => <BookmarkItem key={bookmark.id} {...bookmark} />} />
+			<div style={{ width: 400 }}>
+				<BookmarkGroup id="0" renderGroupHeader={null} bookmarks={[args]} />
+			</div>
 		)
 	],
 	parameters: {

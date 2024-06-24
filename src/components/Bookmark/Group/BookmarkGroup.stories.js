@@ -1,7 +1,5 @@
 import React from 'react';
 import BookmarkGroup from '.';
-import BookmarkGroupHeader from './Header';
-import BookmarkItem from '../Item';
 import defaultData from '../../../constants/defaultData';
 
 export default {
@@ -22,10 +20,6 @@ export default {
 
 export const SampleGroup = {
 	args: {
-		...defaultData.groups[0],
-		renderGroupHeader: (group) => <BookmarkGroupHeader {...group} />,
-		renderBookmarkItem: (bookmark, showDraggableHandle) => (
-			<BookmarkItem key={bookmark.id} showDraggableHandle={showDraggableHandle} {...bookmark} />
-		)
+		...defaultData.groups[0]
 	}
 };
