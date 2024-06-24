@@ -25,7 +25,12 @@ export const SmallBookmark = {
 		link: '#',
 		row: 0,
 		column: 0,
-		size: 'small'
+		size: 'small',
+		favicon: {
+			type: 'icon',
+			iconStyle: 'fas',
+			name: 'calculator'
+		}
 	}
 };
 
@@ -35,7 +40,12 @@ export const MediumBookmark = {
 		link: '#',
 		row: 0,
 		column: 0,
-		size: 'medium'
+		size: 'medium',
+		text: 'Google',
+		favicon: {
+			type: 'image',
+			url: 'https://google.com/favicon.ico'
+		}
 	}
 };
 
@@ -45,7 +55,11 @@ export const WideBookmark = {
 		link: '#',
 		row: 0,
 		column: 0,
-		size: 'wide'
+		size: 'wide',
+		favicon: {
+			type: 'text',
+			text: 'Hello world ahhahahahah'
+		}
 	}
 };
 
@@ -55,6 +69,10 @@ export const LargeBookmark = {
 		link: '#',
 		row: 0,
 		column: 0,
-		size: 'large'
+		size: 'large',
+		favicon: {
+			type: 'image',
+			url: 'https://google.com/favicon.ico'
+		}
 	}
 };
