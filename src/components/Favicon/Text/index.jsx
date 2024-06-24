@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 
-const FaviconText = ({ text = '...' }) => {
-	return text;
-};
+const FaviconText = ({ text = '...' }) => text;
 
 FaviconText.propTypes = {
 	text: PropTypes.string

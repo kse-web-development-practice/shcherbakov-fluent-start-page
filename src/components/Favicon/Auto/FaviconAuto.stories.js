@@ -4,7 +4,7 @@ export default {
 	title: 'Favicon/Auto',
 	component: FaviconAuto,
 	argTypes: {
-		url: {
+		websiteUrl: {
 			control: 'text'
 		}
 	}
@@ -12,12 +12,12 @@ export default {
 
 export const WebsiteExists = {
 	args: {
-		url: 'https://kse-nmt.com'
+		websiteUrl: 'https://kse-nmt.com'
 	}
 };
 
 export const WebsiteNotExists = {
 	args: {
-		url: 'https://iahgiushfgsiufg.ua'
+		websiteUrl: 'https://iahgiushfgsiufg.ua'
 	}
 };
