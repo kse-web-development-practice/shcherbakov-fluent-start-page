@@ -71,6 +71,10 @@ module.exports = (env) => ({
 					'postcss-loader',
 					'sass-loader'
 				]
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/i,
+				type: 'asset/resource'
 			}
 		]
 	}

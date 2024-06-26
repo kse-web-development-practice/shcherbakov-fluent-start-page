@@ -4,7 +4,7 @@ import ReactGridLayout, { WidthProvider } from 'react-grid-layout';
 import Header from './Header';
 import Item from '../Item';
 import useSquareLayoutItems from './hooks/useSquareLayoutItems';
-import useMobileCheck from '../../../hooks/useMobileCheck';
+import useMobileUserAgentCheck from '../../../hooks/useMobileUserAgentCheck';
 import styles from './group.module.scss';
 import { tileSizes } from '../../../constants/tileSizes';
 
@@ -20,7 +20,7 @@ const BookmarkGroup = ({
 	renderBookmarkItem = (bookmark, showDraggableHandle) => <Item key={bookmark.id} showDraggableHandle={showDraggableHandle} {...bookmark} />,
 	onChange
 }) => {
-	const isMobile = useMobileCheck();
+	const isMobile = useMobileUserAgentCheck();
 	const { layoutRowHeight, layoutContainerRef } = useSquareLayoutItems(maxColumns, layoutGap);
 
 	const handleLayoutChange = (layout) => {

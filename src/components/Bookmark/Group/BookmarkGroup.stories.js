@@ -7,7 +7,7 @@ export default {
 	component: BookmarkGroup,
 	decorators: [
 		(Story) => (
-			<div style={{ width: 420 }}>
+			<div style={{ width: 'min(100%, 450px)' }}>
 				<Story />
 			</div>
 		)
