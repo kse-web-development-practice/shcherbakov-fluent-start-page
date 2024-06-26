@@ -11,7 +11,8 @@
 	"env": {
 		"browser": true,
 		"es2021": true,
-		"webextensions": true
+		"webextensions": true,
+		"jest/globals": true
 	},
 	"extends": [
 		"eslint:recommended",
@@ -20,7 +21,8 @@
 	],
 	"plugins": [
 		"react",
-		"react-hooks"
+		"react-hooks",
+		"jest"
 	],
 	"rules": {
 		"react/react-in-jsx-scope": "off",
