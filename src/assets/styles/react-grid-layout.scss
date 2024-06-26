@@ -1,0 +1,42 @@
+// Modified version of node_modules/react-grid-layout/css/style.css
+
+.react-grid {
+	&-layout {
+		position: relative;
+		transition: height 200ms ease;
+	}
+
+	&-item {
+		transition: all 200ms ease;
+
+		&.react-draggable-dragging {
+			transition: none;
+			z-index: 3;
+			will-change: transform;
+		}
+
+		&.react-grid-placeholder {
+			z-index: 2;
+			user-select: none;
+			pointer-events: none;
+		}
+	}
+}
+
+// Custom handle for dragging layout items
+.draggable-handle {
+	position: absolute;
+	content: ' ';
+	top: 8px;
+	right: 6px;
+	width: 15px;
+	height: 15px;
+
+	cursor: grab;
+
+	background: url("data:image/svg+xml,%3Csvg width='98' height='156' viewBox='0 0 98 156' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='20' fill='black'/%3E%3Ccircle cx='20' cy='78' r='20' fill='black'/%3E%3Ccircle cx='20' cy='136' r='20' fill='black'/%3E%3Ccircle cx='78' cy='78' r='20' fill='black'/%3E%3Ccircle cx='78' cy='20' r='20' fill='black'/%3E%3Ccircle cx='78' cy='136' r='20' fill='black'/%3E%3C/svg%3E%0A");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+	border: 0;
+}

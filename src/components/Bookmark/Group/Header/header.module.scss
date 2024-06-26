@@ -1,0 +1,36 @@
+.bookmark-group__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+	box-sizing: border-box;
+
+	h1 {
+		font-weight: 400;
+		font-size: 12pt;
+	}
+
+	&_edit {
+		padding: 10px;
+		background: #666;
+
+		input {
+			width: 100%;
+			box-sizing: border-box;
+
+			font-size: 12pt;
+			padding: 4px;
+		}
+	}
+
+	&_unnamed {
+		h1 {
+			width: 100%;
+			opacity: 0;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+}
