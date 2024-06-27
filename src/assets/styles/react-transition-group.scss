@@ -1,0 +1,22 @@
+.enter {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transform: translateX(0%);
+
+	&-active {
+		transform: translateX(-100%);
+		transition: 500ms ease-in transform;
+	}
+}
+
+.exit {
+	transform: translateX(100%);
+
+	&-active {
+		transform: translateX(0%);
+		transition: 500ms ease-out transform;
+	}
+}
