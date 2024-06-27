@@ -64,6 +64,7 @@ module.exports = (env) => ({
 							importLoaders: 1,
 							esModule: false,
 							modules: {
+								auto: /\.module\.(sa|sc|c)ss$/i,
 								localIdentName: '[local]--[name]--[hash:base64:5]'
 							}
 						}
@@ -71,6 +72,10 @@ module.exports = (env) => ({
 					'postcss-loader',
 					'sass-loader'
 				]
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/i,
+				type: 'asset/resource'
 			}
 		]
 	}
