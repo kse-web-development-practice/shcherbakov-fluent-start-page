@@ -1,0 +1,12 @@
+$input-background-color: #fff;
+$input-border-color: #999;
+$input-border-radius: 6px;
+$input-padding: 8px;
+
+$breakpoint-desktop: 576px;
+
+@mixin desktop-styling {
+	@media only screen and (min-width: $breakpoint-desktop) {
+		@content;
+	}
+}
