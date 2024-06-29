@@ -1,13 +1,12 @@
 import React from 'react';
-import RadioGroup from '.';
+import FormRadioGroup from '.';
 
 export default {
 	title: 'Form/Radio Group',
-	component: RadioGroup,
-	tags: ['autodocs']
+	component: FormRadioGroup
 };
 
-export const Sample = {
+export const RadioGroup = {
 	args: {
 		label: 'Sample radio group',
 		children: (

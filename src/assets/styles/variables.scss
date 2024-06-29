@@ -3,6 +3,13 @@ $input-border-color: #999;
 $input-border-radius: 6px;
 $input-padding: 8px;
 
+$icon-picker-background-color: #3c3c3c;
+$icon-picker-border-color: #9d9d9d;
+$icon-picker-border-radius: 6px;
+$icon-picker-item-hover-border-color: #9d9d9d;
+$icon-picker-item-selected-border-color: #9d9d9d;
+$icon-picker-item-selected-background-color: #4b4b4b;
+
 $breakpoint-desktop: 576px;
 
 @mixin desktop-styling {

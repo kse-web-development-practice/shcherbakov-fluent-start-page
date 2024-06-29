@@ -3,6 +3,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import FormLabel from '../../Label';
 import RadioGroup from '../../RadioGroup';
 import UrlService from '../../../../services/UrlService';
+import FormIconPicker from '../../IconPicker';
 
 export const defaultValues = {
 	size: 'medium',
@@ -26,16 +27,6 @@ const FormEditBookmark = () => {
 			type: watchedFaviconType
 		});
 	}, [watchedFaviconType]);
-
-	// useEffect(() => {
-	// 	onEdit?.(watchedValues);
-	// }, [watchedValues, onEdit]);
-
-	// useEffect(() => {
-	// 	setValue('favicon', {
-	// 		type: watchedFaviconType
-	// 	});
-	// }, [watchedFaviconType]);
 
 	return (
 		<>
@@ -92,7 +83,14 @@ const FormEditBookmark = () => {
 				</FormLabel>
 			)}
 
-			{watchedValues.favicon.type === 'icon' && <p>TODO: implement icon picker</p>}
+			{watchedValues.favicon.type === 'icon' && (
+				<FormIconPicker
+					onPick={({ prefix, iconName }) => {
+						setValue('favicon.iconStyle', prefix);
+						setValue('favicon.name', iconName);
+					}}
+				/>
+			)}
 
 			{watchedValues.favicon.type === 'auto' && (
 				<FormLabel label="Website URL" required>
@@ -121,11 +119,6 @@ const FormEditBookmark = () => {
 					/>
 				</FormLabel>
 			)}
-
-			{/* {watchedValues.favicon.type === 'icon' && <input placeholder="favicon icon props" />}
-			{watchedValues.favicon.type === 'auto' && <input placeholder="url" />}
-			{watchedValues.favicon.type === 'text' && <input placeholder="text" />}
-			{watchedValues.favicon.type === 'image' && <input placeholder="image" />} */}
 		</>
 	);
 };

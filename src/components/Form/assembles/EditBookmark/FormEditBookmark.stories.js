@@ -1,12 +1,11 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import EditBookmark, { defaultValues } from '.';
-import FormEditBookmark from '.';
+import FormEditBookmark, { defaultValues } from '.';
 import BookmarkGroup from '../../../Bookmark/Group';
 
 export default {
-	title: 'Form/Assembles/New or Edit Bookmark',
-	component: EditBookmark,
+	title: 'Form/Assembles/New Or Edit Bookmark',
+	component: FormEditBookmark,
 	decorators: [
 		() => {
 			const methods = useForm({
@@ -37,4 +36,4 @@ export default {
 	]
 };
 
-export const CreateBookmark = {};
+export const NewOrEditBookmark = {};
