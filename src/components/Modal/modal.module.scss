@@ -1,3 +1,5 @@
+@import '../../assets/styles/variables';
+
 $content-padding: 0.7rem;
 $border-radius: 8px;
 $front-bg: #2b2b2b;
@@ -55,8 +57,7 @@ $back-bg: #202020;
 		background-color: $front-bg;
 	}
 
-	// Styles for desktop
-	@media only screen and (min-width: 576px) {
+	@include desktop-styling {
 		display: flex;
 		background: rgba(0, 0, 0, 0.2);
 

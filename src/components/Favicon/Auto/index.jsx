@@ -40,7 +40,7 @@ const FaviconAuto = ({ websiteUrl, ...props }) => {
 		return <p>loading...</p>;
 	}
 
-	if (faviconUrl === null) {
+	if (!faviconUrl) {
 		return null;
 	}
 

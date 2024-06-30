@@ -6,7 +6,7 @@ export default {
 	argTypes: {
 		iconStyle: {
 			control: 'select',
-			options: ['fas', 'far', 'fab']
+			options: ['fas', 'fab']
 		},
 		name: {
 			control: 'text'
@@ -18,13 +18,6 @@ export const Solid = {
 	args: {
 		iconStyle: 'fas',
 		name: 'cog'
-	}
-};
-
-export const Regular = {
-	args: {
-		iconStyle: 'far',
-		name: 'folder-open'
 	}
 };
 
