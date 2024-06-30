@@ -7,6 +7,7 @@ import Favicon from '../../Favicon';
 import FaviconAuto from '../../Favicon/Auto';
 import FaviconIcon from '../../Favicon/Icon';
 import FaviconText from '../../Favicon/Text';
+import FaviconImage from '../../Favicon/Image';
 
 // eslint-disable-next-line no-unused-vars
 const BookmarkItem = React.forwardRef(({ id, text, link, size, className, row, column, showDraggableHandle, favicon, ...props }, ref) => {
@@ -45,7 +46,8 @@ BookmarkItem.propTypes = {
 		PropTypes.shape({ type: 'none' }),
 		PropTypes.shape({ type: 'auto', data: PropTypes.shape(FaviconAuto.propTypes) }),
 		PropTypes.shape({ type: 'icon', data: PropTypes.shape(FaviconIcon.propTypes) }),
-		PropTypes.shape({ type: 'text', data: PropTypes.shape(FaviconText.propTypes) })
+		PropTypes.shape({ type: 'text', data: PropTypes.shape(FaviconText.propTypes) }),
+		PropTypes.shape({ type: 'image', data: PropTypes.shape(FaviconImage.propTypes) })
 	]),
 	showDraggableHandle: PropTypes.bool
 };

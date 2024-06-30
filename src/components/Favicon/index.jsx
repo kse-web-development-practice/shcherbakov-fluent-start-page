@@ -5,19 +5,19 @@ import FaviconIcon from './Icon';
 import FaviconText from './Text';
 import FaviconImage from './Image';
 
-const Favicon = ({ type, ...props }) => {
+const Favicon = ({ type, data, className }) => {
 	switch (type) {
 		case 'icon':
-			return <FaviconIcon {...props} />;
+			return <FaviconIcon {...data} className={className} />;
 
 		case 'auto':
-			return <FaviconAuto {...props} />;
+			return <FaviconAuto {...data} className={className} />;
 
 		case 'text':
-			return <FaviconText {...props} />;
+			return <FaviconText {...data} className={className} />;
 
 		case 'image':
-			return <FaviconImage {...props} />;
+			return <FaviconImage {...data} className={className} />;
 
 		case 'none':
 		default:
@@ -26,7 +26,14 @@ const Favicon = ({ type, ...props }) => {
 };
 
 Favicon.propTypes = {
-	type: PropTypes.oneOf([null, 'none', 'icon', 'auto', 'text', 'image'])
+	type: PropTypes.oneOf([null, 'none', 'icon', 'auto', 'text', 'image']),
+	data: PropTypes.oneOfType([
+		PropTypes.shape(FaviconAuto.propTypes),
+		PropTypes.shape(FaviconIcon.propTypes),
+		PropTypes.shape(FaviconText.propTypes),
+		PropTypes.shape(FaviconImage.propTypes)
+	]),
+	className: PropTypes.string
 };
 
 export default Favicon;
