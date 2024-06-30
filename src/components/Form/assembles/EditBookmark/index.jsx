@@ -23,9 +23,7 @@ const FormEditBookmark = () => {
 	const watchedFaviconType = useWatch({ name: 'favicon.type' });
 
 	useEffect(() => {
-		setValue('favicon', {
-			type: watchedFaviconType
-		});
+		setValue('favicon.data', {});
 	}, [watchedFaviconType]);
 
 	return (
@@ -55,39 +53,41 @@ const FormEditBookmark = () => {
 
 			<h2>Favicon</h2>
 			<RadioGroup label="Method of getting a favicon">
-				<label>
-					<input type="radio" value="none" {...register('favicon.type')} />
-					None
-				</label>
-				<label>
-					<input type="radio" value="icon" {...register('favicon.type')} />
-					Icon
-				</label>
-				<label>
-					<input type="radio" value="auto" {...register('favicon.type')} />
-					Auto
-				</label>
-				<label>
-					<input type="radio" value="text" {...register('favicon.type')} />
-					Text
-				</label>
-				<label>
-					<input type="radio" value="image" {...register('favicon.type')} />
-					Image
-				</label>
+				<>
+					<label>
+						<input type="radio" value="none" {...register('favicon.type')} />
+						None
+					</label>
+					<label>
+						<input type="radio" value="icon" {...register('favicon.type')} />
+						Icon
+					</label>
+					<label>
+						<input type="radio" value="auto" {...register('favicon.type')} />
+						Auto
+					</label>
+					<label>
+						<input type="radio" value="text" {...register('favicon.type')} />
+						Text
+					</label>
+					<label>
+						<input type="radio" value="image" {...register('favicon.type')} />
+						Image
+					</label>
+				</>
 			</RadioGroup>
 
 			{watchedValues.favicon.type === 'text' && (
 				<FormLabel label="Favicon text">
-					<input aria-invalid={errors.favicon?.text ? 'true' : 'false'} {...register('favicon.text')} />
+					<input aria-invalid={errors.favicon?.text ? 'true' : 'false'} {...register('favicon.data.text')} />
 				</FormLabel>
 			)}
 
 			{watchedValues.favicon.type === 'icon' && (
 				<FormIconPicker
 					onPick={({ prefix, iconName }) => {
-						setValue('favicon.iconStyle', prefix);
-						setValue('favicon.name', iconName);
+						setValue('favicon.data.iconStyle', prefix);
+						setValue('favicon.data.name', iconName);
 					}}
 				/>
 			)}
@@ -96,7 +96,7 @@ const FormEditBookmark = () => {
 				<FormLabel label="Website URL" required>
 					<input
 						aria-invalid={errors.favicon?.websiteUrl ? 'true' : 'false'}
-						{...register('favicon.websiteUrl', {
+						{...register('favicon.data.websiteUrl', {
 							required: 'This field is required',
 							validate: {
 								validUrl: (value) => UrlService.isValid(value) || 'Invalid URL'
@@ -110,7 +110,7 @@ const FormEditBookmark = () => {
 				<FormLabel label="Image direct URL" required>
 					<input
 						aria-invalid={errors.favicon?.url ? 'true' : 'false'}
-						{...register('favicon.url', {
+						{...register('favicon.data.url', {
 							required: 'This field is required',
 							validate: {
 								validUrl: (value) => UrlService.isValid(value) || 'Invalid URL'
