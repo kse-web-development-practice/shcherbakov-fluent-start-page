@@ -7,7 +7,7 @@ export default {
 	title: 'Form/Assembles/New Or Edit Bookmark',
 	component: FormEditBookmark,
 	decorators: [
-		() => {
+		(Story) => {
 			const methods = useForm({
 				defaultValues: {
 					id: crypto.randomUUID(),
@@ -22,7 +22,7 @@ export default {
 			return (
 				<FormProvider {...methods}>
 					<form>
-						<FormEditBookmark />
+						<Story />
 					</form>
 
 					<h1>Preview preview</h1>
