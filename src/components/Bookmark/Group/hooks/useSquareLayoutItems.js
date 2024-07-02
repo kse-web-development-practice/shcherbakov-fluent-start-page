@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 /**
  * Implementation of aspect ratio for react-grid-layout
@@ -16,13 +16,25 @@ const useSquareLayoutItems = (maxColumns, layoutGap) => {
 	const [layoutRowHeight, setLayoutRowHeight] = useState(undefined);
 	const layoutContainerRef = useRef(null);
 
+	const resizeHeight = (containerWidth) => {
+		setLayoutRowHeight(containerWidth / maxColumns - layoutGap);
+	};
+
+	const windowResizeHandler = (event) => {
+		resizeHeight(event.target.innerWidth);
+	};
+
+	useEffect(() => {
+		window.addEventListener('resize', windowResizeHandler);
+		return () => window.removeEventListener('resize', windowResizeHandler);
+	}, []);
+
 	useEffect(() => {
 		if (layoutContainerRef.current === null) {
 			return;
 		}
 
-		const layoutContainer = layoutContainerRef.current.elementRef.current;
-		setLayoutRowHeight(layoutContainer.clientWidth / maxColumns - layoutGap);
+		resizeHeight(layoutContainerRef.current.elementRef.current.clientWidth);
 	}, [layoutContainerRef, maxColumns]);
 
 	return { layoutRowHeight, layoutContainerRef };
