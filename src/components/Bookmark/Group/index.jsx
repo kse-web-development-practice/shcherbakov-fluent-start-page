@@ -26,10 +26,12 @@ const BookmarkGroup = ({
 	const handleLayoutChange = (layout) => {
 		onChange?.(
 			id,
-			layout.map(({ x, y, ...item }) => ({
-				...item,
+			layout.map(({ i, x, y, w, h }) => ({
+				id: i,
 				column: x,
-				row: y
+				row: y,
+				// eslint-disable-next-line no-unused-vars
+				size: Object.entries(tileSizes).find(([_, { rows, columns }]) => rows === h && columns === w)[0]
 			}))
 		);
 	};

@@ -1,35 +1,40 @@
 import React from 'react';
-import { Link, Outlet, RouterProvider, createMemoryRouter } from 'react-router-dom';
+import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import './assets/styles/styles.scss';
-import Modal from './components/Modal';
+import ViewMain from './views/Main';
+import ViewCreateBookmark from './views/CreateBookmark';
+import ViewAppSettings from './views/AppSettings';
+import AppDataProvider from './contexts/AppData';
 
 const router = createMemoryRouter(
 	[
 		{
 			path: '/',
-			element: (
-				<>
-					<h1>Bookmarks</h1>
-					<Link to="/add">Add a bookmark</Link>
-					<Outlet />
-				</>
-			),
+			element: <ViewMain />,
 			children: [
 				{
 					path: '/add',
-					element: <Modal />
+					element: <ViewCreateBookmark />
+				},
+				{
+					path: '/settings',
+					element: <ViewAppSettings />
 				}
 			]
 		}
 	],
 	{
-		initialEntries: ['/', '/add'],
+		initialEntries: ['/'],
 		initialIndex: 0
 	}
 );
 
 const App = () => {
-	return <RouterProvider router={router} />;
+	return (
+		<AppDataProvider>
+			<RouterProvider router={router} />
+		</AppDataProvider>
+	);
 };
 
 export default App;
