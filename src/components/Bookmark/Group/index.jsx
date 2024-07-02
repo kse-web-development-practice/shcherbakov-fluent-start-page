@@ -16,15 +16,15 @@ const BookmarkGroup = ({
 	bookmarks = [],
 	maxColumns = 6,
 	layoutGap = 4,
-	renderGroupHeader = (group) => <Header {...group} />,
+	renderGroupHeader = (props) => <Header {...props} />,
 	renderBookmarkItem = (bookmark, showDraggableHandle) => <Item key={bookmark.id} showDraggableHandle={showDraggableHandle} {...bookmark} />,
-	onChange
+	onLayoutChange
 }) => {
 	const isMobile = useMobileUserAgentCheck();
 	const { layoutRowHeight, layoutContainerRef } = useSquareLayoutItems(maxColumns, layoutGap);
 
 	const handleLayoutChange = (layout) => {
-		onChange?.(
+		onLayoutChange?.(
 			id,
 			layout.map(({ i, x, y, w, h }) => ({
 				id: i,
@@ -69,7 +69,7 @@ BookmarkGroup.propTypes = {
 	layoutGap: PropTypes.number,
 
 	/**
-	 * ({ id: string, name: string }) => React.ReactNode;
+	 * ({ id: string, name: string }, onNameChange: (newName: string) => void) => React.ReactNode;
 	 */
 	renderGroupHeader: PropTypes.func,
 
@@ -78,7 +78,7 @@ BookmarkGroup.propTypes = {
 	/**
 	 * (groupId: string, layout: Array<{ id: string; row: number; column: number; size: string; }>) => void
 	 */
-	onChange: PropTypes.func
+	onLayoutChange: PropTypes.func
 };
 
 export default BookmarkGroup;

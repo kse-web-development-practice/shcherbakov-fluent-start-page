@@ -9,26 +9,40 @@ const initializer = (initialValue = defaultData) => LocalStorageService.getAppDa
 
 const reducer = (state, action) => {
 	switch (action.type) {
+		case 'RENAME_BOOKMARK_GROUP':
+			return {
+				...state,
+				groups: state.groups.map((group) => {
+					if (group.id !== action.payload.id) {
+						return group;
+					}
+					return {
+						...group,
+						name: action.payload.newName
+					};
+				})
+			};
+
 		case 'SET_BOOKMARK_GROUP_LAYOUT':
 			return {
 				...state,
 				groups: state.groups.map((group) => {
-					if (group.id === action.payload.id) {
-						return {
-							...group,
-							bookmarks: group.bookmarks.map((groupBookmarks) => {
-								const updatedBookmark = action.payload.layout.find(({ id }) => id === groupBookmarks.id);
-								if (updatedBookmark) {
-									return {
-										...groupBookmarks,
-										...updatedBookmark
-									};
-								}
-								return groupBookmarks;
-							})
-						};
+					if (group.id !== action.payload.id) {
+						return group;
 					}
-					return group;
+					return {
+						...group,
+						bookmarks: group.bookmarks.map((groupBookmarks) => {
+							const updatedBookmark = action.payload.layout.find(({ id }) => id === groupBookmarks.id);
+							if (updatedBookmark) {
+								return {
+									...groupBookmarks,
+									...updatedBookmark
+								};
+							}
+							return groupBookmarks;
+						})
+					};
 				})
 			};
 

@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar';
 import BookmarkGroup from '../components/Bookmark/Group';
 import { AppDataContext } from '../contexts/AppData';
 import LocalStorageService from '../services/LocalStorageService';
+import BookmarkGroupHeader from '../components/Bookmark/Group/Header';
 
 const ViewMain = () => {
 	const { state, dispatch } = useContext(AppDataContext);
@@ -15,6 +16,16 @@ const ViewMain = () => {
 			payload: {
 				id: groupId,
 				layout: newLayout
+			}
+		});
+	};
+
+	const handleBookmarkGroupNameChange = (groupId, newName) => {
+		dispatch({
+			type: 'RENAME_BOOKMARK_GROUP',
+			payload: {
+				id: groupId,
+				newName
 			}
 		});
 	};
@@ -39,7 +50,14 @@ const ViewMain = () => {
 			<button onClick={() => LocalStorageService.clearAppData()}>Clear data</button>
 
 			{state.groups.map((props) => (
-				<BookmarkGroup key={props.id} onChange={handleBookmarkGroupLayoutChange} {...props} />
+				<BookmarkGroup
+					key={props.id}
+					onLayoutChange={handleBookmarkGroupLayoutChange}
+					renderGroupHeader={(props) => (
+						<BookmarkGroupHeader onChange={(newName) => handleBookmarkGroupNameChange(props.id, newName)} {...props} />
+					)}
+					{...props}
+				/>
 			))}
 
 			<Outlet />
