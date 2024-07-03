@@ -10,7 +10,7 @@ import { useState } from 'react';
  *
  * @param {number} dragStartTimeout
  */
-const useLinkClickFix = (dragStartTimeoutInMilliseconds = 100) => {
+const useLinkClickFix = (dragStartTimeoutInMilliseconds = 400) => {
 	const [lastDraggingStartTimestamp, setLastDraggingStartTimestamp] = useState(null);
 
 	const onMouseDown = () => {

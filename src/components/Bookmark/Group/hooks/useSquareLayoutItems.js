@@ -13,29 +13,29 @@ import { useRef, useEffect, useState } from 'react';
  * }}
  */
 const useSquareLayoutItems = (maxColumns, layoutGap) => {
-	const [layoutRowHeight, setLayoutRowHeight] = useState(undefined);
+	const [layoutRowHeight, setLayoutRowHeight] = useState(0);
 	const layoutContainerRef = useRef(null);
 
 	const resizeHeight = (containerWidth) => {
 		setLayoutRowHeight(containerWidth / maxColumns - layoutGap);
 	};
 
-	const windowResizeHandler = (event) => {
-		resizeHeight(event.target.innerWidth);
-	};
-
+	// Handle layout container horizontal resizing
 	useEffect(() => {
-		window.addEventListener('resize', windowResizeHandler);
-		return () => window.removeEventListener('resize', windowResizeHandler);
-	}, []);
+		const observer = new ResizeObserver((entries) => {
+			for (let entry of entries) {
+				resizeHeight(entry.contentRect.width);
+			}
+		});
 
-	useEffect(() => {
-		if (layoutContainerRef.current === null) {
-			return;
+		if (layoutContainerRef.current) {
+			observer.observe(layoutContainerRef.current.elementRef.current);
 		}
 
-		resizeHeight(layoutContainerRef.current.elementRef.current.clientWidth);
-	}, [layoutContainerRef, maxColumns]);
+		return () => {
+			observer.disconnect();
+		};
+	}, []);
 
 	return { layoutRowHeight, layoutContainerRef };
 };
