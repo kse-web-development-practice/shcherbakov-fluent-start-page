@@ -16,25 +16,42 @@ const BookmarkGroupHeader = ({ name, onChange }) => {
 		onChange?.(currentName);
 	};
 
-	const handleEdit = (event) => {
-		setCurrentName(event.target.value);
-	};
-
 	const AccessabilityEditGroupName = () => (
 		<button onClick={handleTitleClick} className="screenreader">
 			Edit group name
 		</button>
 	);
 
+	const EditState = () => {
+		// Confirm edit on escape or enter
+		const handleKeyDown = (event) => {
+			if (event.key === 'Escape' || event.key === 'Enter') {
+				handleEditEnd();
+			}
+		};
+
+		return (
+			<input
+				value={currentName}
+				onBlur={() => handleEditEnd()}
+				onChange={({ target }) => setCurrentName(target.value)}
+				onKeyDown={handleKeyDown}
+				autoFocus
+			/>
+		);
+	};
+
 	const ConditionalContent = () => {
 		if (isEditing) {
-			return <input value={currentName} onBlur={handleEditEnd} onChange={handleEdit} autoFocus />;
+			return <EditState />;
 		}
 
 		if (!currentName) {
 			return (
 				<>
-					<h1 aria-label="Unnamed group">Name a group</h1>
+					<h1 aria-label="Unnamed group" onClick={handleTitleClick}>
+						Name a group
+					</h1>
 					<AccessabilityEditGroupName />
 				</>
 			);
