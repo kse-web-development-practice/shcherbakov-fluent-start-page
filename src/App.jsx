@@ -2,7 +2,7 @@ import React from 'react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import './assets/styles/styles.scss';
 import ViewMain from './views/Main';
-import ViewCreateBookmark from './views/CreateBookmark';
+import ViewBookmarkFormCreate from './views/BookmarkForm/Create';
 import ViewAppSettings from './views/AppSettings';
 import AppDataProvider from './contexts/AppData';
 
@@ -14,7 +14,7 @@ const router = createMemoryRouter(
 			children: [
 				{
 					path: '/add',
-					element: <ViewCreateBookmark />
+					element: <ViewBookmarkFormCreate />
 				},
 				{
 					path: '/settings',

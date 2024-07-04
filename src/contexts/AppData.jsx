@@ -49,7 +49,13 @@ const reducer = (state, action) => {
 		case 'ADD_BOOKMARK':
 			return {
 				...state,
-				groups: [...state.groups, action.payload]
+				groups: [
+					{
+						...state.groups[0],
+						bookmarks: [...state.groups[0].bookmarks, action.payload]
+					},
+					...state.groups.slice(1)
+				]
 			};
 
 		case 'UPDATE_SETTINGS':
@@ -60,9 +66,6 @@ const reducer = (state, action) => {
 					...action.payload
 				}
 			};
-
-		case 'SET_ALL':
-			return action.payload;
 
 		default:
 			return state;
