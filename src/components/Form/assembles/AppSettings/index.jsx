@@ -2,11 +2,10 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import RadioGroup from '../../RadioGroup';
 import FormFileImport from '../../FileImport';
-import useJsonExport from '../../../../hooks/useJsonExport';
+import JsonFileService from '../../../../services/JsonFileService';
 
 const FormAppSettings = () => {
 	const { register } = useFormContext();
-	const exportAppSettings = useJsonExport();
 
 	return (
 		<>
@@ -28,7 +27,7 @@ const FormAppSettings = () => {
 
 			<h2>Data</h2>
 			<FormFileImport />
-			<button type="button" onClick={() => exportAppSettings('settings', { str: 'TODO' })}>
+			<button type="button" onClick={() => JsonFileService.download('settings', { str: 'TODO' })}>
 				Export
 			</button>
 			<button type="button">Clear</button>
