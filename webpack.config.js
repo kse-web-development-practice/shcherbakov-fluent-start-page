@@ -28,8 +28,7 @@ module.exports = (env) => ({
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: 'public/index.html',
-			inject: false // Зупинити дублювання стилів https://stackoverflow.com/a/75313687
+			template: 'public/index.html'
 		}),
 		new EslintWebpackPlugin({
 			exclude: ['node_modules', 'dist', 'public'],
