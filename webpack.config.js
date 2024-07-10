@@ -9,8 +9,10 @@ module.exports = (env) => ({
 	mode: env.dev ? 'development' : 'production',
 	entry: './src/index.js',
 	output: {
-		filename: 'main.js',
-		path: path.resolve(__dirname, 'dist')
+		filename: '[name]-[fullhash].js',
+		path: path.resolve(__dirname, 'dist'),
+		publicPath: process.env.BASE_URL ?? '/',
+		clean: true
 	},
 	resolve: {
 		extensions: ['.js', '.jsx']
@@ -22,10 +24,7 @@ module.exports = (env) => ({
 		},
 		port: 3000,
 		compress: false,
-		// Для легшої маршрутизації
-		historyApiFallback: {
-			index: 'index.html'
-		}
+		historyApiFallback: true
 	},
 	plugins: [
 		new HtmlWebpackPlugin({

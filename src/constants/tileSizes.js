@@ -1,23 +1,19 @@
 export const tileSizes = {
 	small: {
 		rows: 1,
-		columns: 1,
-		aspectRatio: '1 / 1'
+		columns: 1
 	},
 	medium: {
 		rows: 2,
-		columns: 2,
-		aspectRatio: '1 / 1'
+		columns: 2
 	},
 	wide: {
 		rows: 2,
-		columns: 4,
-		aspectRatio: '2 / 0'
+		columns: 4
 	},
 	large: {
 		rows: 4,
-		columns: 4,
-		aspectRatio: '1 / 1'
+		columns: 4
 	}
 };
 

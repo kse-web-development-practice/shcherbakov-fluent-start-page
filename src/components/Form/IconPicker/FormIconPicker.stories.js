@@ -2,7 +2,7 @@ import { fn } from '@storybook/test';
 import FormIconPicker from '.';
 
 export default {
-	title: 'Form/IconPicker',
+	title: 'Form/Icon Picker',
 	component: FormIconPicker
 };
 
