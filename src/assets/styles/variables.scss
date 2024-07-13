@@ -1,0 +1,31 @@
+$input-background-color: #fff;
+$input-border-color: #999;
+$input-border-radius: 6px;
+$input-padding: 8px;
+
+$icon-picker-background-color: #3c3c3c;
+$icon-picker-border-color: #9d9d9d;
+$icon-picker-border-radius: 6px;
+$icon-picker-item-hover-border-color: #9d9d9d;
+$icon-picker-item-selected-border-color: #9d9d9d;
+$icon-picker-item-selected-background-color: #4b4b4b;
+
+$file-import-background-color: #575757;
+$file-import-border-color: #9d9d9d;
+$file-import-border-radius: 6px;
+
+$sidebar-covered-width: 56px;
+$sidebar-uncovered-width: 250px;
+$sidebar-item-height: $sidebar-covered-width;
+$sidebar-covered-background-color: #272727;
+$sidebar-uncovered-background-color: #2c2c2c;
+$sidebar-item-color: #ffff;
+$sidebar-item-hover-background-color: #414141;
+
+$breakpoint-desktop: 576px;
+
+@mixin desktop-styling {
+	@media only screen and (min-width: $breakpoint-desktop) {
+		@content;
+	}
+}

@@ -3,7 +3,6 @@ const config = {
 	stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
 	addons: [
 		'@storybook/addon-webpack5-compiler-swc',
-		'@storybook/addon-onboarding',
 		'@storybook/addon-links',
 		'@storybook/addon-essentials',
 		'@chromatic-com/storybook',
@@ -18,7 +17,10 @@ const config = {
 							'style-loader',
 							{
 								loader: 'css-loader',
-								options: { importLoaders: 1 }
+								options: {
+									importLoaders: 1,
+									esModule: false
+								}
 							},
 							'postcss-loader',
 							'sass-loader'

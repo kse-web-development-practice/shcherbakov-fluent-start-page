@@ -1,0 +1,29 @@
+@import '../../../assets/styles/variables';
+
+.file-import {
+	display: inline-block;
+	position: relative;
+
+	&_drag-and-drop {
+		background-color: $file-import-background-color;
+		padding: 30px 50px;
+		border-radius: $file-import-border-radius;
+		border: 3px dashed $file-import-border-color;
+
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+
+		.file-import__text {
+			display: block;
+			margin: 0;
+		}
+	}
+
+	&__text {
+		display: none;
+		color: #fff;
+	}
+}

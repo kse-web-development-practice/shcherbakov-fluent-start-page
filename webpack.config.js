@@ -9,8 +9,10 @@ module.exports = (env) => ({
 	mode: env.dev ? 'development' : 'production',
 	entry: './src/index.js',
 	output: {
-		filename: 'main.js',
-		path: path.resolve(__dirname, 'dist')
+		filename: '[name]-[fullhash].js',
+		path: path.resolve(__dirname, 'dist'),
+		publicPath: process.env.BASE_URL ?? '/',
+		clean: true
 	},
 	resolve: {
 		extensions: ['.js', '.jsx']
@@ -22,19 +24,17 @@ module.exports = (env) => ({
 		},
 		port: 3000,
 		compress: false,
-		// Для легшої маршрутизації
-		historyApiFallback: {
-			index: 'index.html'
-		}
+		historyApiFallback: true
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: 'public/index.html',
-			inject: false // Зупинити дублювання стилів https://stackoverflow.com/a/75313687
+			template: 'public/index.html'
 		}),
 		new EslintWebpackPlugin({
 			exclude: ['node_modules', 'dist', 'public'],
-			context: path.resolve(__dirname, 'src')
+			context: path.resolve(__dirname, 'src'),
+			emitWarning: env.dev !== true,
+			emitError: env.dev !== true
 		}),
 		new DefinePlugin({
 			'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL)
@@ -60,7 +60,9 @@ module.exports = (env) => ({
 						loader: 'css-loader',
 						options: {
 							importLoaders: 1,
+							esModule: false,
 							modules: {
+								auto: /\.module\.(sa|sc|c)ss$/i,
 								localIdentName: '[local]--[name]--[hash:base64:5]'
 							}
 						}
@@ -68,6 +70,10 @@ module.exports = (env) => ({
 					'postcss-loader',
 					'sass-loader'
 				]
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/i,
+				type: 'asset/resource'
 			}
 		]
 	}

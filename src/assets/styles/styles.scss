@@ -1,3 +1,18 @@
+@import './variables';
+@import './react-grid-layout';
+@import './react-transition-group';
+@import './inputs';
+
+@font-face {
+	font-family: OpenSans;
+	src: url(../fonts/OpenSans-VariableFont.ttf);
+}
+
 body {
-	background-color: red;
+	font-family: OpenSans, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.screenreader {
+	position: absolute;
+	left: -9999em;
 }
