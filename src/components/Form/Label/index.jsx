@@ -15,7 +15,7 @@ const FormLabel = ({ label, required, error, vertical, children }) => {
 			</label>
 			{error && (
 				<span className={styles.formLabelErrorMessage} role="alert">
-					{error.message}
+					{error}
 				</span>
 			)}
 		</div>
@@ -25,7 +25,7 @@ const FormLabel = ({ label, required, error, vertical, children }) => {
 FormLabel.propTypes = {
 	label: PropTypes.string.isRequired,
 	required: PropTypes.bool,
-	error: PropTypes.shape({ message: PropTypes.string.isRequired }),
+	error: PropTypes.string,
 	vertical: PropTypes.bool,
 	children: PropTypes.element
 };

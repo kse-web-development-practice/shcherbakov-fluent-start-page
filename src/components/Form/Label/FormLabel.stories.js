@@ -39,8 +39,6 @@ export const FieldWithError = {
 	args: {
 		label: 'Something is wrong here',
 		children: <input />,
-		error: {
-			message: 'Error message'
-		}
+		error: 'Error message'
 	}
 };
