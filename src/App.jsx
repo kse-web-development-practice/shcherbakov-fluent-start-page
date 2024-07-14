@@ -23,7 +23,8 @@ const router = createMemoryRouter(
 		}
 	],
 	{
-		initialEntries: ['/', '/add'],
+		// eslint-disable-next-line no-undef
+		initialEntries: [process.env.BASE_URL ?? '/'],
 		initialIndex: 0,
 		// eslint-disable-next-line no-undef
 		basename: process.env.BASE_URL ?? '/'
