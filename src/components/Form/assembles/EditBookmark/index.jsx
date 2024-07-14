@@ -28,10 +28,10 @@ const FormEditBookmark = () => {
 
 	return (
 		<>
-			<FormLabel label="Name" required error={errors.text}>
+			<FormLabel label="Name" required error={errors.text?.message}>
 				<input aria-invalid={errors.text ? 'true' : 'false'} {...register('text', { required: 'This field is required' })} />
 			</FormLabel>
-			<FormLabel label="URL" required error={errors.link}>
+			<FormLabel label="URL" required error={errors.link?.message}>
 				<input
 					aria-invalid={errors.link ? 'true' : 'false'}
 					{...register('link', {
@@ -42,7 +42,7 @@ const FormEditBookmark = () => {
 					})}
 				/>
 			</FormLabel>
-			<FormLabel label="Size" error={errors.size}>
+			<FormLabel label="Size" error={errors.size?.message}>
 				<select {...register('size')}>
 					<option value="small">Small</option>
 					<option value="medium">Medium</option>

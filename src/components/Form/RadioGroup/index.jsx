@@ -12,7 +12,7 @@ const RadioGroup = ({ children, ...labelProps }) => (
 RadioGroup.propTypes = {
 	label: PropTypes.string.isRequired,
 	required: PropTypes.bool,
-	error: PropTypes.shape({ message: PropTypes.string.isRequired }),
+	error: PropTypes.string,
 	children: PropTypes.element
 };
 
