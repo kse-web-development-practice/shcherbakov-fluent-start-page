@@ -5,7 +5,6 @@ import Sidebar from '../../components/Sidebar';
 import BookmarkGroup from '../../components/Bookmark/Group';
 import { AppDataContext } from '../../contexts/AppData';
 import LocalStorageService from '../../services/LocalStorageService';
-import BookmarkGroupHeader from '../../components/Bookmark/Group/Header';
 import styles from './main.module.scss';
 
 const ViewMain = () => {
@@ -56,9 +55,7 @@ const ViewMain = () => {
 						<BookmarkGroup
 							key={props.id}
 							onLayoutChange={handleBookmarkGroupLayoutChange}
-							renderGroupHeader={(props) => (
-								<BookmarkGroupHeader onChange={(newName) => handleBookmarkGroupNameChange(props.id, newName)} {...props} />
-							)}
+							onTitleChange={handleBookmarkGroupNameChange}
 							{...props}
 						/>
 					))}

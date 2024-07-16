@@ -78,4 +78,14 @@
 			margin: auto;
 		}
 	}
+
+	&__edit-button {
+		position: absolute;
+		z-index: 1;
+		padding: 5px;
+		color: #fff;
+		background: transparent;
+		border: 0;
+		cursor: ne-resize;
+	}
 }

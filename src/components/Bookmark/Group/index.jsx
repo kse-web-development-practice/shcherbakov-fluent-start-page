@@ -16,9 +16,10 @@ const BookmarkGroup = ({
 	bookmarks = [],
 	maxColumns = 6,
 	layoutGap = 4,
-	renderGroupHeader = (props) => <Header {...props} />,
-	renderBookmarkItem = (bookmark, showDraggableHandle) => <Item key={bookmark.id} showDraggableHandle={showDraggableHandle} {...bookmark} />,
-	onLayoutChange
+	hideHeader = false,
+	onLayoutChange,
+	onTitleChange,
+	onItemEditButtonClick
 }) => {
 	const isMobile = useMobileUserAgentCheck();
 	const { layoutRowHeight, layoutContainerRef } = useSquareLayoutItems(maxColumns, layoutGap);
@@ -38,7 +39,7 @@ const BookmarkGroup = ({
 
 	return (
 		<section className={styles.bookmarkGroup} role="group">
-			{renderGroupHeader?.({ id, name })}
+			{!hideHeader && <Header name={name} onChange={onTitleChange} />}
 			<ResponsiveReactGridLayout
 				ref={layoutContainerRef}
 				layout={bookmarks.map(({ id, row, column, size }) => ({
@@ -55,7 +56,9 @@ const BookmarkGroup = ({
 				onLayoutChange={handleLayoutChange}
 				draggableHandle={isMobile ? '.draggable-handle' : undefined}
 			>
-				{bookmarks.map((item) => renderBookmarkItem(item, isMobile))}
+				{bookmarks.map((item) => (
+					<Item key={item.id} showDraggableHandle={isMobile} onEditButtonClick={onItemEditButtonClick} {...item} />
+				))}
 			</ResponsiveReactGridLayout>
 		</section>
 	);
@@ -67,18 +70,22 @@ BookmarkGroup.propTypes = {
 	bookmarks: PropTypes.arrayOf(PropTypes.shape(Item.propTypes)),
 	maxColumns: PropTypes.number,
 	layoutGap: PropTypes.number,
-
-	/**
-	 * ({ id: string, name: string }, onNameChange: (newName: string) => void) => React.ReactNode;
-	 */
-	renderGroupHeader: PropTypes.func,
-
-	renderBookmarkItem: PropTypes.func,
+	hideHeader: PropTypes.bool,
 
 	/**
 	 * (groupId: string, layout: Array<{ id: string; row: number; column: number; size: string; }>) => void
 	 */
-	onLayoutChange: PropTypes.func
+	onLayoutChange: PropTypes.func,
+
+	/**
+	 * (groupId: string, bookmarkId: string) => void
+	 */
+	onItemEditButtonClick: PropTypes.func,
+
+	/**
+	 * (newTitle: string) => void
+	 */
+	onTitleChange: PropTypes.func
 };
 
 export default BookmarkGroup;

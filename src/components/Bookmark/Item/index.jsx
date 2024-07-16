@@ -8,14 +8,19 @@ import FaviconAuto from '../../Favicon/Auto';
 import FaviconIcon from '../../Favicon/Icon';
 import FaviconText from '../../Favicon/Text';
 import FaviconImage from '../../Favicon/Image';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// eslint-disable-next-line no-unused-vars
-const BookmarkItem = React.forwardRef(({ id, text, link, size, className, row, column, showDraggableHandle, favicon, ...props }, ref) => {
+const BookmarkItem = React.forwardRef(({ text, link, size, className, showDraggableHandle, favicon, onEditButtonClick, ...props }, ref) => {
 	const linkClickFix = useLinkClickFix();
 
 	return (
 		<div ref={ref} className={classNames(styles.bookmarkItem, className)} {...props}>
 			{showDraggableHandle && <button className="draggable-handle" aria-hidden></button>}
+			<button className={styles.bookmarkItemEditButton} onClick={onEditButtonClick}>
+				<FontAwesomeIcon icon={faPen} fixedWidth aria-hidden />
+				<span className="screenreader">Edit a bookmark</span>
+			</button>
 			<a href={link} className={styles.bookmarkItemLink} {...linkClickFix}>
 				{favicon && (
 					<Favicon
@@ -36,11 +41,14 @@ const BookmarkItem = React.forwardRef(({ id, text, link, size, className, row, c
 BookmarkItem.displayName = 'BookmarkItem';
 
 BookmarkItem.propTypes = {
+	// These properties are unused here
+	// but they are needed for overall defining the structure
 	id: PropTypes.string.isRequired,
-	link: PropTypes.string.isRequired,
-	size: PropTypes.oneOf(['small', 'medium', 'wide', 'large']).isRequired,
 	row: PropTypes.number.isRequired,
 	column: PropTypes.number.isRequired,
+
+	link: PropTypes.string.isRequired,
+	size: PropTypes.oneOf(['small', 'medium', 'wide', 'large']).isRequired,
 	text: PropTypes.string,
 	favicon: PropTypes.oneOfType([
 		PropTypes.shape({ type: 'none' }),
@@ -49,7 +57,13 @@ BookmarkItem.propTypes = {
 		PropTypes.shape({ type: 'text', data: PropTypes.shape(FaviconText.propTypes) }),
 		PropTypes.shape({ type: 'image', data: PropTypes.shape(FaviconImage.propTypes) })
 	]),
-	showDraggableHandle: PropTypes.bool
+	showDraggableHandle: PropTypes.bool,
+	className: PropTypes.string,
+
+	/**
+	 * (groupId: string, bookmarkId: string)
+	 */
+	onEditButtonClick: PropTypes.func
 };
 
 export default BookmarkItem;

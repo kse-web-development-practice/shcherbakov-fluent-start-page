@@ -35,7 +35,7 @@ const useSquareLayoutItems = (maxColumns, layoutGap) => {
 		return () => {
 			observer.disconnect();
 		};
-	}, []);
+	}, [maxColumns, layoutGap]);
 
 	return { layoutRowHeight, layoutContainerRef };
 };

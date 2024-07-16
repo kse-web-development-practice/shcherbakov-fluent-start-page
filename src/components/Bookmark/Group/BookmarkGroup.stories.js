@@ -1,6 +1,7 @@
 import React from 'react';
 import BookmarkGroup from '.';
 import defaultData from '../../../constants/defaultData';
+import { fn } from '@storybook/test';
 
 export default {
 	title: 'Bookmark/Group',
@@ -20,6 +21,9 @@ export default {
 
 export const SampleGroup = {
 	args: {
-		...defaultData.groups[0]
+		...defaultData.groups[0],
+		onLayoutChange: fn(),
+		onTitleChange: fn(),
+		onItemEditButtonClick: fn()
 	}
 };

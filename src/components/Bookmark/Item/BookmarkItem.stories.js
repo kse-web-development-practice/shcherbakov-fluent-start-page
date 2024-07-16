@@ -9,7 +9,7 @@ export default {
 	decorators: [
 		(Story, { args }) => (
 			<div style={{ width: 400 }}>
-				<BookmarkGroup id="0" renderGroupHeader={null} bookmarks={[args]} />
+				<BookmarkGroup id="0" hideHeader bookmarks={[args]} />
 			</div>
 		)
 	],
