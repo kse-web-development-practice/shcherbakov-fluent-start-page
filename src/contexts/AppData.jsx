@@ -9,6 +9,12 @@ const initializer = (initialValue = defaultData) => LocalStorageService.getAppDa
 
 const reducer = (state, action) => {
 	switch (action.type) {
+		/**
+		 * payload: {
+		 * 	id: string - bookmark group id;
+		 * 	newName: string - bookmark group's new name;
+		 * };
+		 */
 		case 'RENAME_BOOKMARK_GROUP':
 			return {
 				...state,
@@ -23,6 +29,28 @@ const reducer = (state, action) => {
 				})
 			};
 
+		/**
+		 * payload: {
+		 * 	id: string; - bookmark group id to delete
+		 * };
+		 */
+		case 'REMOVE_BOOKMARK_GROUP':
+			return {
+				...state,
+				groups: state.groups.filter((group) => group.id !== action.payload.id)
+			};
+
+		/**
+		 * payload: {
+		 * 	id: string; - bookmark group id
+		 * 	layout: Array<{
+		 *   id: string;
+		 * 	 row: number;
+		 * 	 column: number;
+		 * 	 size: number;
+		 * 	}>; - bookmark group items position in a group
+		 * };
+		 */
 		case 'SET_BOOKMARK_GROUP_LAYOUT':
 			return {
 				...state,
@@ -46,6 +74,9 @@ const reducer = (state, action) => {
 				})
 			};
 
+		/**
+		 * payload: { bookmark item props };
+		 */
 		case 'ADD_BOOKMARK':
 			return {
 				...state,
@@ -58,6 +89,12 @@ const reducer = (state, action) => {
 				]
 			};
 
+		/**
+		 * payload: {
+		 * 	groupId: string;
+		 * 	bookmark: { bookmark props };
+		 * }
+		 */
 		case 'EDIT_BOOKMARK':
 			return {
 				...state,
@@ -80,6 +117,29 @@ const reducer = (state, action) => {
 				})
 			};
 
+		/**
+		 * payload: {
+		 * 	groupId: string; - bookmark group id
+		 * 	bookmarkId: string; - bookmark's id to remove
+		 * }
+		 */
+		case 'REMOVE_BOOKMARK':
+			return {
+				...state,
+				groups: state.groups.map((group) => {
+					if (group.id !== action.payload.groupId) {
+						return group;
+					}
+					return {
+						...group,
+						bookmarks: group.bookmarks.filter((bookmark) => bookmark.id !== action.payload.bookmarkId)
+					};
+				})
+			};
+
+		/**
+		 * payload: Pick<{ app settings }>;
+		 */
 		case 'UPDATE_SETTINGS':
 			return {
 				...state,
