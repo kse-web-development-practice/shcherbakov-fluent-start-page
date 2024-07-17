@@ -24,6 +24,10 @@ const BookmarkGroup = ({
 	const isMobile = useMobileUserAgentCheck();
 	const { layoutRowHeight, layoutContainerRef } = useSquareLayoutItems(maxColumns, layoutGap);
 
+	const handleItemEditButtonClick = (bookmarkItemId) => {
+		onItemEditButtonClick?.(id, bookmarkItemId);
+	};
+
 	const handleLayoutChange = (layout) => {
 		onLayoutChange?.(
 			id,
@@ -57,7 +61,7 @@ const BookmarkGroup = ({
 				draggableHandle={isMobile ? '.draggable-handle' : undefined}
 			>
 				{bookmarks.map((item) => (
-					<Item key={item.id} showDraggableHandle={isMobile} onEditButtonClick={onItemEditButtonClick} {...item} />
+					<Item key={item.id} showDraggableHandle={isMobile} onEditButtonClick={() => handleItemEditButtonClick(item.id)} {...item} />
 				))}
 			</ResponsiveReactGridLayout>
 		</section>

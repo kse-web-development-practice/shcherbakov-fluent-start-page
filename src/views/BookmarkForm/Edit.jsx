@@ -1,25 +1,21 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
-import { v4 as uuid } from 'uuid';
 import Modal from '../../components/Modal';
 import BookmarkGroup from '../../components/Bookmark/Group';
-import FormEditBookmark, { defaultValues } from '../../components/Form/assembles/EditBookmark';
+import FormEditBookmark from '../../components/Form/assembles/EditBookmark';
 import styles from './bookmark.module.scss';
 import { AppDataContext } from '../../contexts/AppData';
 
-const ViewBookmarkFormCreate = () => {
+const ViewBookmarkFormEdit = () => {
 	const { dispatch } = useContext(AppDataContext);
 
+	const {
+		state: { bookmark, groupId }
+	} = useLocation();
 	const navigate = useNavigate();
-	const form = useForm({
-		defaultValues: {
-			id: uuid(),
-			row: 0,
-			column: 0,
-			...defaultValues
-		}
-	});
+
+	const form = useForm({ values: bookmark });
 	const formData = form.watch();
 
 	const handleModalClose = () => {
@@ -28,8 +24,11 @@ const ViewBookmarkFormCreate = () => {
 
 	const handleFormSubmit = (newBookmarkData) => {
 		dispatch({
-			type: 'ADD_BOOKMARK',
-			payload: newBookmarkData
+			type: 'EDIT_BOOKMARK',
+			payload: {
+				groupId,
+				bookmark: newBookmarkData
+			}
 		});
 		handleModalClose();
 	};
@@ -40,13 +39,13 @@ const ViewBookmarkFormCreate = () => {
 				Cancel
 			</button>
 			<button type="submit" onClick={form.handleSubmit(handleFormSubmit)} disabled={!form.formState.isValid}>
-				Create
+				Edit
 			</button>
 		</>
 	);
 
 	return (
-		<Modal title="Create a new bookmark" isVisible onClose={handleModalClose} footer={<ModalFooter />}>
+		<Modal title="Edit a bookmark" isVisible onClose={handleModalClose} footer={<ModalFooter />}>
 			<FormProvider {...form}>
 				<form className={styles.bookmarkFormLayout} onSubmit={form.handleSubmit(handleFormSubmit)}>
 					<div className={styles.bookmarkFormLayoutForm}>
@@ -64,4 +63,4 @@ const ViewBookmarkFormCreate = () => {
 	);
 };
 
-export default ViewBookmarkFormCreate;
+export default ViewBookmarkFormEdit;

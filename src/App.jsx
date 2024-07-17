@@ -3,6 +3,7 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import './assets/styles/styles.scss';
 import ViewMain from './views/Main';
 import ViewBookmarkFormCreate from './views/BookmarkForm/Create';
+import ViewBookmarkFormEdit from './views/BookmarkForm/Edit';
 import ViewAppSettings from './views/AppSettings';
 import AppDataProvider from './contexts/AppData';
 
@@ -15,6 +16,10 @@ const router = createMemoryRouter(
 				{
 					path: '/add',
 					element: <ViewBookmarkFormCreate />
+				},
+				{
+					path: '/edit',
+					element: <ViewBookmarkFormEdit />
 				},
 				{
 					path: '/settings',

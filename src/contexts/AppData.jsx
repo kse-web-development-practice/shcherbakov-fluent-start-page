@@ -58,6 +58,28 @@ const reducer = (state, action) => {
 				]
 			};
 
+		case 'EDIT_BOOKMARK':
+			return {
+				...state,
+				groups: state.groups.map((group) => {
+					if (group.id !== action.payload.groupId) {
+						return group;
+					}
+					return {
+						...group,
+						bookmarks: group.bookmarks.map((bookmark) => {
+							if (bookmark.id !== action.payload.bookmark.id) {
+								return bookmark;
+							}
+							return {
+								...bookmark,
+								...action.payload.bookmark
+							};
+						})
+					};
+				})
+			};
+
 		case 'UPDATE_SETTINGS':
 			return {
 				...state,

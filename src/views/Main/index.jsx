@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { faCog, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Sidebar from '../../components/Sidebar';
 import BookmarkGroup from '../../components/Bookmark/Group';
@@ -8,6 +8,7 @@ import LocalStorageService from '../../services/LocalStorageService';
 import styles from './main.module.scss';
 
 const ViewMain = () => {
+	const navigate = useNavigate();
 	const { state, dispatch } = useContext(AppDataContext);
 
 	const handleBookmarkGroupLayoutChange = (groupId, newLayout) => {
@@ -26,6 +27,16 @@ const ViewMain = () => {
 			payload: {
 				id: groupId,
 				newName
+			}
+		});
+	};
+
+	const handleBookmarkEditButtonClick = (bookmarkGroupId, bookmarkItemId) => {
+		const editBookmark = state.groups.find((group) => group.id === bookmarkGroupId).bookmarks.find((bookmark) => bookmark.id === bookmarkItemId);
+		navigate('/edit', {
+			state: {
+				groupId: bookmarkGroupId,
+				bookmark: editBookmark
 			}
 		});
 	};
@@ -56,6 +67,7 @@ const ViewMain = () => {
 							key={props.id}
 							onLayoutChange={handleBookmarkGroupLayoutChange}
 							onTitleChange={handleBookmarkGroupNameChange}
+							onItemEditButtonClick={handleBookmarkEditButtonClick}
 							{...props}
 						/>
 					))}

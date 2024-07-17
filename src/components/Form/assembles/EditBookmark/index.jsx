@@ -77,13 +77,13 @@ const FormEditBookmark = () => {
 				</>
 			</RadioGroup>
 
-			{watchedValues.favicon.type === 'text' && (
+			{watchedValues.favicon?.type === 'text' && (
 				<FormLabel label="Favicon text">
 					<input aria-invalid={errors.favicon?.text ? 'true' : 'false'} {...register('favicon.data.text')} />
 				</FormLabel>
 			)}
 
-			{watchedValues.favicon.type === 'icon' && (
+			{watchedValues.favicon?.type === 'icon' && (
 				<FormIconPicker
 					onPick={({ prefix, iconName }) => {
 						setValue('favicon.data.iconStyle', prefix);
@@ -92,7 +92,7 @@ const FormEditBookmark = () => {
 				/>
 			)}
 
-			{watchedValues.favicon.type === 'auto' && (
+			{watchedValues.favicon?.type === 'auto' && (
 				<FormLabel label="Website URL" required>
 					<input
 						aria-invalid={errors.favicon?.websiteUrl ? 'true' : 'false'}
@@ -106,7 +106,7 @@ const FormEditBookmark = () => {
 				</FormLabel>
 			)}
 
-			{watchedValues.favicon.type === 'image' && (
+			{watchedValues.favicon?.type === 'image' && (
 				<FormLabel label="Image direct URL" required>
 					<input
 						aria-invalid={errors.favicon?.url ? 'true' : 'false'}
