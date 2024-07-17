@@ -16,7 +16,8 @@ const BookmarkGroup = ({
 	bookmarks = [],
 	maxColumns = 6,
 	layoutGap = 4,
-	hideHeader = false,
+	showHeader = true,
+	showItemEditButton = true,
 	onLayoutChange,
 	onTitleChange,
 	onItemEditButtonClick
@@ -43,7 +44,7 @@ const BookmarkGroup = ({
 
 	return (
 		<section className={styles.bookmarkGroup} role="group">
-			{!hideHeader && <Header name={name} onChange={onTitleChange} />}
+			{showHeader && <Header name={name} onChange={onTitleChange} />}
 			<ResponsiveReactGridLayout
 				ref={layoutContainerRef}
 				layout={bookmarks.map(({ id, row, column, size }) => ({
@@ -61,7 +62,13 @@ const BookmarkGroup = ({
 				draggableHandle={isMobile ? '.draggable-handle' : undefined}
 			>
 				{bookmarks.map((item) => (
-					<Item key={item.id} showDraggableHandle={isMobile} onEditButtonClick={() => handleItemEditButtonClick(item.id)} {...item} />
+					<Item
+						key={item.id}
+						showDraggableHandle={isMobile}
+						showEditButton={showItemEditButton}
+						onEditButtonClick={() => handleItemEditButtonClick(item.id)}
+						{...item}
+					/>
 				))}
 			</ResponsiveReactGridLayout>
 		</section>
@@ -74,7 +81,8 @@ BookmarkGroup.propTypes = {
 	bookmarks: PropTypes.arrayOf(PropTypes.shape(Item.propTypes)),
 	maxColumns: PropTypes.number,
 	layoutGap: PropTypes.number,
-	hideHeader: PropTypes.bool,
+	showHeader: PropTypes.bool,
+	showItemEditButton: PropTypes.bool,
 
 	/**
 	 * (groupId: string, layout: Array<{ id: string; row: number; column: number; size: string; }>) => void

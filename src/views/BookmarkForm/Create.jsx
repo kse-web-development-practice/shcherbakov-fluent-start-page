@@ -55,7 +55,13 @@ const ViewBookmarkFormCreate = () => {
 					<div className={styles.bookmarkFormLayoutPreview}>
 						<div className={styles.bookmarkFormLayoutPreviewContent}>
 							<h3 className={styles.bookmarkFormLayoutPreviewTitle}>Preview</h3>
-							<BookmarkGroup id="0" hideHeader bookmarks={[{ ...formData, link: '#', row: 0, column: 0 }]} maxColumns={4} />
+							<BookmarkGroup
+								id="0"
+								showHeader={false}
+								showItemEditButton={false}
+								bookmarks={[{ ...formData, link: '#', row: 0, column: 0 }]}
+								maxColumns={4}
+							/>
 						</div>
 					</div>
 				</form>
