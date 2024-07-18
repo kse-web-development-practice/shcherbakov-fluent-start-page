@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ReactGridLayout, { WidthProvider } from 'react-grid-layout';
+import { BookmarkContainerContext } from '../Container';
 import Header from './Header';
 import Item from '../Item';
 import useSquareLayoutItems from './hooks/useSquareLayoutItems';
@@ -10,27 +11,14 @@ import { tileSizes } from '../../../constants/tileSizes';
 
 const ResponsiveReactGridLayout = WidthProvider(ReactGridLayout);
 
-const BookmarkGroup = ({
-	id,
-	name,
-	bookmarks = [],
-	maxColumns = 6,
-	layoutGap = 4,
-	showHeader = true,
-	showItemEditButton = true,
-	onLayoutChange,
-	onTitleChange,
-	onItemEditButtonClick
-}) => {
+const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4, showHeader = true }) => {
+	const { handleGroupLayoutChange } = useContext(BookmarkContainerContext);
+
 	const isMobile = useMobileUserAgentCheck();
 	const { layoutRowHeight, layoutContainerRef } = useSquareLayoutItems(maxColumns, layoutGap);
 
-	const handleItemEditButtonClick = (bookmarkItemId) => {
-		onItemEditButtonClick?.(id, bookmarkItemId);
-	};
-
 	const handleLayoutChange = (layout) => {
-		onLayoutChange?.(
+		handleGroupLayoutChange(
 			id,
 			layout.map(({ i, x, y, w, h }) => ({
 				id: i,
@@ -44,7 +32,7 @@ const BookmarkGroup = ({
 
 	return (
 		<section className={styles.bookmarkGroup} role="group">
-			{showHeader && <Header name={name} onChange={onTitleChange} />}
+			{showHeader && <Header id={id} name={name} />}
 			<ResponsiveReactGridLayout
 				ref={layoutContainerRef}
 				layout={bookmarks.map(({ id, row, column, size }) => ({
@@ -62,42 +50,24 @@ const BookmarkGroup = ({
 				draggableHandle={isMobile ? '.draggable-handle' : undefined}
 			>
 				{bookmarks.map((item) => (
-					<Item
-						key={item.id}
-						showDraggableHandle={isMobile}
-						showEditButton={showItemEditButton}
-						onEditButtonClick={() => handleItemEditButtonClick(item.id)}
-						{...item}
-					/>
+					<Item key={item.id} showDraggableHandle={isMobile} {...item} />
 				))}
 			</ResponsiveReactGridLayout>
 		</section>
 	);
 };
 
+export const publicProps = {
+	maxColumns: PropTypes.number,
+	layoutGap: PropTypes.number,
+	showHeader: PropTypes.bool
+};
+
 BookmarkGroup.propTypes = {
 	id: PropTypes.string.isRequired,
 	name: PropTypes.string,
 	bookmarks: PropTypes.arrayOf(PropTypes.shape(Item.propTypes)),
-	maxColumns: PropTypes.number,
-	layoutGap: PropTypes.number,
-	showHeader: PropTypes.bool,
-	showItemEditButton: PropTypes.bool,
-
-	/**
-	 * (groupId: string, layout: Array<{ id: string; row: number; column: number; size: string; }>) => void
-	 */
-	onLayoutChange: PropTypes.func,
-
-	/**
-	 * (groupId: string, bookmarkId: string) => void
-	 */
-	onItemEditButtonClick: PropTypes.func,
-
-	/**
-	 * (newTitle: string) => void
-	 */
-	onTitleChange: PropTypes.func
+	...publicProps
 };
 
 export default BookmarkGroup;

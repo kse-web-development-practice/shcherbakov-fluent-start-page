@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { BookmarkContainerContext } from '../Container';
 import styles from './item.module.scss';
 import useLinkClickFix from './hooks/useLinkClickFix';
 import Favicon from '../../Favicon';
@@ -11,47 +12,46 @@ import FaviconIcon from '../../Favicon/Icon';
 import FaviconText from '../../Favicon/Text';
 import FaviconImage from '../../Favicon/Image';
 
-const BookmarkItem = React.forwardRef(
-	({ text, link, size, className, showDraggableHandle, showEditButton, favicon, onEditButtonClick, ...props }, ref) => {
-		const linkClickFix = useLinkClickFix();
+const BookmarkItem = React.forwardRef(({ text, link, size, className, showDraggableHandle, showEditButton = true, favicon, ...props }, ref) => {
+	const { onGroupItemEditButtonClick } = useContext(BookmarkContainerContext);
+	const linkClickFix = useLinkClickFix();
 
-		const DraggableHandle = () => (showDraggableHandle ? <button className="draggable-handle" aria-hidden></button> : null);
-
-		const EditButton = () =>
-			showEditButton ? (
-				<button className={styles.bookmarkItemEditButton} onClick={onEditButtonClick}>
+	return (
+		<div ref={ref} className={classNames(styles.bookmarkItem, className)} {...props}>
+			{showDraggableHandle && <button className="draggable-handle" aria-hidden></button>}
+			{showEditButton && (
+				<button className={styles.bookmarkItemEditButton} onClick={onGroupItemEditButtonClick}>
 					<FontAwesomeIcon icon={faPen} fixedWidth aria-hidden />
 					<span className="screenreader">Edit a bookmark</span>
 				</button>
-			) : null;
+			)}
 
-		return (
-			<div ref={ref} className={classNames(styles.bookmarkItem, className)} {...props}>
-				<DraggableHandle />
-				<EditButton />
+			<a href={link} className={styles.bookmarkItemLink} {...linkClickFix}>
+				{favicon && (
+					<Favicon
+						className={classNames(styles.bookmarkItemFavicon, {
+							[styles.bookmarkItemFaviconIcon]: favicon.type === 'icon',
+							[styles.bookmarkItemFaviconImage]: favicon.type === 'image' || favicon.type === 'auto',
+							[styles.bookmarkItemFaviconText]: favicon.type === 'text'
+						})}
+						{...favicon}
+					/>
+				)}
+				<span className={styles.bookmarkItemText}>{size !== 'small' && text}</span>
+			</a>
+		</div>
+	);
+});
 
-				<a href={link} className={styles.bookmarkItemLink} {...linkClickFix}>
-					{favicon && (
-						<Favicon
-							className={classNames(styles.bookmarkItemFavicon, {
-								[styles.bookmarkItemFaviconIcon]: favicon.type === 'icon',
-								[styles.bookmarkItemFaviconImage]: favicon.type === 'image' || favicon.type === 'auto',
-								[styles.bookmarkItemFaviconText]: favicon.type === 'text'
-							})}
-							{...favicon}
-						/>
-					)}
-					<span className={styles.bookmarkItemText}>{size !== 'small' && text}</span>
-				</a>
-			</div>
-		);
-	}
-);
+export const publicProps = {
+	showEditButton: PropTypes.bool,
+	className: PropTypes.string
+};
 
 BookmarkItem.displayName = 'BookmarkItem';
 
 BookmarkItem.propTypes = {
-	// These properties are unused here
+	// These 3 properties are unused in this component
 	// but they are needed for overall defining the structure
 	id: PropTypes.string.isRequired,
 	row: PropTypes.number.isRequired,
@@ -68,13 +68,8 @@ BookmarkItem.propTypes = {
 		PropTypes.shape({ type: 'image', data: PropTypes.shape(FaviconImage.propTypes) })
 	]),
 	showDraggableHandle: PropTypes.bool,
-	showEditButton: PropTypes.bool,
-	className: PropTypes.string,
 
-	/**
-	 * (groupId: string, bookmarkId: string)
-	 */
-	onEditButtonClick: PropTypes.func
+	...publicProps
 };
 
 export default BookmarkItem;

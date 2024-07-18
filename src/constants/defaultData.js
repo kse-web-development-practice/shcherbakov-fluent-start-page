@@ -93,6 +93,44 @@ export default {
 					link: 'https://google.com'
 				}
 			]
+		},
+		{
+			id: '157a9',
+			name: 'Group Name',
+			bookmarks: [
+				{
+					id: '562f1',
+					text: 's1',
+					column: 0,
+					row: 0,
+					size: 'small',
+					link: 'https://google.com'
+				},
+				{
+					id: 'f0cd7',
+					text: 's2',
+					column: 1,
+					row: 0,
+					size: 'small',
+					link: 'https://google.com'
+				},
+				{
+					id: '25fa3',
+					text: 's3',
+					column: 2,
+					row: 0,
+					size: 'small',
+					link: 'https://google.com'
+				},
+				{
+					id: '3d29f',
+					text: 's4',
+					column: 3,
+					row: 1,
+					size: 'large',
+					link: 'https://google.com'
+				}
+			]
 		}
 	],
 	settings: {}

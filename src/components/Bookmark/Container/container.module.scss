@@ -1,0 +1,11 @@
+@import '../../../assets/styles/variables';
+
+.bookmark-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2rem;
+
+	@include desktop-styling {
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	}
+}

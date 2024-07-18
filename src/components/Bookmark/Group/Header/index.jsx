@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight, faTrash } from '@fortawesome/free-solid-svg-icons';
 import styles from './header.module.scss';
+import { BookmarkContainerContext } from '../../Container';
 
-const BookmarkGroupHeader = ({ name, onChange }) => {
+const BookmarkGroupHeader = ({ id, name }) => {
+	const { handleShiftGroups, handleRenameGroup, handleRemoveGroup } = useContext(BookmarkContainerContext);
+
 	const [currentName, setCurrentName] = useState(name);
 	const [isEditing, setIsEditing] = useState(false);
 
@@ -13,13 +18,27 @@ const BookmarkGroupHeader = ({ name, onChange }) => {
 
 	const handleEditEnd = () => {
 		setIsEditing(false);
-		onChange?.(currentName);
+		handleRenameGroup(id, currentName);
 	};
 
 	const AccessabilityEditGroupName = () => (
 		<button onClick={handleTitleClick} className="screenreader">
 			Edit group name
 		</button>
+	);
+
+	const ControlButtons = () => (
+		<div>
+			<button aria-label="Move group back" onClick={() => handleShiftGroups(-1)}>
+				<FontAwesomeIcon icon={faArrowLeft} fixedWidth aria-hidden />
+			</button>
+			<button aria-label="Move group forward" onClick={() => handleShiftGroups(1)}>
+				<FontAwesomeIcon icon={faArrowRight} fixedWidth aria-hidden />
+			</button>
+			<button aria-label="Remove group" onClick={() => handleRemoveGroup(id)}>
+				<FontAwesomeIcon icon={faTrash} fixedWidth aria-hidden />
+			</button>
+		</div>
 	);
 
 	const EditState = () => {
@@ -52,6 +71,7 @@ const BookmarkGroupHeader = ({ name, onChange }) => {
 					<h1 aria-label="Unnamed group" onClick={handleTitleClick}>
 						Name a group
 					</h1>
+					<ControlButtons />
 					<AccessabilityEditGroupName />
 				</>
 			);
@@ -60,6 +80,7 @@ const BookmarkGroupHeader = ({ name, onChange }) => {
 		return (
 			<>
 				<h1 onClick={handleTitleClick}>{currentName}</h1>
+				<ControlButtons />
 				<AccessabilityEditGroupName />
 			</>
 		);
@@ -78,8 +99,8 @@ const BookmarkGroupHeader = ({ name, onChange }) => {
 };
 
 BookmarkGroupHeader.propTypes = {
-	name: PropTypes.string,
-	onChange: PropTypes.func
+	id: PropTypes.string.isRequired,
+	name: PropTypes.string
 };
 
 export default BookmarkGroupHeader;

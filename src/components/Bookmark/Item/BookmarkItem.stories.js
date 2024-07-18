@@ -1,16 +1,19 @@
 import React from 'react';
 
-import BookmarkGroup from '../Group';
 import BookmarkItem from '.';
+import AppDataProvider from '../../../contexts/AppData';
+import BookmarkContainer from '../Container';
 
 export default {
 	title: 'Bookmark/Item',
 	component: BookmarkItem,
 	decorators: [
 		(Story, { args }) => (
-			<div style={{ width: 400 }}>
-				<BookmarkGroup id="0" showHeader={false} bookmarks={[args]} maxColumns={4} />
-			</div>
+			<AppDataProvider useStorage={false} initialData={{ groups: [{ id: '0', bookmarks: [args] }] }}>
+				<div style={{ width: 400 }}>
+					<BookmarkContainer groupProps={{ showHeader: false, maxColumns: 4 }} />
+				</div>
+			</AppDataProvider>
 		)
 	],
 	parameters: {

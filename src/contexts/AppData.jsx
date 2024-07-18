@@ -2,82 +2,23 @@ import React, { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import defaultData from '../constants/defaultData';
 import LocalStorageService from '../services/LocalStorageService';
+import { v4 as uuid } from 'uuid';
 
 export const AppDataContext = createContext(null);
-
-const initializer = (initialValue = defaultData) => LocalStorageService.getAppData() || initialValue;
 
 const reducer = (state, action) => {
 	switch (action.type) {
 		/**
-		 * payload: {
-		 * 	id: string - bookmark group id;
-		 * 	newName: string - bookmark group's new name;
-		 * };
-		 */
-		case 'RENAME_BOOKMARK_GROUP':
-			return {
-				...state,
-				groups: state.groups.map((group) => {
-					if (group.id !== action.payload.id) {
-						return group;
-					}
-					return {
-						...group,
-						name: action.payload.newName
-					};
-				})
-			};
-
-		/**
-		 * payload: {
-		 * 	id: string; - bookmark group id to delete
-		 * };
-		 */
-		case 'REMOVE_BOOKMARK_GROUP':
-			return {
-				...state,
-				groups: state.groups.filter((group) => group.id !== action.payload.id)
-			};
-
-		/**
-		 * payload: {
-		 * 	id: string; - bookmark group id
-		 * 	layout: Array<{
-		 *   id: string;
-		 * 	 row: number;
-		 * 	 column: number;
-		 * 	 size: number;
-		 * 	}>; - bookmark group items position in a group
-		 * };
-		 */
-		case 'SET_BOOKMARK_GROUP_LAYOUT':
-			return {
-				...state,
-				groups: state.groups.map((group) => {
-					if (group.id !== action.payload.id) {
-						return group;
-					}
-					return {
-						...group,
-						bookmarks: group.bookmarks.map((groupBookmarks) => {
-							const updatedBookmark = action.payload.layout.find(({ id }) => id === groupBookmarks.id);
-							if (updatedBookmark) {
-								return {
-									...groupBookmarks,
-									...updatedBookmark
-								};
-							}
-							return groupBookmarks;
-						})
-					};
-				})
-			};
-
-		/**
 		 * payload: { bookmark item props };
 		 */
 		case 'ADD_BOOKMARK':
+			if (state.groups.length === 0) {
+				return {
+					...state,
+					groups: [{ id: uuid(), bookmarks: [action.payload] }]
+				};
+			}
+
 			return {
 				...state,
 				groups: [
@@ -137,6 +78,12 @@ const reducer = (state, action) => {
 				})
 			};
 
+		case 'SET_BOOKMARKS':
+			return {
+				...state,
+				groups: action.payload
+			};
+
 		/**
 		 * payload: Pick<{ app settings }>;
 		 */
@@ -154,18 +101,28 @@ const reducer = (state, action) => {
 	}
 };
 
-const AppDataProvider = ({ children }) => {
-	const [state, dispatch] = useReducer(reducer, defaultData, initializer);
+const AppDataProvider = ({ children, initialData = defaultData, useStorage = true }) => {
+	const [state, dispatch] = useReducer(reducer, defaultData, (initialValue = initialData) => {
+		if (!useStorage) {
+			return initialValue;
+		}
+		return LocalStorageService.getAppData() || initialValue;
+	});
 
 	useEffect(() => {
+		if (!useStorage) {
+			return;
+		}
 		LocalStorageService.setAppData(state);
-	}, [state]);
+	}, [state, useStorage]);
 
 	return <AppDataContext.Provider value={{ state, dispatch }}>{children}</AppDataContext.Provider>;
 };
 
 AppDataProvider.propTypes = {
-	children: PropTypes.element
+	children: PropTypes.element,
+	useStorage: PropTypes.bool,
+	initialData: PropTypes.any
 };
 
 export default AppDataProvider;

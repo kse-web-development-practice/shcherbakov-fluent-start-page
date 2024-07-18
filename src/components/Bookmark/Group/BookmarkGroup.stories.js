@@ -1,16 +1,19 @@
 import React from 'react';
 import BookmarkGroup from '.';
 import defaultData from '../../../constants/defaultData';
-import { fn } from '@storybook/test';
+import AppDataProvider from '../../../contexts/AppData';
+import BookmarkContainer from '../Container';
 
 export default {
 	title: 'Bookmark/Group',
 	component: BookmarkGroup,
 	decorators: [
-		(Story) => (
-			<div style={{ width: 'min(100%, 450px)' }}>
-				<Story />
-			</div>
+		(Story, { args }) => (
+			<AppDataProvider useStorage={false} initialData={{ ...defaultData, groups: [args] }}>
+				<div style={{ width: 'min(100%, 450px)' }}>
+					<BookmarkContainer />
+				</div>
+			</AppDataProvider>
 		)
 	],
 	parameters: {
@@ -20,10 +23,5 @@ export default {
 };
 
 export const SampleGroup = {
-	args: {
-		...defaultData.groups[0],
-		onLayoutChange: fn(),
-		onTitleChange: fn(),
-		onItemEditButtonClick: fn()
-	}
+	args: defaultData.groups[0]
 };
