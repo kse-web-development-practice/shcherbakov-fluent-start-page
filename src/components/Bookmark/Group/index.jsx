@@ -7,28 +7,10 @@ import Item from '../Item';
 import styles from './group.module.scss';
 import { tileSizes } from '../../../constants/tileSizes';
 
-const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4, showHeader = true }) => {
-	// const { groupItemProps, groupHeaderProps, handleGroupLayoutChange } = useContext(BookmarkContainerContext);
-	const { groupItemProps, groupHeaderProps } = useContext(BookmarkContainerContext);
+const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 2, showHeader = true }) => {
+	const { groupItemProps, groupHeaderProps, handleGroupLayoutChange } = useContext(BookmarkContainerContext);
+	const gridContainerRef = useRef(null);
 	const gridRef = useRef(null);
-
-	// const handleLayoutChange = (layout) => {
-	// 	console.log('layout change');
-	// 	handleGroupLayoutChange(
-	// 		id,
-	// 		layout.map(({ i, x, y, w, h }) => ({
-	// 			id: i,
-	// 			column: x,
-	// 			row: y,
-	// 			// eslint-disable-next-line no-unused-vars
-	// 			size: Object.entries(tileSizes).find(([_, { rows, columns }]) => rows === h && columns === w)[0]
-	// 		}))
-	// 	);
-	// };
-
-	// const handleDrop = (layout, oldItem, newItem) => {
-	// 	console.log(layout, oldItem, newItem);
-	// };
 
 	useEffect(() => {
 		const grid = GridStack.init(
@@ -40,21 +22,31 @@ const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4
 				disableResize: true,
 				cellHeight: 'auto',
 				sizeToContent: true,
-				margin: layoutGap / 2
+				margin: layoutGap
 			},
-			gridRef.current
+			gridContainerRef.current
 		);
-		// TODO: implement callbacks
 
-		return () => {
-			grid.removeAll();
-		};
+		grid.on('change', () => {
+			const data = gridRef.current.save(false, false);
+
+			handleGroupLayoutChange(
+				id,
+				data.map((item) => ({
+					id: item.id,
+					column: item.x,
+					row: item.y,
+					// eslint-disable-next-line no-unused-vars
+					size: Object.entries(tileSizes).find(([_, { rows, columns }]) => rows === item.minH && columns === item.minW)[0]
+				}))
+			);
+		});
 	}, []);
 
 	return (
 		<section className={styles.bookmarkGroup} role="group">
 			{showHeader && <Header id={id} name={name} {...groupHeaderProps} />}
-			<div ref={gridRef} className="grid-stack">
+			<div ref={gridContainerRef} className="grid-stack">
 				{bookmarks.map((bookmark) => (
 					<div
 						key={bookmark.id}
@@ -62,7 +54,9 @@ const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4
 						gs-id={bookmark.id}
 						gs-x={bookmark.column}
 						gs-y={bookmark.row}
-						gs-w={tileSizes[bookmark.size].columns}
+						// gs-w does not work on changing bookmark position
+						gs-max-w={tileSizes[bookmark.size].columns}
+						gs-min-w={tileSizes[bookmark.size].columns}
 						// gs-h does not work
 						gs-min-h={tileSizes[bookmark.size].rows}
 						gs-max-h={tileSizes[bookmark.size].rows}

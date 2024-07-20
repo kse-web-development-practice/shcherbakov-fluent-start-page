@@ -35,7 +35,8 @@
 					"gs-id",
 					"gs-x",
 					"gs-y",
-					"gs-w",
+					"gs-min-w",
+					"gs-max-w",
 					"gs-min-h",
 					"gs-max-h"
 				]

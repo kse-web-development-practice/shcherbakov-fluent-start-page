@@ -5,6 +5,10 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import App from './App.jsx';
 
+// Gridstack required css
+import 'gridstack/dist/gridstack.min.css';
+import 'gridstack/dist/gridstack-extra.min.css';
+
 // Load Font Awesome icons
 library.add(fas);
 library.add(fab);

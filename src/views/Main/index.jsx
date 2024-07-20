@@ -38,7 +38,7 @@ const ViewMain = () => {
 			/>
 
 			<div className={styles.pageContent}>
-				<BookmarkContainer groups={state.groups} onGroupItemEditButtonClick={handleBookmarkEditButtonClick} />
+				<BookmarkContainer onGroupItemEditButtonClick={handleBookmarkEditButtonClick} />
 			</div>
 
 			<Outlet />

@@ -101,7 +101,6 @@ const BookmarkContainer = ({
 				groupHeaderProps,
 				groupItemProps,
 				showCreateGroupButton,
-
 				handleShiftGroups,
 				handleCreateGroup,
 				handleRenameGroup,
@@ -131,8 +130,6 @@ BookmarkContainer.propTypes = {
 	groupHeaderProps: PropTypes.shape(publicGroupHeaderProps),
 	groupItemProps: PropTypes.shape(publicItemProps),
 	showCreateGroupButton: PropTypes.bool,
-
-	groups: PropTypes.arrayOf(PropTypes.shape(BookmarkGroup.propTypes)),
 
 	/**
 	 * (groupId: string, bookmarkId: string) => void
