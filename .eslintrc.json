@@ -36,7 +36,8 @@
 					"gs-x",
 					"gs-y",
 					"gs-w",
-					"gs-min-h"
+					"gs-min-h",
+					"gs-max-h"
 				]
 			}
 		]

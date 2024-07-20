@@ -63,7 +63,9 @@ const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4
 						gs-x={bookmark.column}
 						gs-y={bookmark.row}
 						gs-w={tileSizes[bookmark.size].columns}
-						gs-min-h={tileSizes[bookmark.size].rows} // gs-h does not work
+						// gs-h does not work
+						gs-min-h={tileSizes[bookmark.size].rows}
+						gs-max-h={tileSizes[bookmark.size].rows}
 					>
 						<div className="grid-stack-item-content">
 							<Item {...groupItemProps} {...bookmark} />
