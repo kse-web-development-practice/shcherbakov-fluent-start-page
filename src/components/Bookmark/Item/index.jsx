@@ -5,13 +5,11 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import BookmarkContainerContext from '../Container/context';
 import styles from './item.module.scss';
-// import useLinkClickFix from './hooks/useLinkClickFix';
 import Favicon from '../../Favicon';
 import FaviconAuto from '../../Favicon/Auto';
 import FaviconIcon from '../../Favicon/Icon';
 import FaviconText from '../../Favicon/Text';
 import FaviconImage from '../../Favicon/Image';
-// import { tileSizes } from '../../../constants/tileSizes';
 
 const BookmarkItem = ({ text, link, size, showDraggableHandle, showEditButton = true, favicon }) => {
 	const { onGroupItemEditButtonClick } = useContext(BookmarkContainerContext);
