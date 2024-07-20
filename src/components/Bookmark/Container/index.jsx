@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 import BookmarkGroup, { publicProps as publicGroupProps } from '../Group';
@@ -15,7 +15,6 @@ const BookmarkContainer = ({
 	showCreateGroupButton = true,
 	onGroupItemEditButtonClick
 }) => {
-	const containerRef = useRef(null);
 	const { state, dispatch } = useContext(AppDataContext);
 
 	const handleShiftGroups = (moveBy) => {
@@ -112,10 +111,15 @@ const BookmarkContainer = ({
 				onGroupItemEditButtonClick
 			}}
 		>
-			<article ref={containerRef} className={styles.bookmarkContainer}>
-				{state.groups.map((group) => (
-					<BookmarkGroup key={group.id} {...group} {...groupProps} />
-				))}
+			<article className={styles.bookmarkContainer}>
+				{state.groups.map(
+					(
+						group,
+						index // Must be used to make group ordering buttons work properly
+					) => (
+						<BookmarkGroup key={`${group.id}-${index}`} {...group} {...groupProps} />
+					)
+				)}
 				{showCreateGroupButton && <CreateGroupButton />}
 			</article>
 		</BookmarkContainerContext.Provider>
@@ -136,4 +140,4 @@ BookmarkContainer.propTypes = {
 	onGroupItemEditButtonClick: PropTypes.func
 };
 
-export default React.memo(BookmarkContainer);
+export default BookmarkContainer;

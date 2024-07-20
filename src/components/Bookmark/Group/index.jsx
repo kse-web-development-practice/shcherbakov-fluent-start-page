@@ -44,8 +44,11 @@ const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4
 			},
 			gridRef.current
 		);
-		console.log(grid);
 		// TODO: implement callbacks
+
+		return () => {
+			grid.removeAll();
+		};
 	}, []);
 
 	return (
