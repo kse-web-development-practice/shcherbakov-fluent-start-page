@@ -33,3 +33,8 @@
 >
 > export default LocalStorageService;
 > ```
+
+---
+
+> I want to unit test FontAwesomeService. How to mock @fortawesome libs?
+> `FontAwesomeService code`

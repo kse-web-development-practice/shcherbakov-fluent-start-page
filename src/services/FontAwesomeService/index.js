@@ -117,7 +117,7 @@ class FontAwesomeService {
 	];
 	static #brandIconsBlackList = ['faYandexInternational', 'faYandex', 'faVk', 'faSquareOdnoklassniki', 'faOdnoklassniki'];
 
-	static #getIconVisibleName(name) {
+	static getIconVisibleName(name) {
 		const result = name.replace(/-/g, ' ');
 		return result.charAt(0).toUpperCase() + result.slice(1).toLowerCase();
 	}
@@ -135,7 +135,7 @@ class FontAwesomeService {
 			.filter(([key]) => this.#solidIconsWhiteList.includes(key))
 			.map(([key, { prefix, iconName }]) => ({
 				fullName: key,
-				visibleName: this.#getIconVisibleName(iconName),
+				visibleName: this.getIconVisibleName(iconName),
 				prefix,
 				iconName
 			}));
@@ -144,13 +144,17 @@ class FontAwesomeService {
 			.filter(([key]) => !this.#brandIconsBlackList.includes(key))
 			.map(([key, { prefix, iconName }]) => ({
 				fullName: key,
-				visibleName: this.#getIconVisibleName(iconName),
+				visibleName: this.getIconVisibleName(iconName),
 				prefix,
 				iconName
 			}));
 
 		iconsCache = [...solidIconsResult, ...brandIconsResult];
 		return iconsCache;
+	}
+
+	static resetCache() {
+		iconsCache = null;
 	}
 }
 
