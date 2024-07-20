@@ -1,14 +1,21 @@
-import React, { createContext, useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 import BookmarkGroup, { publicProps as publicGroupProps } from '../Group';
+import { publicProps as publicGroupHeaderProps } from '../Group/Header';
 import { publicProps as publicItemProps } from '../Item';
 import { AppDataContext } from '../../../contexts/AppData';
 import styles from './container.module.scss';
+import BookmarkContainerContext from './context';
 
-export const BookmarkContainerContext = createContext(null);
-
-const BookmarkContainer = ({ onGroupItemEditButtonClick }) => {
+const BookmarkContainer = ({
+	groupProps = {},
+	groupHeaderProps = {},
+	groupItemProps = {},
+	showCreateGroupButton = true,
+	onGroupItemEditButtonClick
+}) => {
+	const containerRef = useRef(null);
 	const { state, dispatch } = useContext(AppDataContext);
 
 	const handleShiftGroups = (moveBy) => {
@@ -91,34 +98,42 @@ const BookmarkContainer = ({ onGroupItemEditButtonClick }) => {
 	return (
 		<BookmarkContainerContext.Provider
 			value={{
+				groupProps,
+				groupHeaderProps,
+				groupItemProps,
+				showCreateGroupButton,
+
 				handleShiftGroups,
 				handleCreateGroup,
 				handleRenameGroup,
 				handleRemoveGroup,
 				handleGroupLayoutChange,
+
 				onGroupItemEditButtonClick
 			}}
 		>
-			<article className={styles.bookmarkContainer}>
+			<article ref={containerRef} className={styles.bookmarkContainer}>
 				{state.groups.map((group) => (
-					<BookmarkGroup key={group.id} {...group} />
+					<BookmarkGroup key={group.id} {...group} {...groupProps} />
 				))}
-				<CreateGroupButton />
+				{showCreateGroupButton && <CreateGroupButton />}
 			</article>
 		</BookmarkContainerContext.Provider>
 	);
 };
 
 BookmarkContainer.propTypes = {
+	groupProps: PropTypes.shape(publicGroupProps),
+	groupHeaderProps: PropTypes.shape(publicGroupHeaderProps),
+	groupItemProps: PropTypes.shape(publicItemProps),
+	showCreateGroupButton: PropTypes.bool,
+
 	groups: PropTypes.arrayOf(PropTypes.shape(BookmarkGroup.propTypes)),
 
 	/**
 	 * (groupId: string, bookmarkId: string) => void
 	 */
-	onGroupItemEditButtonClick: PropTypes.func,
-
-	groupProps: PropTypes.shape(publicGroupProps),
-	groupItemProps: PropTypes.shape(publicItemProps)
+	onGroupItemEditButtonClick: PropTypes.func
 };
 
-export default BookmarkContainer;
+export default React.memo(BookmarkContainer);

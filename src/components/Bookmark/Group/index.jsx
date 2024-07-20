@@ -1,58 +1,73 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import ReactGridLayout, { WidthProvider } from 'react-grid-layout';
-import { BookmarkContainerContext } from '../Container';
+import { GridStack } from 'gridstack';
+import BookmarkContainerContext from '../Container/context';
 import Header from './Header';
 import Item from '../Item';
-import useSquareLayoutItems from './hooks/useSquareLayoutItems';
-import useMobileUserAgentCheck from '../../../hooks/useMobileUserAgentCheck';
 import styles from './group.module.scss';
 import { tileSizes } from '../../../constants/tileSizes';
 
-const ResponsiveReactGridLayout = WidthProvider(ReactGridLayout);
-
 const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 4, showHeader = true }) => {
-	const { handleGroupLayoutChange } = useContext(BookmarkContainerContext);
+	// const { groupItemProps, groupHeaderProps, handleGroupLayoutChange } = useContext(BookmarkContainerContext);
+	const { groupItemProps, groupHeaderProps } = useContext(BookmarkContainerContext);
+	const gridRef = useRef(null);
 
-	const isMobile = useMobileUserAgentCheck();
-	const { layoutRowHeight, layoutContainerRef } = useSquareLayoutItems(maxColumns, layoutGap);
+	// const handleLayoutChange = (layout) => {
+	// 	console.log('layout change');
+	// 	handleGroupLayoutChange(
+	// 		id,
+	// 		layout.map(({ i, x, y, w, h }) => ({
+	// 			id: i,
+	// 			column: x,
+	// 			row: y,
+	// 			// eslint-disable-next-line no-unused-vars
+	// 			size: Object.entries(tileSizes).find(([_, { rows, columns }]) => rows === h && columns === w)[0]
+	// 		}))
+	// 	);
+	// };
 
-	const handleLayoutChange = (layout) => {
-		handleGroupLayoutChange(
-			id,
-			layout.map(({ i, x, y, w, h }) => ({
-				id: i,
-				column: x,
-				row: y,
-				// eslint-disable-next-line no-unused-vars
-				size: Object.entries(tileSizes).find(([_, { rows, columns }]) => rows === h && columns === w)[0]
-			}))
+	// const handleDrop = (layout, oldItem, newItem) => {
+	// 	console.log(layout, oldItem, newItem);
+	// };
+
+	useEffect(() => {
+		const grid = GridStack.init(
+			{
+				acceptWidgets: true,
+				column: maxColumns,
+				maxRow: 10,
+				minRow: 2,
+				disableResize: true,
+				cellHeight: 'auto',
+				sizeToContent: true,
+				margin: layoutGap / 2
+			},
+			gridRef.current
 		);
-	};
+		console.log(grid);
+		// TODO: implement callbacks
+	}, []);
 
 	return (
 		<section className={styles.bookmarkGroup} role="group">
-			{showHeader && <Header id={id} name={name} />}
-			<ResponsiveReactGridLayout
-				ref={layoutContainerRef}
-				layout={bookmarks.map(({ id, row, column, size }) => ({
-					i: id,
-					x: column,
-					y: row,
-					w: tileSizes[size].columns,
-					h: tileSizes[size].rows
-				}))}
-				cols={maxColumns}
-				margin={[layoutGap, layoutGap]}
-				containerPadding={[0, 0]}
-				rowHeight={layoutRowHeight}
-				onLayoutChange={handleLayoutChange}
-				draggableHandle={isMobile ? '.draggable-handle' : undefined}
-			>
-				{bookmarks.map((item) => (
-					<Item key={item.id} showDraggableHandle={isMobile} {...item} />
+			{showHeader && <Header id={id} name={name} {...groupHeaderProps} />}
+			<div ref={gridRef} className="grid-stack">
+				{bookmarks.map((bookmark) => (
+					<div
+						key={bookmark.id}
+						className="grid-stack-item"
+						gs-id={bookmark.id}
+						gs-x={bookmark.column}
+						gs-y={bookmark.row}
+						gs-w={tileSizes[bookmark.size].columns}
+						gs-min-h={tileSizes[bookmark.size].rows} // gs-h does not work
+					>
+						<div className="grid-stack-item-content">
+							<Item {...groupItemProps} {...bookmark} />
+						</div>
+					</div>
 				))}
-			</ResponsiveReactGridLayout>
+			</div>
 		</section>
 	);
 };

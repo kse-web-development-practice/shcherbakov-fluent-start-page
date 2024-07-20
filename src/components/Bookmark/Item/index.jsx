@@ -3,21 +3,21 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { BookmarkContainerContext } from '../Container';
+import BookmarkContainerContext from '../Container/context';
 import styles from './item.module.scss';
-import useLinkClickFix from './hooks/useLinkClickFix';
+// import useLinkClickFix from './hooks/useLinkClickFix';
 import Favicon from '../../Favicon';
 import FaviconAuto from '../../Favicon/Auto';
 import FaviconIcon from '../../Favicon/Icon';
 import FaviconText from '../../Favicon/Text';
 import FaviconImage from '../../Favicon/Image';
+// import { tileSizes } from '../../../constants/tileSizes';
 
-const BookmarkItem = React.forwardRef(({ text, link, size, className, showDraggableHandle, showEditButton = true, favicon, ...props }, ref) => {
+const BookmarkItem = ({ text, link, size, showDraggableHandle, showEditButton = true, favicon }) => {
 	const { onGroupItemEditButtonClick } = useContext(BookmarkContainerContext);
-	const linkClickFix = useLinkClickFix();
 
 	return (
-		<div ref={ref} className={classNames(styles.bookmarkItem, className)} {...props}>
+		<div className={styles.bookmarkItem}>
 			{showDraggableHandle && <button className="draggable-handle" aria-hidden></button>}
 			{showEditButton && (
 				<button className={styles.bookmarkItemEditButton} onClick={onGroupItemEditButtonClick}>
@@ -26,7 +26,7 @@ const BookmarkItem = React.forwardRef(({ text, link, size, className, showDragga
 				</button>
 			)}
 
-			<a href={link} className={styles.bookmarkItemLink} {...linkClickFix}>
+			<a href={link} className={styles.bookmarkItemLink}>
 				{favicon && (
 					<Favicon
 						className={classNames(styles.bookmarkItemFavicon, {
@@ -41,18 +41,13 @@ const BookmarkItem = React.forwardRef(({ text, link, size, className, showDragga
 			</a>
 		</div>
 	);
-});
-
-export const publicProps = {
-	showEditButton: PropTypes.bool,
-	className: PropTypes.string
 };
 
-BookmarkItem.displayName = 'BookmarkItem';
+export const publicProps = {
+	showEditButton: PropTypes.bool
+};
 
 BookmarkItem.propTypes = {
-	// These 3 properties are unused in this component
-	// but they are needed for overall defining the structure
 	id: PropTypes.string.isRequired,
 	row: PropTypes.number.isRequired,
 	column: PropTypes.number.isRequired,

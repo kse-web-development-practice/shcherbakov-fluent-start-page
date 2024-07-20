@@ -104,7 +104,7 @@ const reducer = (state, action) => {
 const AppDataProvider = ({ children, initialData = defaultData, useStorage = true }) => {
 	const [state, dispatch] = useReducer(reducer, defaultData, (initialValue = initialData) => {
 		if (!useStorage) {
-			return initialValue;
+			return initialData;
 		}
 		return LocalStorageService.getAppData() || initialValue;
 	});

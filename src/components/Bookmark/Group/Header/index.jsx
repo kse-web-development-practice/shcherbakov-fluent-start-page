@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight, faTrash } from '@fortawesome/free-solid-svg-icons';
 import styles from './header.module.scss';
-import { BookmarkContainerContext } from '../../Container';
+import BookmarkContainerContext from '../../Container/context';
 
-const BookmarkGroupHeader = ({ id, name }) => {
+const BookmarkGroupHeader = ({ id, name, showGroupControls = true }) => {
 	const { handleShiftGroups, handleRenameGroup, handleRemoveGroup } = useContext(BookmarkContainerContext);
 
 	const [currentName, setCurrentName] = useState(name);
@@ -27,19 +27,20 @@ const BookmarkGroupHeader = ({ id, name }) => {
 		</button>
 	);
 
-	const ControlButtons = () => (
-		<div>
-			<button aria-label="Move group back" onClick={() => handleShiftGroups(-1)}>
-				<FontAwesomeIcon icon={faArrowLeft} fixedWidth aria-hidden />
-			</button>
-			<button aria-label="Move group forward" onClick={() => handleShiftGroups(1)}>
-				<FontAwesomeIcon icon={faArrowRight} fixedWidth aria-hidden />
-			</button>
-			<button aria-label="Remove group" onClick={() => handleRemoveGroup(id)}>
-				<FontAwesomeIcon icon={faTrash} fixedWidth aria-hidden />
-			</button>
-		</div>
-	);
+	const ControlButtons = () =>
+		showGroupControls ? (
+			<div>
+				<button aria-label="Move group back" onClick={() => handleShiftGroups(-1)}>
+					<FontAwesomeIcon icon={faArrowLeft} fixedWidth aria-hidden />
+				</button>
+				<button aria-label="Move group forward" onClick={() => handleShiftGroups(1)}>
+					<FontAwesomeIcon icon={faArrowRight} fixedWidth aria-hidden />
+				</button>
+				<button aria-label="Remove group" onClick={() => handleRemoveGroup(id)}>
+					<FontAwesomeIcon icon={faTrash} fixedWidth aria-hidden />
+				</button>
+			</div>
+		) : null;
 
 	const EditState = () => {
 		// Confirm edit on escape or enter
@@ -68,7 +69,7 @@ const BookmarkGroupHeader = ({ id, name }) => {
 		if (!currentName) {
 			return (
 				<>
-					<h1 aria-label="Unnamed group" onClick={handleTitleClick}>
+					<h1 className="group-header-handle" aria-label="Unnamed group" onClick={handleTitleClick}>
 						Name a group
 					</h1>
 					<ControlButtons />
@@ -79,7 +80,9 @@ const BookmarkGroupHeader = ({ id, name }) => {
 
 		return (
 			<>
-				<h1 onClick={handleTitleClick}>{currentName}</h1>
+				<h1 className="group-header-handle" onClick={handleTitleClick}>
+					{currentName}
+				</h1>
 				<ControlButtons />
 				<AccessabilityEditGroupName />
 			</>
@@ -98,9 +101,14 @@ const BookmarkGroupHeader = ({ id, name }) => {
 	);
 };
 
+export const publicProps = {
+	showGroupControls: PropTypes.bool
+};
+
 BookmarkGroupHeader.propTypes = {
 	id: PropTypes.string.isRequired,
-	name: PropTypes.string
+	name: PropTypes.string,
+	...publicProps
 };
 
 export default BookmarkGroupHeader;

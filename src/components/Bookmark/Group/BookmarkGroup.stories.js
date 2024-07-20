@@ -11,7 +11,7 @@ export default {
 		(Story, { args }) => (
 			<AppDataProvider useStorage={false} initialData={{ ...defaultData, groups: [args] }}>
 				<div style={{ width: 'min(100%, 450px)' }}>
-					<BookmarkContainer />
+					<BookmarkContainer showCreateGroupButton={false} groupHeaderProps={{ showGroupControls: false }} />
 				</div>
 			</AppDataProvider>
 		)
@@ -23,5 +23,5 @@ export default {
 };
 
 export const SampleGroup = {
-	args: defaultData.groups[0]
+	args: { ...defaultData.groups[0] }
 };

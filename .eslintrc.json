@@ -27,7 +27,19 @@
 	"rules": {
 		"react/react-in-jsx-scope": "off",
 		"react/no-unescaped-entities": 0,
-		"react/prop-types": "off"
+		"react/prop-types": "off",
+		"react/no-unknown-property": [
+			"error",
+			{
+				"ignore": [
+					"gs-id",
+					"gs-x",
+					"gs-y",
+					"gs-w",
+					"gs-min-h"
+				]
+			}
+		]
 	},
 	"ignorePatterns": [
 		"**/*.svg",
