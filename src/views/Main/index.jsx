@@ -13,8 +13,17 @@ const ViewMain = () => {
 	const { state } = useContext(AppDataContext);
 	const theme = useTheme();
 
-	const handleBookmarkEditButtonClick = (bookmarkGroupId, bookmarkItemId) => {
-		const editBookmark = state.groups.find((group) => group.id === bookmarkGroupId).bookmarks.find((bookmark) => bookmark.id === bookmarkItemId);
+	const handleBookmarkEditButtonClick = (bookmarkItemId) => {
+		let bookmarkGroupId;
+		let editBookmark;
+		state.groups.forEach((group) => {
+			editBookmark = group.bookmarks.find((bookmark) => bookmark.id === bookmarkItemId);
+			if (editBookmark) {
+				bookmarkGroupId = group.id;
+				return;
+			}
+		});
+
 		navigate('/edit', {
 			state: {
 				groupId: bookmarkGroupId,
@@ -41,7 +50,7 @@ const ViewMain = () => {
 			/>
 
 			<div className={classNames(styles.pageContent, styles[`pageContentTheme${theme}`])}>
-				<BookmarkContainer onGroupItemEditButtonClick={handleBookmarkEditButtonClick} />
+				<BookmarkContainer groups={state.groups} onGroupItemEditButtonClick={handleBookmarkEditButtonClick} />
 			</div>
 
 			<Outlet />

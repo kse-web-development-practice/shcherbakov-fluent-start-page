@@ -62,6 +62,10 @@ const ViewBookmarkFormCreate = () => {
 										bookmarks: [{ ...formData, link: '#', row: 0, column: 0 }]
 									}
 								]}
+								editAppData={false}
+								showCreateGroupButton={false}
+								groupProps={{ showHeader: false }}
+								groupItemProps={{ showEditButton: false }}
 							/>
 						</div>
 					</div>

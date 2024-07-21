@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import Modal from '../../components/Modal';
-import BookmarkGroup from '../../components/Bookmark/Group';
+import BookmarkContainer from '../../components/Bookmark/Container';
 import FormEditBookmark from '../../components/Form/assembles/EditBookmark';
 import styles from './bookmark.module.scss';
 import { AppDataContext } from '../../contexts/AppData';
@@ -54,12 +54,17 @@ const ViewBookmarkFormEdit = () => {
 					<div className={styles.bookmarkFormLayoutPreview}>
 						<div className={styles.bookmarkFormLayoutPreviewContent}>
 							<h3 className={styles.bookmarkFormLayoutPreviewTitle}>Preview</h3>
-							<BookmarkGroup
-								id="0"
-								showHeader={false}
-								showItemEditButton={false}
-								bookmarks={[{ ...formData, link: '#', row: 0, column: 0 }]}
-								maxColumns={4}
+							<BookmarkContainer
+								groups={[
+									{
+										id: '0',
+										bookmarks: [{ ...formData, link: '#', row: 0, column: 0 }]
+									}
+								]}
+								editAppData={false}
+								showCreateGroupButton={false}
+								groupProps={{ showHeader: false }}
+								groupItemProps={{ showEditButton: false }}
 							/>
 						</div>
 					</div>

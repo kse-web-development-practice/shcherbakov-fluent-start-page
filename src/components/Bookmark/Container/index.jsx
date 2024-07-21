@@ -14,11 +14,14 @@ const BookmarkContainer = ({
 	groupHeaderProps = {},
 	groupItemProps = {},
 	showCreateGroupButton = true,
+	editAppData = true,
 	onGroupItemEditButtonClick
 }) => {
 	const { dispatch } = useContext(AppDataContext);
 
 	const handleShiftGroups = (moveBy) => {
+		if (!editAppData) return;
+
 		const length = groups.length;
 		const shiftCount = ((-moveBy % length) + length) % length;
 		dispatch({
@@ -28,6 +31,8 @@ const BookmarkContainer = ({
 	};
 
 	const handleCreateGroup = () => {
+		if (!editAppData) return;
+
 		dispatch({
 			type: 'SET_BOOKMARKS',
 			payload: [
@@ -41,6 +46,8 @@ const BookmarkContainer = ({
 	};
 
 	const handleRenameGroup = (groupId, newName) => {
+		if (!editAppData) return;
+
 		dispatch({
 			type: 'SET_BOOKMARKS',
 			payload: groups.map((group) => {
@@ -56,6 +63,8 @@ const BookmarkContainer = ({
 	};
 
 	const handleRemoveGroup = (groupId) => {
+		if (!editAppData) return;
+
 		dispatch({
 			type: 'SET_BOOKMARKS',
 			payload: groups.filter(({ id }) => id !== groupId)
@@ -67,6 +76,8 @@ const BookmarkContainer = ({
 	 * @param {Array<{ id: string; row: number; column: number; size: string; }>} layout
 	 */
 	const handleGroupLayoutChange = (groupId, layout) => {
+		if (!editAppData) return;
+
 		dispatch({
 			type: 'SET_BOOKMARKS',
 			payload: groups.map((group) => {
@@ -132,6 +143,7 @@ BookmarkContainer.propTypes = {
 	groupHeaderProps: PropTypes.shape(publicGroupHeaderProps),
 	groupItemProps: PropTypes.shape(publicItemProps),
 	showCreateGroupButton: PropTypes.bool,
+	editAppData: PropTypes.bool,
 
 	/**
 	 * (groupId: string, bookmarkId: string) => void

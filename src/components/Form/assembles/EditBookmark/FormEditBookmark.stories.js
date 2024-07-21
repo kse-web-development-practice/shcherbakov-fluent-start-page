@@ -31,6 +31,7 @@ export default {
 					<div style={{ maxWidth: 500 }}>
 						<BookmarkContainer
 							groups={[{ id: '0', bookmarks: [{ ...formData, link: '#' }] }]}
+							editAppData={false}
 							showCreateGroupButton={false}
 							groupProps={{ showHeader: false }}
 							groupItemProps={{ showEditButton: false }}
