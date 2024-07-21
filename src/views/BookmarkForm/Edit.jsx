@@ -33,18 +33,34 @@ const ViewBookmarkFormEdit = () => {
 		handleModalClose();
 	};
 
+	const handleRemoveButtonClick = () => {
+		dispatch({
+			type: 'REMOVE_BOOKMARK',
+			payload: {
+				groupId,
+				bookmarkId: bookmark.id
+			}
+		});
+		handleModalClose();
+	};
+
+	const handleEditButtonClick = () => {
+		form.handleSubmit(handleFormSubmit);
+	};
+
 	const ModalFooter = () => (
 		<>
+			<button type="button" onClick={handleRemoveButtonClick}>
+				Remove
+			</button>
 			<button type="button" onClick={handleModalClose}>
 				Cancel
 			</button>
-			<button type="submit" onClick={form.handleSubmit(handleFormSubmit)} disabled={!form.formState.isValid}>
+			<button type="submit" onClick={handleEditButtonClick} disabled={!form.formState.isValid}>
 				Edit
 			</button>
 		</>
 	);
-
-	console.log(formData);
 
 	return (
 		<Modal title="Edit a bookmark" isVisible onClose={handleModalClose} footer={<ModalFooter />}>
