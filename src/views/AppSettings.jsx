@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal';
+import { AppDataContext } from '../contexts/AppData';
+import FormAppSettings from '../components/Form/assembles/AppSettings';
 
 const ViewAppSettings = () => {
+	const { state } = useContext(AppDataContext);
+
 	const navigate = useNavigate();
+	const form = useForm({
+		defaultValues: state.settings
+	});
 
 	const handleModalClose = () => {
 		navigate(-1);
@@ -11,7 +19,11 @@ const ViewAppSettings = () => {
 
 	return (
 		<Modal title="Settings" isVisible onClose={handleModalClose}>
-			TODO
+			<FormProvider {...form}>
+				<form>
+					<FormAppSettings />
+				</form>
+			</FormProvider>
 		</Modal>
 	);
 };

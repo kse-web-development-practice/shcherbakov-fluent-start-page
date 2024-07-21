@@ -134,6 +134,6 @@ export default {
 		}
 	],
 	settings: {
-		theme: 'light'
+		theme: 'auto'
 	}
 };

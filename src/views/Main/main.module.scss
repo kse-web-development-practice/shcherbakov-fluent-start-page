@@ -1,7 +1,7 @@
 @import '../../assets/styles/variables';
 
 $page-content-mobile-padding: 10px 15px 80px 15px;
-$page-content-horizontal-padding: 15px;
+$page-content-desktop-padding: 10px 15px 10px $sidebar-covered-width + 15px;
 
 .page-content {
 	padding: $page-content-mobile-padding;
@@ -9,7 +9,6 @@ $page-content-horizontal-padding: 15px;
 	box-sizing: border-box;
 
 	@include desktop-styling {
-		padding-left: $sidebar-covered-width + $page-content-horizontal-padding;
-		padding-right: $page-content-horizontal-padding;
+		padding: $page-content-desktop-padding;
 	}
 }
