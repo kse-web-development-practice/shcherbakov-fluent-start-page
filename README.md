@@ -44,10 +44,10 @@ See [draw.io](https://drive.google.com/file/d/10v3QcEAvQOjWphO6h3XzgWVWlb_bbT1j/
 - [x] Create a Windows 10 start menu-like grid system
 - [x] Create a Bookmark Item component
 - [x] Create a Bookmark Group component
-- [ ] Implement drag and drop system for Bookmark Item and Bookmark Group components
+- [x] Implement drag and drop system for Bookmark Item and Bookmark Group components
 - [x] Create an Add Bookmark Form
-- [ ] Create an Edit Bookmark Form
-- [ ] Create Settings Form
+- [x] Create an Edit Bookmark Form
+- [x] Create Settings Form
 - [x] Implement saving and loading data
-- [ ] Implement support of light and dark color themes, including detecting the system’s color theme
-- [ ] Implement importing and exporting existing configurations (JSON files)
+- [x] Implement support of light and dark color themes, including detecting the system’s color theme
+- [x] Implement importing and exporting existing configurations (JSON files)
