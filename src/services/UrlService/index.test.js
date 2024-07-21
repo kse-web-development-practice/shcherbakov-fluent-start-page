@@ -45,7 +45,7 @@ describe('URL Service', () => {
 
 		describe('if URL is invalid', () => {
 			it('should return false', () => {
-				[undefined, null, 0, ''].forEach((input) => expect(input).toBeFalsy());
+				[undefined, null, 0, ''].forEach((input) => expect(UrlService.isValid(input)).toBeFalsy());
 			});
 		});
 	});

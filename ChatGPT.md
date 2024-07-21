@@ -38,3 +38,30 @@
 
 > I want to unit test FontAwesomeService. How to mock @fortawesome libs?
 > `FontAwesomeService code`
+
+---
+
+> I need to unit test a hook, that uses react-responsive. How to do it?
+> I tried to write a unit test but it throws TypeError: Cannot read properties of null (reading 'useContext').
+>
+> ```js
+> import useMobileScreenCheck from '.';
+> const screenWidths = [
+> 	{
+> 		screenWidth: 600,
+> 		isMobile: false
+> 	},
+> 	{
+> 		screenWidth: 500,
+> 		isMobile: true
+> 	}
+> ];
+> describe('useMobileScreenCheck', () => {
+> 	describe.each(screenWidths)('test for width $screenWidth', (item) => {
+> 		window.innerWidth = item.screenWidth;
+> 		it(returns ${item.isMobile}, () => {
+> 			expect(useMobileScreenCheck()).toBe(item.isMobile);
+> 		});
+> 	});
+> });
+> ```
