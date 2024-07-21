@@ -116,6 +116,11 @@ const AppDataProvider = ({ children, initialData = defaultData, useStorage = tru
 		LocalStorageService.setAppData(state);
 	}, [state, useStorage]);
 
+	useEffect(() => {
+		document.body.classList.remove('light', 'dark');
+		document.body.classList.add(state.settings.theme);
+	}, [state.settings.theme]);
+
 	return <AppDataContext.Provider value={{ state, dispatch }}>{children}</AppDataContext.Provider>;
 };
 

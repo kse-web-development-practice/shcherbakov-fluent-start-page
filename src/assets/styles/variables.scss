@@ -1,3 +1,13 @@
+@mixin desktop-styling {
+	@media only screen and (min-width: $breakpoint-desktop) {
+		@content;
+	}
+}
+
+@function themed($theme, $key) {
+	@return map-get(map-get($themes, $theme), $key);
+}
+
 $themes: (
 	light: (
 		pageBackground: #e4e4e4,
@@ -67,23 +77,31 @@ $themes: (
 	)
 );
 
-$input-background-color: #fff;
-$input-border-color: #999;
-$input-border-radius: 6px;
-$input-padding: 8px;
+body {
+	&.light {
+		background-color: themed('light', 'pageBackground');
+
+		select,
+		input {
+			background-color: themed('light', 'inputBackgroundColor');
+			border-color: themed('light', 'inputBorderColor');
+		}
+	}
+
+	&.dark {
+		background-color: themed('dark', 'pageBackground');
+
+		select,
+		input {
+			background-color: themed('dark', 'inputBackgroundColor');
+			border-color: themed('dark', 'inputBorderColor');
+		}
+
+	}
+}
 
 $sidebar-covered-width: 56px;
 $sidebar-uncovered-width: 250px;
 $sidebar-item-height: $sidebar-covered-width;
 
 $breakpoint-desktop: 576px;
-
-@mixin desktop-styling {
-	@media only screen and (min-width: $breakpoint-desktop) {
-		@content;
-	}
-}
-
-@function themed($theme, $key) {
-	@return map-get(map-get($themes, $theme), $key);
-}
