@@ -5,11 +5,48 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	transition: all 0.25s ease;
+	transition: all 0.15s ease;
 	z-index: 998;
 
 	overflow: hidden;
-	background-color: $sidebar-covered-background-color;
+
+	&_theme {
+		&_light {
+			background-color: themed('light', 'sidebarCoveredBackgroundColor');
+
+			@include desktop-styling {
+				&:hover {
+					background-color: themed('light', 'sidebarUncoveredBackgroundColor');
+				}
+			}
+
+			& .sidebar__item {
+				color: themed('light', 'sidebarItemColor');
+
+				&:hover {
+					background-color: themed('light', 'sidebarItemHoverBackgroundColor');
+				}
+			}
+		}
+
+		&_dark {
+			background-color: themed('dark', 'sidebarCoveredBackgroundColor');
+
+			@include desktop-styling {
+				&:hover {
+					background-color: themed('dark', 'sidebarUncoveredBackgroundColor');
+				}
+			}
+
+			& .sidebar__item {
+				color: themed('dark', 'sidebarItemColor');
+
+				&:hover {
+					background-color: themed('dark', 'sidebarItemHoverBackgroundColor');
+				}
+			}
+		}
+	}
 
 	@include desktop-styling {
 		top: 0;
@@ -17,7 +54,6 @@
 
 		&:hover {
 			width: $sidebar-uncovered-width;
-			background-color: $sidebar-uncovered-background-color;
 
 			.sidebar__item {
 				justify-content: start;
@@ -52,11 +88,6 @@
 
 		height: $sidebar-item-height;
 		text-decoration: none;
-		color: $sidebar-item-color;
-
-		&:hover {
-			background-color: $sidebar-item-hover-background-color;
-		}
 
 		&-icon {
 			width: $sidebar-covered-width;

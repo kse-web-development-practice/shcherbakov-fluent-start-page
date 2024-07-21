@@ -1,29 +1,80 @@
-$page-content-vertical-padding: 10px;
-$page-content-horizontal-padding: 15px;
+$themes: (
+	light: (
+		pageBackground: #e4e4e4,
+
+		inputBackgroundColor: #f0f0f0,
+		inputBorderColor: #ccc,
+
+		bookmarkGroupHeaderColor: #333,
+		bookmarkGroupHeaderStateEditBackgroundColor: #e6e6e6,
+
+		bookmarkItemColor: #333,
+		bookmarkItemBackgroundColor: #efefef,
+		bookmarkItemHoverBorderColor: #bbb,
+
+		iconPickerBackgroundColor: #f9f9f9,
+		iconPickerBorderColor: #bbb,
+		iconPickerItemColor: #333,
+		iconPickerItemHoverBorderColor: #bbb,
+		iconPickerItemSelectedBorderColor: #bbb,
+		iconPickerItemSelectedBackgroundColor: #e0e0e0,
+
+		fileImportBackgroundColor: #f5f5f5,
+		fileImportBorderColor: #bbb,
+		fileImportTextColor: #333,
+
+		modalContentBackgroundColor: #fff,
+		modalContentColor: #333,
+		modalFooterBackgroundColor: #f1f1f1,
+
+		sidebarCoveredBackgroundColor: #e4e4e4,
+		sidebarUncoveredBackgroundColor: #e9e9e9,
+		sidebarItemColor: #333,
+		sidebarItemHoverBackgroundColor: #f6f6f6
+	),
+	dark: (
+		pageBackground: #1f1f1f,
+
+		inputBackgroundColor: #fff,
+		inputBorderColor: #999,
+
+		bookmarkGroupHeaderColor: #fff,
+		bookmarkGroupHeaderStateEditBackgroundColor: #666,
+
+		bookmarkItemColor: #fff,
+		bookmarkItemBackgroundColor: #3c3c3c,
+		bookmarkItemHoverBorderColor: #9d9d9d,
+
+		iconPickerBackgroundColor: #3c3c3c,
+		iconPickerBorderColor: #9d9d9d,
+		iconPickerItemColor: #fff,
+		iconPickerItemHoverBorderColor: #9d9d9d,
+		iconPickerItemSelectedBorderColor: #9d9d9d,
+		iconPickerItemSelectedBackgroundColor: #4b4b4b,
+
+		fileImportBackgroundColor: #575757,
+		fileImportBorderColor: #9d9d9d,
+		fileImportTextColor: #fff,
+
+		modalContentBackgroundColor: #202020,
+		modalContentColor: #fff,
+		modalFooterBackgroundColor: #2b2b2b,
+
+		sidebarCoveredBackgroundColor: #1f1f1f,
+		sidebarUncoveredBackgroundColor: #2c2c2c,
+		sidebarItemColor: #fff,
+		sidebarItemHoverBackgroundColor: #414141
+	)
+);
 
 $input-background-color: #fff;
 $input-border-color: #999;
 $input-border-radius: 6px;
 $input-padding: 8px;
 
-$icon-picker-background-color: #3c3c3c;
-$icon-picker-border-color: #9d9d9d;
-$icon-picker-border-radius: 6px;
-$icon-picker-item-hover-border-color: #9d9d9d;
-$icon-picker-item-selected-border-color: #9d9d9d;
-$icon-picker-item-selected-background-color: #4b4b4b;
-
-$file-import-background-color: #575757;
-$file-import-border-color: #9d9d9d;
-$file-import-border-radius: 6px;
-
 $sidebar-covered-width: 56px;
 $sidebar-uncovered-width: 250px;
 $sidebar-item-height: $sidebar-covered-width;
-$sidebar-covered-background-color: #272727;
-$sidebar-uncovered-background-color: #2c2c2c;
-$sidebar-item-color: #ffff;
-$sidebar-item-hover-background-color: #414141;
 
 $breakpoint-desktop: 576px;
 
@@ -31,4 +82,8 @@ $breakpoint-desktop: 576px;
 	@media only screen and (min-width: $breakpoint-desktop) {
 		@content;
 	}
+}
+
+@function themed($theme, $key) {
+	@return map-get(map-get($themes, $theme), $key);
 }

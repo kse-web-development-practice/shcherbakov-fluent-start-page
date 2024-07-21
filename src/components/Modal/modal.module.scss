@@ -13,12 +13,44 @@ $back-bg: #202020;
 	right: 0;
 	z-index: 999;
 
+	&_theme {
+		&_light {
+			& .modal__header,
+			& .modal__content {
+				background-color: themed('light', 'modalContentBackgroundColor');
+			}
+
+			& .modal__footer {
+				background-color: themed('light', 'modalFooterBackgroundColor');
+			}
+
+			& .modal__body,
+			&__close-button {
+				color: themed('light', 'modalContentColor');
+			}
+		}
+
+		&_dark {
+			& .modal__header,
+			& .modal__content {
+				background-color: themed('dark', 'modalContentBackgroundColor');
+			}
+
+			& .modal__footer {
+				background-color: themed('dark', 'modalFooterBackgroundColor');
+			}
+
+			& .modal__body,
+			&__close-button {
+				color: themed('dark', 'modalContentColor');
+			}
+		}
+	}
+
 	&__body {
 		display: flex;
 		flex-direction: column;
 		height: 100%;
-
-		color: #fff;
 	}
 
 	&__header {
@@ -27,7 +59,6 @@ $back-bg: #202020;
 
 		gap: 0.5rem;
 		padding: $content-padding * 1.2 $content-padding;
-		background-color: $back-bg;
 		font-weight: 500;
 		font-size: 18px;
 	}
@@ -38,7 +69,6 @@ $back-bg: #202020;
 		background: transparent;
 		border: none;
 		cursor: pointer;
-		color: #fff;
 
 		&_desktop {
 			display: none;
@@ -48,13 +78,11 @@ $back-bg: #202020;
 	&__content {
 		flex: 1;
 		overflow-y: auto;
-		background-color: $back-bg;
 		padding: $content-padding;
 	}
 
 	&__footer {
 		padding: $content-padding;
-		background-color: $front-bg;
 	}
 
 	@include desktop-styling {

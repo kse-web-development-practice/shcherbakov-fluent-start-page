@@ -1,3 +1,5 @@
+@import '../../../../assets/styles/variables.scss';
+
 .bookmark-group__header {
 	display: flex;
 	justify-content: space-between;
@@ -10,26 +12,49 @@
 		font-size: 16px;
 	}
 
-	&_edit {
-		padding: 10px;
-		background: #666;
+	&_theme {
+		&_light {
+			h1 {
+				color: themed('light', 'bookmarkGroupHeaderColor');
+			}
 
-		input {
-			width: 100%;
-			box-sizing: border-box;
+			&.bookmark-group__header_state_edit {
+				background: themed('light', 'bookmarkGroupHeaderStateEditBackgroundColor');
+			}
+		}
 
-			font-size: 16px;
-			padding: 4px;
+		&_dark {
+			h1 {
+				color: themed('dark', 'bookmarkGroupHeaderColor');
+			}
+
+			&.bookmark-group__header_state_edit {
+				background: themed('dark', 'bookmarkGroupHeaderStateEditBackgroundColor');
+			}
 		}
 	}
 
-	&_unnamed {
-		h1 {
-			width: 100%;
-			opacity: 0;
+	&_state {
+		&_edit {
+			padding: 10px;
 
-			&:hover {
-				opacity: 1;
+			input {
+				width: 100%;
+				box-sizing: border-box;
+
+				font-size: 16px;
+				padding: 4px;
+			}
+		}
+
+		&_unnamed {
+			h1 {
+				width: 100%;
+				opacity: 0;
+
+				&:hover {
+					opacity: 1;
+				}
 			}
 		}
 	}

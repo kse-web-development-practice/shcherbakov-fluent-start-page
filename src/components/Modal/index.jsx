@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faClose } from '@fortawesome/free-solid-svg-icons';
 import styles from './modal.module.scss';
+import useTheme from '../../hooks/useTheme';
 
 const Modal = ({ title, footer, onClose, children, isVisible = false }) => {
+	const theme = useTheme();
+
 	useEffect(() => {
 		const handleKeyDown = (event) => {
 			if (event.key === 'Escape') {
@@ -33,7 +37,13 @@ const Modal = ({ title, footer, onClose, children, isVisible = false }) => {
 	}
 
 	return (
-		<div className={styles.modal} onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-title">
+		<div
+			className={classNames(styles.modal, styles[`modalTheme${theme}`])}
+			onClick={onClose}
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="modal-title"
+		>
 			<div className={styles.modalBody} onClick={(event) => event.stopPropagation()}>
 				<div className={styles.modalHeader}>
 					<CloseButton />

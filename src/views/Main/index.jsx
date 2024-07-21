@@ -4,11 +4,14 @@ import { faCog, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Sidebar from '../../components/Sidebar';
 import BookmarkContainer from '../../components/Bookmark/Container';
 import { AppDataContext } from '../../contexts/AppData';
+import useTheme from '../../hooks/useTheme';
 import styles from './main.module.scss';
+import classNames from 'classnames';
 
 const ViewMain = () => {
 	const navigate = useNavigate();
 	const { state } = useContext(AppDataContext);
+	const theme = useTheme();
 
 	const handleBookmarkEditButtonClick = (bookmarkGroupId, bookmarkItemId) => {
 		const editBookmark = state.groups.find((group) => group.id === bookmarkGroupId).bookmarks.find((bookmark) => bookmark.id === bookmarkItemId);
@@ -37,7 +40,7 @@ const ViewMain = () => {
 				]}
 			/>
 
-			<div className={styles.pageContent}>
+			<div className={classNames(styles.pageContent, styles[`pageContentTheme${theme}`])}>
 				<BookmarkContainer onGroupItemEditButtonClick={handleBookmarkEditButtonClick} />
 			</div>
 

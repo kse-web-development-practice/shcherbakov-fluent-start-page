@@ -4,11 +4,34 @@
 	display: inline-block;
 	position: relative;
 
+	&_theme {
+		&_light {
+			& .file-import__text {
+				color: themed('light', 'fileImportTextColor');
+			}
+
+			&.file-import_drag-and-drop {
+				background-color: themed('light', 'fileImportBackgroundColor');
+				border-color: themed('light', 'fileImportBorderColor');
+			}
+		}
+
+		&_dark {
+			& .file-import__text {
+				color: themed('dark', 'fileImportTextColor');
+			}
+
+			&.file-import_drag-and-drop {
+				background-color: themed('dark', 'fileImportBackgroundColor');
+				border-color: themed('dark', 'fileImportBorderColor');
+			}
+		}
+	}
+
 	&_drag-and-drop {
-		background-color: $file-import-background-color;
 		padding: 30px 50px;
-		border-radius: $file-import-border-radius;
-		border: 3px dashed $file-import-border-color;
+		border-radius: 6px;
+		border: 3px dashed;
 
 		display: inline-flex;
 		flex-direction: column;
@@ -24,6 +47,5 @@
 
 	&__text {
 		display: none;
-		color: #fff;
 	}
 }

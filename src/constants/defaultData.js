@@ -133,5 +133,7 @@ export default {
 			]
 		}
 	],
-	settings: {}
+	settings: {
+		theme: 'light'
+	}
 };

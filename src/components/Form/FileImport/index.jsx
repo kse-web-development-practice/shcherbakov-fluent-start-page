@@ -2,11 +2,13 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import useMobileUserAgentCheck from '../../../hooks/useMobileUserAgentCheck';
+import useTheme from '../../../hooks/useTheme';
 import styles from './file-import.module.scss';
 
 const FormFileImport = ({ onChange, accepts = ['.json', 'application/json'], allowDragAndDrop = true }) => {
 	const fileInputRef = useRef(null);
 	const isMobile = useMobileUserAgentCheck();
+	const theme = useTheme();
 
 	const handleDragOver = (event) => {
 		if (!allowDragAndDrop) {
@@ -45,7 +47,7 @@ const FormFileImport = ({ onChange, accepts = ['.json', 'application/json'], all
 
 	return (
 		<div
-			className={classNames(styles.fileImport, {
+			className={classNames(styles.fileImport, styles[`fileImportTheme${theme}`], {
 				[styles.fileImportDragAndDrop]: allowDragAndDrop && !isMobile
 			})}
 			onDragOver={handleDragOver}

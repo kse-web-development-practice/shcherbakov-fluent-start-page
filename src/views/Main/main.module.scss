@@ -1,7 +1,22 @@
 @import '../../assets/styles/variables';
 
+$page-content-vertical-padding: 10px;
+$page-content-horizontal-padding: 15px;
+
 .page-content {
 	padding: $page-content-vertical-padding $page-content-horizontal-padding;
+	height: 100vh;
+	box-sizing: border-box;
+
+	&_theme {
+		&_light {
+			background-color: themed('light', 'pageBackground');
+		}
+
+		&_dark {
+			background-color: themed('dark', 'pageBackground');
+		}
+	}
 
 	@include desktop-styling {
 		padding-left: $sidebar-covered-width + $page-content-horizontal-padding;
