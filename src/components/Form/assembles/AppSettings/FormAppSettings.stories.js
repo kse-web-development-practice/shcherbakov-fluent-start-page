@@ -9,9 +9,7 @@ export default {
 	decorators: [
 		(Story) => {
 			const { state } = useContext(AppDataContext);
-			const methods = useForm({
-				defaultValues: state.settings
-			});
+			const methods = useForm({ values: state.settings });
 
 			return (
 				<FormProvider {...methods}>

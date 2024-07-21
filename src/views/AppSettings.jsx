@@ -9,9 +9,7 @@ const ViewAppSettings = () => {
 	const { state } = useContext(AppDataContext);
 
 	const navigate = useNavigate();
-	const form = useForm({
-		defaultValues: state.settings
-	});
+	const form = useForm({ values: state.settings });
 
 	const handleModalClose = () => {
 		navigate(-1);

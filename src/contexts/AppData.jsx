@@ -102,6 +102,12 @@ const reducer = (state, action) => {
 				}
 			};
 
+		/**
+		 * payload: { settings, groups }
+		 */
+		case 'SET_DATA':
+			return action.payload;
+
 		default:
 			return state;
 	}

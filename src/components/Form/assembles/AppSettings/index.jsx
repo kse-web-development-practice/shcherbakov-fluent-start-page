@@ -4,10 +4,11 @@ import RadioGroup from '../../RadioGroup';
 import FormFileImport from '../../FileImport';
 import JsonFileService from '../../../../services/JsonFileService';
 import { AppDataContext } from '../../../../contexts/AppData';
+import defaultData from '../../../../constants/defaultData';
 
 const FormAppSettings = () => {
 	const { register, watch } = useFormContext();
-	const { dispatch } = useContext(AppDataContext);
+	const { state, dispatch } = useContext(AppDataContext);
 
 	const watchTheme = watch('theme');
 	useEffect(() => {
@@ -18,6 +19,34 @@ const FormAppSettings = () => {
 			}
 		});
 	}, [watchTheme]);
+
+	const handleExportData = () => {
+		const date = new Date().toISOString().split('T')[0];
+		JsonFileService.download(`fluent-start-page_${date}`, state);
+	};
+
+	const handleImportData = ([file]) => {
+		JsonFileService.read(file)
+			.then((data) => {
+				if (!data.settings || !data.groups) {
+					alert('Invalid data: no settings and/or bookmark groups');
+					return;
+				}
+
+				dispatch({
+					type: 'SET_DATA',
+					payload: data
+				});
+			})
+			.catch(alert);
+	};
+
+	const handleClearData = () => {
+		dispatch({
+			type: 'SET_DATA',
+			payload: defaultData
+		});
+	};
 
 	return (
 		<>
@@ -38,11 +67,13 @@ const FormAppSettings = () => {
 			</RadioGroup>
 
 			<h2>Data</h2>
-			<FormFileImport />
-			<button type="button" onClick={() => JsonFileService.download('settings', { str: 'TODO' })}>
+			<FormFileImport onChange={handleImportData} />
+			<button type="button" onClick={handleExportData}>
 				Export
 			</button>
-			<button type="button">Clear</button>
+			<button type="button" onClick={handleClearData}>
+				Clear
+			</button>
 		</>
 	);
 };
