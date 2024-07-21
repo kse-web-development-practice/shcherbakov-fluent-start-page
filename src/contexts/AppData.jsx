@@ -1,8 +1,9 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuid } from 'uuid';
+import ThemeProvider from './Theme';
 import defaultData from '../constants/defaultData';
 import LocalStorageService from '../services/LocalStorageService';
-import { v4 as uuid } from 'uuid';
 
 export const AppDataContext = createContext(null);
 
@@ -128,12 +129,11 @@ const AppDataProvider = ({ children, initialData = defaultData, useStorage = tru
 		LocalStorageService.setAppData(state);
 	}, [state, useStorage]);
 
-	useEffect(() => {
-		document.body.classList.remove('light', 'dark');
-		document.body.classList.add(state.settings.theme);
-	}, [state.settings.theme]);
-
-	return <AppDataContext.Provider value={{ state, dispatch }}>{children}</AppDataContext.Provider>;
+	return (
+		<AppDataContext.Provider value={{ state, dispatch }}>
+			<ThemeProvider>{children}</ThemeProvider>
+		</AppDataContext.Provider>
+	);
 };
 
 AppDataProvider.propTypes = {

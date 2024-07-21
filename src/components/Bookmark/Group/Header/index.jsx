@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight, faTrash } from '@fortawesome/free-solid-svg-icons';
 import styles from './header.module.scss';
 import BookmarkContainerContext from '../../Container/context';
-import useTheme from '../../../../hooks/useTheme';
+import { ThemeContext } from '../../../../contexts/Theme';
 
 const BookmarkGroupHeader = ({ id, name, showGroupControls = true }) => {
-	const theme = useTheme();
+	const { themeCapitalized } = useContext(ThemeContext);
 
 	const { handleShiftGroups, handleRenameGroup, handleRemoveGroup } = useContext(BookmarkContainerContext);
 
@@ -94,7 +94,7 @@ const BookmarkGroupHeader = ({ id, name, showGroupControls = true }) => {
 
 	return (
 		<header
-			className={classNames(styles.bookmarkGroupHeader, styles[`bookmarkGroupHeaderTheme${theme}`], {
+			className={classNames(styles.bookmarkGroupHeader, styles[`bookmarkGroupHeaderTheme${themeCapitalized}`], {
 				[styles.bookmarkGroupHeaderStateEdit]: isEditing,
 				[styles.bookmarkGroupHeaderStateUnnamed]: !currentName
 			})}

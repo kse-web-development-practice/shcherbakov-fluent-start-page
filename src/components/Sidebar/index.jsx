@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import SidebarItem from './Item';
 import styles from './sidebar.module.scss';
-import useTheme from '../../hooks/useTheme';
+import { ThemeContext } from '../../contexts/Theme';
 
 const Sidebar = ({ items = [], renderItem = (props, index) => <SidebarItem key={index} {...props} /> }) => {
-	const theme = useTheme();
+	const { themeCapitalized } = useContext(ThemeContext);
 
 	return (
-		<aside className={classNames(styles.sidebar, styles[`sidebarTheme${theme}`])}>
+		<aside className={classNames(styles.sidebar, styles[`sidebarTheme${themeCapitalized}`])}>
 			<nav className={styles.sidebarNavigation}>{items.map((item, index) => renderItem(item, index))}</nav>
 		</aside>
 	);

@@ -8,7 +8,7 @@ import BookmarkGroup, { groupStructureProps, publicProps as publicGroupProps } f
 import { publicProps as publicGroupHeaderProps } from '../Group/Header';
 import { publicProps as publicItemProps } from '../Item';
 import { AppDataContext } from '../../../contexts/AppData';
-import useTheme from '../../../hooks/useTheme';
+import { ThemeContext } from '../../../contexts/Theme';
 import styles from './container.module.scss';
 import BookmarkContainerContext from './context';
 
@@ -21,8 +21,8 @@ const BookmarkContainer = ({
 	editAppData = true,
 	onGroupItemEditButtonClick
 }) => {
-	const theme = useTheme();
 	const { dispatch } = useContext(AppDataContext);
+	const { themeCapitalized } = useContext(ThemeContext);
 
 	const handleShiftGroups = (moveBy) => {
 		if (!editAppData) return;
@@ -133,7 +133,7 @@ const BookmarkContainer = ({
 				onGroupItemEditButtonClick
 			}}
 		>
-			<article className={classNames(styles.bookmarkContainer, styles[`bookmarkContainerTheme${theme}`])}>
+			<article className={classNames(styles.bookmarkContainer, styles[`bookmarkContainerTheme${themeCapitalized}`])}>
 				{groups.map(
 					(
 						group,

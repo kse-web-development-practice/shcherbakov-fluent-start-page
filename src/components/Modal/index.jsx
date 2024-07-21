@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faClose } from '@fortawesome/free-solid-svg-icons';
 import styles from './modal.module.scss';
-import useTheme from '../../hooks/useTheme';
+import { ThemeContext } from '../../contexts/Theme';
 
 const Modal = ({ title, footer, onClose, children, isVisible = false }) => {
-	const theme = useTheme();
+	const { themeCapitalized } = useContext(ThemeContext);
 
 	useEffect(() => {
 		const handleKeyDown = (event) => {
@@ -38,7 +38,7 @@ const Modal = ({ title, footer, onClose, children, isVisible = false }) => {
 
 	return (
 		<div
-			className={classNames(styles.modal, styles[`modalTheme${theme}`])}
+			className={classNames(styles.modal, styles[`modalTheme${themeCapitalized}`])}
 			onClick={onClose}
 			role="dialog"
 			aria-modal="true"
