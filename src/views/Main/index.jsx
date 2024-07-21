@@ -17,9 +17,10 @@ const ViewMain = () => {
 		let bookmarkGroupId;
 		let editBookmark;
 		state.groups.forEach((group) => {
-			editBookmark = group.bookmarks.find((bookmark) => bookmark.id === bookmarkItemId);
-			if (editBookmark) {
+			const bookmarkIndex = group.bookmarks.findIndex((bookmark) => bookmark.id === bookmarkItemId);
+			if (bookmarkIndex !== -1) {
 				bookmarkGroupId = group.id;
+				editBookmark = group.bookmarks[bookmarkIndex];
 				return;
 			}
 		});

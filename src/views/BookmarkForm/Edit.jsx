@@ -44,6 +44,8 @@ const ViewBookmarkFormEdit = () => {
 		</>
 	);
 
+	console.log(formData);
+
 	return (
 		<Modal title="Edit a bookmark" isVisible onClose={handleModalClose} footer={<ModalFooter />}>
 			<FormProvider {...form}>
