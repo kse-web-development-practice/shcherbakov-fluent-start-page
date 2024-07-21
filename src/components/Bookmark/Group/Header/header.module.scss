@@ -8,7 +8,17 @@
 	box-sizing: border-box;
 
 	h1 {
+		flex: 1;
 		font-weight: 400;
+		font-size: 16px;
+	}
+
+	button {
+		padding: 5px;
+		border: 0;
+		border-radius: 4px;
+		background-color: transparent;
+		cursor: pointer;
 		font-size: 16px;
 	}
 
@@ -18,8 +28,16 @@
 				color: themed('light', 'bookmarkGroupHeaderColor');
 			}
 
+			button {
+				color: themed('light', 'bookmarkGroupHeaderControlButtonColor');
+
+				&:hover {
+					background-color: themed('light', 'bookmarkGroupHeaderControlButtonHoverBackgroundColor');
+				}
+			}
+
 			&.bookmark-group__header_state_edit {
-				background: themed('light', 'bookmarkGroupHeaderStateEditBackgroundColor');
+				background-color: themed('light', 'bookmarkGroupHeaderStateEditBackgroundColor');
 			}
 		}
 
@@ -28,8 +46,16 @@
 				color: themed('dark', 'bookmarkGroupHeaderColor');
 			}
 
+			button {
+				color: themed('dark', 'bookmarkGroupHeaderControlButtonColor');
+
+				&:hover {
+					background-color: themed('dark', 'bookmarkGroupHeaderControlButtonHoverBackgroundColor');
+				}
+			}
+
 			&.bookmark-group__header_state_edit {
-				background: themed('dark', 'bookmarkGroupHeaderStateEditBackgroundColor');
+				background-color: themed('dark', 'bookmarkGroupHeaderStateEditBackgroundColor');
 			}
 		}
 	}
@@ -49,7 +75,6 @@
 
 		&_unnamed {
 			h1 {
-				width: 100%;
 				opacity: 0;
 
 				&:hover {

@@ -1,11 +1,11 @@
 @import '../../assets/styles/variables';
 
-$page-content-vertical-padding: 10px;
+$page-content-mobile-padding: 10px 15px 80px 15px;
 $page-content-horizontal-padding: 15px;
 
 .page-content {
-	padding: $page-content-vertical-padding $page-content-horizontal-padding;
-	height: 100vh;
+	padding: $page-content-mobile-padding;
+	height: 100%;
 	box-sizing: border-box;
 
 	@include desktop-styling {

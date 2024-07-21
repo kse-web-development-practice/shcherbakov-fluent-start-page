@@ -25,7 +25,7 @@ $back-bg: #202020;
 			}
 
 			& .modal__body,
-			&__close-button {
+			& .modal__close-button {
 				color: themed('light', 'modalContentColor');
 			}
 		}
@@ -41,7 +41,7 @@ $back-bg: #202020;
 			}
 
 			& .modal__body,
-			&__close-button {
+			& .modal__close-button {
 				color: themed('dark', 'modalContentColor');
 			}
 		}

@@ -12,11 +12,17 @@ $themes: (
 	light: (
 		pageBackground: #e4e4e4,
 
+		inputColor: #000,
 		inputBackgroundColor: #f0f0f0,
 		inputBorderColor: #ccc,
 
 		bookmarkGroupHeaderColor: #333,
 		bookmarkGroupHeaderStateEditBackgroundColor: #e6e6e6,
+		bookmarkGroupHeaderControlButtonColor: #333,
+		bookmarkGroupHeaderControlButtonHoverBackgroundColor: #efefef,
+
+		bookmarkGroupNewButtonColor: #333,
+		bookmarkGroupNewButtonBackgroundColor: #efefef,
 
 		bookmarkItemColor: #333,
 		bookmarkItemBackgroundColor: #efefef,
@@ -45,11 +51,17 @@ $themes: (
 	dark: (
 		pageBackground: #1f1f1f,
 
-		inputBackgroundColor: #fff,
-		inputBorderColor: #999,
+		inputColor: #fff,
+		inputBackgroundColor: #535353,
+		inputBorderColor: #6b6b6b,
 
 		bookmarkGroupHeaderColor: #fff,
 		bookmarkGroupHeaderStateEditBackgroundColor: #666,
+		bookmarkGroupHeaderControlButtonColor: #fff,
+		bookmarkGroupHeaderControlButtonHoverBackgroundColor: #3c3c3c,
+
+		bookmarkGroupNewButtonColor: #fff,
+		bookmarkGroupNewButtonBackgroundColor: #3c3c3c,
 
 		bookmarkItemColor: #fff,
 		bookmarkItemBackgroundColor: #3c3c3c,
@@ -83,6 +95,7 @@ body {
 
 		select,
 		input {
+			color: themed('light', 'inputColor');
 			background-color: themed('light', 'inputBackgroundColor');
 			border-color: themed('light', 'inputBorderColor');
 		}
@@ -93,6 +106,7 @@ body {
 
 		select,
 		input {
+			color: themed('dark', 'inputColor');
 			background-color: themed('dark', 'inputBackgroundColor');
 			border-color: themed('dark', 'inputBorderColor');
 		}

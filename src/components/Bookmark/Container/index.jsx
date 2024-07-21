@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import BookmarkGroup, { groupStructureProps, publicProps as publicGroupProps } from '../Group';
 import { publicProps as publicGroupHeaderProps } from '../Group/Header';
 import { publicProps as publicItemProps } from '../Item';
 import { AppDataContext } from '../../../contexts/AppData';
+import useTheme from '../../../hooks/useTheme';
 import styles from './container.module.scss';
 import BookmarkContainerContext from './context';
 
@@ -17,6 +21,7 @@ const BookmarkContainer = ({
 	editAppData = true,
 	onGroupItemEditButtonClick
 }) => {
+	const theme = useTheme();
 	const { dispatch } = useContext(AppDataContext);
 
 	const handleShiftGroups = (moveBy) => {
@@ -105,7 +110,12 @@ const BookmarkContainer = ({
 		});
 	};
 
-	const CreateGroupButton = () => <button onClick={handleCreateGroup}>Create a new group</button>;
+	const CreateGroupButton = () => (
+		<button className={styles.bookmarkContainerNewGroupButton} onClick={handleCreateGroup}>
+			<FontAwesomeIcon icon={faPlusCircle} size="3x" aria-hidden />
+			Create a new group
+		</button>
+	);
 
 	return (
 		<BookmarkContainerContext.Provider
@@ -123,7 +133,7 @@ const BookmarkContainer = ({
 				onGroupItemEditButtonClick
 			}}
 		>
-			<article className={styles.bookmarkContainer}>
+			<article className={classNames(styles.bookmarkContainer, styles[`bookmarkContainerTheme${theme}`])}>
 				{groups.map(
 					(
 						group,
