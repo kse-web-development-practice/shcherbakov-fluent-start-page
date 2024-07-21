@@ -6,6 +6,7 @@ import 'gridstack/dist/gridstack.min.css';
 import 'gridstack/dist/gridstack-extra.min.css';
 import '../src/assets/styles/styles.scss';
 import AppDataProvider from '../src/contexts/AppData';
+import defaultData from '../src/constants/defaultData';
 
 // Load Font Awesome icons
 library.add(fas);
@@ -23,7 +24,7 @@ const preview = {
 	},
 	decorators: [
 		(Story) => (
-			<AppDataProvider useStorage={false}>
+			<AppDataProvider useStorage={false} initialData={{ ...defaultData, settings: { theme: 'light' } }}>
 				<Story />
 			</AppDataProvider>
 		)
