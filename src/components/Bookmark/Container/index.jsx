@@ -73,34 +73,35 @@ const BookmarkContainer = ({
 
 	/**
 	 * @param {string} groupId
-	 * @param {Array<{ id: string; row: number; column: number; size: string; }>} layout
+	 * @param {Array<{ id: string; row: number; column: number; }>} layout
 	 */
 	const handleGroupLayoutChange = (groupId, layout) => {
 		if (!editAppData) return;
 
 		dispatch({
 			type: 'SET_BOOKMARKS',
-			payload: groups.map((group) => {
-				if (group.id !== groupId) {
-					return group;
-				}
+			payload: (state) =>
+				state.groups.map((group) => {
+					if (group.id !== groupId) {
+						return group;
+					}
 
-				return {
-					...group,
-					bookmarks: group.bookmarks.map((groupBookmarks) => {
-						const updatedBookmark = layout.find(({ id }) => id === groupBookmarks.id);
+					return {
+						...group,
+						bookmarks: group.bookmarks.map((bookmark) => {
+							const updatedBookmark = layout.find(({ id }) => id === bookmark.id);
 
-						if (!updatedBookmark) {
-							return groupBookmarks;
-						}
+							if (!updatedBookmark) {
+								return bookmark;
+							}
 
-						return {
-							...groupBookmarks,
-							...updatedBookmark
-						};
-					})
-				};
-			})
+							return {
+								...bookmark,
+								...updatedBookmark
+							};
+						})
+					};
+				})
 		});
 	};
 

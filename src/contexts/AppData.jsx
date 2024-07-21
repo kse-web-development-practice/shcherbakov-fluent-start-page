@@ -78,10 +78,16 @@ const reducer = (state, action) => {
 				})
 			};
 
+		/**
+		 * payload can be a function that receives the current app state
+		 * to solve the bug when moving bookmark item in one group first,
+		 * and then moving any bookmark item in another group,
+		 * causes the first moved bookmark item to reset to its initial position
+		 */
 		case 'SET_BOOKMARKS':
 			return {
 				...state,
-				groups: action.payload
+				groups: typeof action.payload === 'function' ? action.payload(state) : action.payload
 			};
 
 		/**
