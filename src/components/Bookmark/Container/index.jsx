@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
-import BookmarkGroup, { publicProps as publicGroupProps } from '../Group';
+import BookmarkGroup, { groupStructureProps, publicProps as publicGroupProps } from '../Group';
 import { publicProps as publicGroupHeaderProps } from '../Group/Header';
 import { publicProps as publicItemProps } from '../Item';
 import { AppDataContext } from '../../../contexts/AppData';
@@ -9,20 +9,21 @@ import styles from './container.module.scss';
 import BookmarkContainerContext from './context';
 
 const BookmarkContainer = ({
+	groups = [],
 	groupProps = {},
 	groupHeaderProps = {},
 	groupItemProps = {},
 	showCreateGroupButton = true,
 	onGroupItemEditButtonClick
 }) => {
-	const { state, dispatch } = useContext(AppDataContext);
+	const { dispatch } = useContext(AppDataContext);
 
 	const handleShiftGroups = (moveBy) => {
-		const length = state.groups.length;
+		const length = groups.length;
 		const shiftCount = ((-moveBy % length) + length) % length;
 		dispatch({
 			type: 'SET_BOOKMARKS',
-			payload: state.groups.slice(shiftCount).concat(state.groups.slice(0, shiftCount))
+			payload: groups.slice(shiftCount).concat(groups.slice(0, shiftCount))
 		});
 	};
 
@@ -30,7 +31,7 @@ const BookmarkContainer = ({
 		dispatch({
 			type: 'SET_BOOKMARKS',
 			payload: [
-				...state.groups,
+				...groups,
 				{
 					id: uuid(),
 					bookmarks: []
@@ -42,7 +43,7 @@ const BookmarkContainer = ({
 	const handleRenameGroup = (groupId, newName) => {
 		dispatch({
 			type: 'SET_BOOKMARKS',
-			payload: state.groups.map((group) => {
+			payload: groups.map((group) => {
 				if (group.id !== groupId) {
 					return group;
 				}
@@ -57,7 +58,7 @@ const BookmarkContainer = ({
 	const handleRemoveGroup = (groupId) => {
 		dispatch({
 			type: 'SET_BOOKMARKS',
-			payload: state.groups.filter(({ id }) => id !== groupId)
+			payload: groups.filter(({ id }) => id !== groupId)
 		});
 	};
 
@@ -68,7 +69,7 @@ const BookmarkContainer = ({
 	const handleGroupLayoutChange = (groupId, layout) => {
 		dispatch({
 			type: 'SET_BOOKMARKS',
-			payload: state.groups.map((group) => {
+			payload: groups.map((group) => {
 				if (group.id !== groupId) {
 					return group;
 				}
@@ -111,7 +112,7 @@ const BookmarkContainer = ({
 			}}
 		>
 			<article className={styles.bookmarkContainer}>
-				{state.groups.map(
+				{groups.map(
 					(
 						group,
 						index // Must be used to make group ordering buttons work properly
@@ -126,6 +127,7 @@ const BookmarkContainer = ({
 };
 
 BookmarkContainer.propTypes = {
+	groups: PropTypes.arrayOf(PropTypes.shape(groupStructureProps)),
 	groupProps: PropTypes.shape(publicGroupProps),
 	groupHeaderProps: PropTypes.shape(publicGroupHeaderProps),
 	groupItemProps: PropTypes.shape(publicItemProps),

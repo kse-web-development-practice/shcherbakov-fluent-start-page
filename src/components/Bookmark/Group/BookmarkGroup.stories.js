@@ -1,7 +1,6 @@
 import React from 'react';
 import BookmarkGroup from '.';
 import defaultData from '../../../constants/defaultData';
-import AppDataProvider from '../../../contexts/AppData';
 import BookmarkContainer from '../Container';
 
 export default {
@@ -9,11 +8,9 @@ export default {
 	component: BookmarkGroup,
 	decorators: [
 		(Story, { args }) => (
-			<AppDataProvider useStorage={false} initialData={{ ...defaultData, groups: [args] }}>
-				<div style={{ width: 'min(100%, 450px)' }}>
-					<BookmarkContainer showCreateGroupButton={false} groupHeaderProps={{ showGroupControls: false }} />
-				</div>
-			</AppDataProvider>
+			<div style={{ width: 'min(100%, 450px)' }}>
+				<BookmarkContainer groups={[args]} showCreateGroupButton={false} groupHeaderProps={{ showGroupControls: false }} />
+			</div>
 		)
 	],
 	parameters: {

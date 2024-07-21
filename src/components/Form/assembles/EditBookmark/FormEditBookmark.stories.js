@@ -2,7 +2,7 @@ import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
 import FormEditBookmark, { defaultValues } from '.';
-import BookmarkGroup from '../../../Bookmark/Group';
+import BookmarkContainer from '../../../Bookmark/Container';
 
 export default {
 	title: 'Form/Assembles/New Or Edit Bookmark',
@@ -29,7 +29,12 @@ export default {
 					<h1>Preview preview</h1>
 					<pre>{JSON.stringify(formData, null, 4)}</pre>
 					<div style={{ maxWidth: 500 }}>
-						<BookmarkGroup id="0" renderGroupHeader={null} bookmarks={[{ ...formData, link: '#' }]} />
+						<BookmarkContainer
+							groups={[{ id: '0', bookmarks: [{ ...formData, link: '#' }] }]}
+							showCreateGroupButton={false}
+							groupProps={{ showHeader: false }}
+							groupItemProps={{ showEditButton: false }}
+						/>
 					</div>
 				</FormProvider>
 			);

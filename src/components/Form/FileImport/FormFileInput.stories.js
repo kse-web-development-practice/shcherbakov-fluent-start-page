@@ -1,5 +1,5 @@
-import FormFileImport from '.';
 import { fn } from '@storybook/test';
+import FormFileImport from '.';
 
 export default {
 	title: 'Form/File Import',

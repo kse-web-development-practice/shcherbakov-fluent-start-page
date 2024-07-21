@@ -1,17 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { fn } from '@storybook/test';
 import BookmarkContainer from '.';
-import AppDataProvider from '../../../contexts/AppData';
+import { AppDataContext } from '../../../contexts/AppData';
 
 export default {
 	title: 'Bookmark/Container',
 	component: BookmarkContainer,
 	decorators: [
-		(Story) => (
-			<AppDataProvider useStorage={false}>
-				<Story />
-			</AppDataProvider>
-		)
+		(Story, { args }) => {
+			const { state } = useContext(AppDataContext);
+			return <BookmarkContainer editAppData={false} groups={state.groups} {...args} />;
+		}
 	]
 };
 

@@ -10,7 +10,6 @@ import { tileSizes } from '../../../constants/tileSizes';
 const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 2, showHeader = true }) => {
 	const { groupItemProps, groupHeaderProps, handleGroupLayoutChange } = useContext(BookmarkContainerContext);
 	const gridContainerRef = useRef(null);
-	const gridRef = useRef(null);
 
 	useEffect(() => {
 		const grid = GridStack.init(
@@ -28,7 +27,7 @@ const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 2
 		);
 
 		grid.on('change', () => {
-			const data = gridRef.current.save(false, false);
+			const data = grid.save(false, false);
 
 			handleGroupLayoutChange(
 				id,
@@ -77,10 +76,14 @@ export const publicProps = {
 	showHeader: PropTypes.bool
 };
 
-BookmarkGroup.propTypes = {
+export const groupStructureProps = {
 	id: PropTypes.string.isRequired,
 	name: PropTypes.string,
-	bookmarks: PropTypes.arrayOf(PropTypes.shape(Item.propTypes)),
+	bookmarks: PropTypes.arrayOf(PropTypes.shape(Item.propTypes))
+};
+
+BookmarkGroup.propTypes = {
+	...groupStructureProps,
 	...publicProps
 };
 
