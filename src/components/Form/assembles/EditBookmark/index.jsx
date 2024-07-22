@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import FormLabel from '../../Label';
 import RadioGroup from '../../RadioGroup';
-import UrlService from '../../../../services/UrlService';
 import FormIconPicker from '../../IconPicker';
+import UrlService from '../../../../services/UrlService';
+import { AppDataContext } from '../../../../contexts/AppData';
 
 export const defaultValues = {
 	size: 'medium',
@@ -13,6 +14,8 @@ export const defaultValues = {
 };
 
 const FormEditBookmark = () => {
+	const { state } = useContext(AppDataContext);
+
 	const {
 		register,
 		setValue,
@@ -50,6 +53,17 @@ const FormEditBookmark = () => {
 					<option value="large">Large</option>
 				</select>
 			</FormLabel>
+			{state.groups.length > 0 && (
+				<FormLabel label="Group" error={errors.groupId?.message}>
+					<select {...register('groupId')}>
+						{state.groups.map((group, index) => (
+							<option key={group.id} value={group.id}>
+								{index + 1}. {group.name ?? 'Unnamed group'}
+							</option>
+						))}
+					</select>
+				</FormLabel>
+			)}
 
 			<h2>Favicon</h2>
 			<RadioGroup label="Method of getting a favicon">

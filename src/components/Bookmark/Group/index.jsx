@@ -18,7 +18,8 @@ const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 2
 			gridRef.current = GridStack.init(
 				{
 					// Allows to drag and drop bookmarks across different groups
-					// but can't manage to make it work properly
+					// but can't manage to make it work properly:
+					// getting error Node.removeChild: The node to be removed is not a child of this node
 					// acceptWidgets: true,
 
 					column: maxColumns,
@@ -32,7 +33,6 @@ const BookmarkGroup = ({ id, name, bookmarks = [], maxColumns = 6, layoutGap = 2
 			);
 
 			gridRef.current.on('change', (event, items) => {
-				// const data = gridRef.current.save(false, false);
 				handleGroupLayoutChange(
 					id,
 					items.map(({ id, x, y }) => ({ id, column: x, row: y }))

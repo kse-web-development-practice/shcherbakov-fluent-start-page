@@ -9,12 +9,13 @@ import styles from './bookmark.module.scss';
 import { AppDataContext } from '../../contexts/AppData';
 
 const ViewBookmarkFormCreate = () => {
-	const { dispatch } = useContext(AppDataContext);
+	const { state, dispatch } = useContext(AppDataContext);
 
 	const navigate = useNavigate();
 	const form = useForm({
 		defaultValues: {
 			id: uuid(),
+			groupId: state.groups[0]?.id,
 			row: 0,
 			column: 0,
 			...defaultValues
@@ -26,10 +27,13 @@ const ViewBookmarkFormCreate = () => {
 		navigate(-1);
 	};
 
-	const handleFormSubmit = (newBookmarkData) => {
+	const handleFormSubmit = ({ groupId, ...newBookmarkData }) => {
 		dispatch({
 			type: 'ADD_BOOKMARK',
-			payload: newBookmarkData
+			payload: {
+				groupId,
+				data: newBookmarkData
+			}
 		});
 		handleModalClose();
 	};

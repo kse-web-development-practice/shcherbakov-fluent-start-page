@@ -10,25 +10,47 @@ export const AppDataContext = createContext(null);
 const reducer = (state, action) => {
 	switch (action.type) {
 		/**
-		 * payload: { bookmark item props };
+		 * payload: {
+		 * 	groupId: string,
+		 * 	data: bookmark item props
+		 * };
 		 */
 		case 'ADD_BOOKMARK':
+			// If no groups - create a new one and insert a bookmark there
+			// groupId ignored
 			if (state.groups.length === 0) {
 				return {
 					...state,
-					groups: [{ id: uuid(), bookmarks: [action.payload] }]
+					groups: [{ id: uuid(), bookmarks: [action.payload.data] }]
 				};
 			}
 
+			// If group with groupId was not found - insert a bookmark into the first group in a list
+			if (state.groups.findIndex((group) => group.id === action.payload.groupId) === -1) {
+				return {
+					...state,
+					groups: [
+						{
+							...state.groups[0],
+							bookmarks: [...state.groups[0].bookmarks, action.payload.data]
+						},
+						...state.groups.slice(1)
+					]
+				};
+			}
+
+			// Insert a bookmark into specific group
 			return {
 				...state,
-				groups: [
-					{
-						...state.groups[0],
-						bookmarks: [...state.groups[0].bookmarks, action.payload]
-					},
-					...state.groups.slice(1)
-				]
+				groups: state.groups.map((group) => {
+					if (group.id !== action.payload.groupId) {
+						return group;
+					}
+					return {
+						...group,
+						bookmarks: [...group.bookmarks, action.payload.data]
+					};
+				})
 			};
 
 		/**

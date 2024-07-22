@@ -52,18 +52,20 @@ const FormAppSettings = () => {
 		<>
 			<h2>Theme</h2>
 			<RadioGroup label="Mode">
-				<label>
-					<input type="radio" value="light" {...register('theme')} />
-					Light
-				</label>
-				<label>
-					<input type="radio" value="dark" {...register('theme')} />
-					Dark
-				</label>
-				<label>
-					<input type="radio" value="auto" {...register('theme')} />
-					Automatic - the system's Dark or Light mode
-				</label>
+				<>
+					<label>
+						<input type="radio" value="light" {...register('theme')} />
+						Light
+					</label>
+					<label>
+						<input type="radio" value="dark" {...register('theme')} />
+						Dark
+					</label>
+					<label>
+						<input type="radio" value="auto" {...register('theme')} />
+						Automatic - the system's Dark or Light mode
+					</label>
+				</>
 			</RadioGroup>
 
 			<h2>Data</h2>
