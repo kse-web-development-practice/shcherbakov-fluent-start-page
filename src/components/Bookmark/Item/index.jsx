@@ -60,11 +60,11 @@ BookmarkItem.propTypes = {
 	size: PropTypes.oneOf(['small', 'medium', 'wide', 'large']).isRequired,
 	text: PropTypes.string,
 	favicon: PropTypes.oneOfType([
-		PropTypes.shape({ type: 'none' }),
-		PropTypes.shape({ type: 'auto', data: PropTypes.shape(FaviconAuto.propTypes) }),
-		PropTypes.shape({ type: 'icon', data: PropTypes.shape(FaviconIcon.propTypes) }),
-		PropTypes.shape({ type: 'text', data: PropTypes.shape(FaviconText.propTypes) }),
-		PropTypes.shape({ type: 'image', data: PropTypes.shape(FaviconImage.propTypes) })
+		PropTypes.shape({ type: PropTypes.oneOf(['none']).isRequired }),
+		PropTypes.shape({ type: PropTypes.oneOf(['auto']).isRequired, data: PropTypes.shape(FaviconAuto.propTypes) }),
+		PropTypes.shape({ type: PropTypes.oneOf(['icon']).isRequired, data: PropTypes.shape(FaviconIcon.propTypes) }),
+		PropTypes.shape({ type: PropTypes.oneOf(['text']).isRequired, data: PropTypes.shape(FaviconText.propTypes) }),
+		PropTypes.shape({ type: PropTypes.oneOf(['image']).isRequired, data: PropTypes.shape(FaviconImage.propTypes) })
 	]),
 	showDraggableHandle: PropTypes.bool,
 

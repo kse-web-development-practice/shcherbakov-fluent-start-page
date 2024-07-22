@@ -10,7 +10,10 @@ export default {
 					column: 0,
 					row: 0,
 					size: 'small',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: 'HuKTb',
@@ -18,7 +21,10 @@ export default {
 					column: 1,
 					row: 0,
 					size: 'small',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: 'Hamul',
@@ -26,7 +32,10 @@ export default {
 					column: 2,
 					row: 0,
 					size: 'small',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: 'S3CYZ',
@@ -34,7 +43,10 @@ export default {
 					column: 3,
 					row: 0,
 					size: 'small',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: 'xVPKI',
@@ -42,7 +54,10 @@ export default {
 					column: 4,
 					row: 0,
 					size: 'small',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: 'dJQwl',
@@ -50,7 +65,10 @@ export default {
 					column: 5,
 					row: 0,
 					size: 'small',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: 'ytMCM',
@@ -58,7 +76,10 @@ export default {
 					column: 0,
 					row: 1,
 					size: 'medium',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: 'K4CY2',
@@ -66,7 +87,10 @@ export default {
 					column: 2,
 					row: 1,
 					size: 'medium',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: 'LunYX',
@@ -74,7 +98,10 @@ export default {
 					column: 4,
 					row: 1,
 					size: 'medium',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: 'cBytx',
@@ -82,7 +109,10 @@ export default {
 					column: 0,
 					row: 3,
 					size: 'wide',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: 'CzISo',
@@ -90,7 +120,10 @@ export default {
 					column: 4,
 					row: 3,
 					size: 'medium',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				}
 			]
 		},
@@ -104,7 +137,10 @@ export default {
 					column: 0,
 					row: 0,
 					size: 'small',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: 'f0cd7',
@@ -112,7 +148,10 @@ export default {
 					column: 1,
 					row: 0,
 					size: 'small',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: '25fa3',
@@ -120,7 +159,10 @@ export default {
 					column: 2,
 					row: 0,
 					size: 'small',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				},
 				{
 					id: '3d29f',
@@ -128,7 +170,10 @@ export default {
 					column: 3,
 					row: 1,
 					size: 'large',
-					link: 'https://google.com'
+					link: 'https://google.com',
+					favicon: {
+						type: 'none'
+					}
 				}
 			]
 		}
