@@ -2,7 +2,7 @@ export default {
 	groups: [
 		{
 			id: 'xWcHs',
-			name: 'Group Name',
+			name: 'Group 1',
 			bookmarks: [
 				{
 					id: '1Ucen',
@@ -96,7 +96,7 @@ export default {
 		},
 		{
 			id: '157a9',
-			name: 'Group Name',
+			name: 'Group 2',
 			bookmarks: [
 				{
 					id: '562f1',
