@@ -1,24 +1,16 @@
 import * as AppDataStorage from '.';
 
+// In jest.config.js, the testEnvironment is set to jsdom
+// meaning that we can ignore creating a mock localStorage object
 describe('App Data Storage Service', () => {
-	beforeEach(() => {
-		Storage.prototype.getItem = jest.fn();
-		Storage.prototype.setItem = jest.fn();
-		Storage.prototype.removeItem = jest.fn();
-	});
-
-	afterEach(() => {
-		jest.resetAllMocks();
-	});
-
 	describe('getAppData', () => {
-		it('should return stored app data from AppDataStorage.APP_DATA_KEY', () => {
+		it('should return stored app data', () => {
 			const data = { foo: 'bar' };
 			const expectedOutput = JSON.stringify(data);
-			localStorage.getItem.mockReturnValue(expectedOutput);
+
+			localStorage.setItem(AppDataStorage.APP_DATA_KEY, expectedOutput);
 
 			const result = AppDataStorage.getAppData();
-			expect(localStorage.getItem).toHaveBeenCalledWith(AppDataStorage.APP_DATA_KEY);
 			expect(result).toEqual(data);
 		});
 	});
@@ -27,14 +19,20 @@ describe('App Data Storage Service', () => {
 		it('should new set app data in localStorage', () => {
 			const data = { foo: 'bar' };
 			AppDataStorage.setAppData(data);
-			expect(localStorage.setItem).toHaveBeenCalledWith(AppDataStorage.APP_DATA_KEY, JSON.stringify(data));
+
+			const storedData = JSON.parse(localStorage.getItem(AppDataStorage.APP_DATA_KEY));
+			expect(storedData).toEqual(data);
 		});
 	});
 
 	describe('clearAppData', () => {
 		it('should clear all stored application data', () => {
+			const data = { foo: 'bar' };
+			AppDataStorage.setAppData(data);
+			expect(localStorage.getItem(AppDataStorage.APP_DATA_KEY)).not.toBeNull();
+
 			AppDataStorage.clearAppData();
-			expect(localStorage.removeItem).toHaveBeenCalledWith(AppDataStorage.APP_DATA_KEY);
+			expect(localStorage.getItem(AppDataStorage.APP_DATA_KEY)).toBeNull();
 		});
 	});
 });
