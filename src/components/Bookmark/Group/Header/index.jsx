@@ -69,22 +69,10 @@ const BookmarkGroupHeader = ({ id, name, showGroupControls = true }) => {
 			return <EditState />;
 		}
 
-		if (!currentName) {
-			return (
-				<>
-					<h1 className="group-header-handle" aria-label="Unnamed group" onClick={handleTitleClick}>
-						Name a group
-					</h1>
-					<ControlButtons />
-					<AccessabilityEditGroupName />
-				</>
-			);
-		}
-
 		return (
 			<>
-				<h1 className="group-header-handle" onClick={handleTitleClick}>
-					{currentName}
+				<h1 aria-label={currentName || 'Unnamed group'} onClick={handleTitleClick}>
+					{currentName || 'Name a group'}
 				</h1>
 				<ControlButtons />
 				<AccessabilityEditGroupName />

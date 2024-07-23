@@ -29,7 +29,7 @@ export default {
 						<Story />
 					</form>
 
-					<h1>Preview preview</h1>
+					<h1>Preview</h1>
 					<pre>{JSON.stringify(formData, null, 4)}</pre>
 					<div style={{ maxWidth: 500 }}>
 						<BookmarkContainer
