@@ -29,7 +29,8 @@ module.exports = (env) => ({
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: 'public/index.html'
+			template: 'public/index.html',
+			publicUrl: process.env.BASE_URL ?? '/'
 		}),
 		new CopyWebpackPlugin({
 			patterns: [
@@ -84,10 +85,7 @@ module.exports = (env) => ({
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/i,
-				type: 'asset/resource',
-				generator: {
-					publicPath: '/'
-				}
+				type: 'asset/resource'
 			}
 		]
 	}
