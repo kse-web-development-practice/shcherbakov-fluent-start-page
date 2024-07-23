@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 import ThemeProvider from './Theme';
 import defaultData from '../constants/defaultData';
 import LocalStorageService from '../services/LocalStorageService';
+import getFallbackIfPropertyNotExist from '../utils/getFallbackIfPropertyNotExist';
 
 export const AppDataContext = createContext(null);
 
@@ -141,7 +142,18 @@ const AppDataProvider = ({ children, initialData = defaultData, useStorage = tru
 		if (!useStorage) {
 			return initialData;
 		}
-		return LocalStorageService.getAppData() || initialValue;
+
+		const savedData = LocalStorageService.getAppData();
+
+		if (!savedData) {
+			return initialValue;
+		}
+
+		// Adding new values if they don't exist
+		// as a result of updating an app that adds new properties
+		savedData.settings.theme = getFallbackIfPropertyNotExist(savedData, 'settings.theme', initialValue.settings.theme);
+
+		return savedData;
 	});
 
 	useEffect(() => {
