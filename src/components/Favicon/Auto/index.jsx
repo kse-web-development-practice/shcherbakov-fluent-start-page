@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FaviconGrabberService from '../../../services/FaviconGrabberService';
-import UrlService from '../../../services/UrlService';
+import { isUrlValid } from '../../../services/UrlService';
 
 const FaviconAuto = ({ websiteUrl, ...props }) => {
 	const [faviconUrl, setFaviconUrl] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		if (!UrlService.isValid(websiteUrl)) {
+		if (!isUrlValid(websiteUrl)) {
 			setIsLoading(false);
 			return;
 		}

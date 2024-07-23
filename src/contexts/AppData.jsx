@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 import ThemeProvider from './Theme';
 import defaultData from '../constants/defaultData';
-import LocalStorageService from '../services/LocalStorageService';
+import { getAppData, setAppData } from '../services/AppDataStorage';
 import getFallbackIfPropertyNotExist from '../utils/getFallbackIfPropertyNotExist';
 
 export const AppDataContext = createContext(null);
@@ -143,7 +143,7 @@ const AppDataProvider = ({ children, initialData = defaultData, useStorage = tru
 			return initialData;
 		}
 
-		const savedData = LocalStorageService.getAppData();
+		const savedData = getAppData();
 
 		if (!savedData) {
 			return initialValue;
@@ -160,7 +160,7 @@ const AppDataProvider = ({ children, initialData = defaultData, useStorage = tru
 		if (!useStorage) {
 			return;
 		}
-		LocalStorageService.setAppData(state);
+		setAppData(state);
 	}, [state, useStorage]);
 
 	return (

@@ -1,6 +1,6 @@
-import LocalStorageService from '.';
+import * as AppDataStorage from '.';
 
-describe('LocalStorage Service', () => {
+describe('App Data Storage Service', () => {
 	beforeEach(() => {
 		Storage.prototype.getItem = jest.fn();
 		Storage.prototype.setItem = jest.fn();
@@ -12,13 +12,13 @@ describe('LocalStorage Service', () => {
 	});
 
 	describe('getAppData', () => {
-		it('should return stored app data from LocalStorageService.APP_DATA_KEY', () => {
+		it('should return stored app data from AppDataStorage.APP_DATA_KEY', () => {
 			const data = { foo: 'bar' };
 			const expectedOutput = JSON.stringify(data);
 			localStorage.getItem.mockReturnValue(expectedOutput);
 
-			const result = LocalStorageService.getAppData();
-			expect(localStorage.getItem).toHaveBeenCalledWith(LocalStorageService.APP_DATA_KEY);
+			const result = AppDataStorage.getAppData();
+			expect(localStorage.getItem).toHaveBeenCalledWith(AppDataStorage.APP_DATA_KEY);
 			expect(result).toEqual(data);
 		});
 	});
@@ -26,15 +26,15 @@ describe('LocalStorage Service', () => {
 	describe('setAppData', () => {
 		it('should new set app data in localStorage', () => {
 			const data = { foo: 'bar' };
-			LocalStorageService.setAppData(data);
-			expect(localStorage.setItem).toHaveBeenCalledWith(LocalStorageService.APP_DATA_KEY, JSON.stringify(data));
+			AppDataStorage.setAppData(data);
+			expect(localStorage.setItem).toHaveBeenCalledWith(AppDataStorage.APP_DATA_KEY, JSON.stringify(data));
 		});
 	});
 
 	describe('clearAppData', () => {
 		it('should clear all stored application data', () => {
-			LocalStorageService.clearAppData();
-			expect(localStorage.removeItem).toHaveBeenCalledWith(LocalStorageService.APP_DATA_KEY);
+			AppDataStorage.clearAppData();
+			expect(localStorage.removeItem).toHaveBeenCalledWith(AppDataStorage.APP_DATA_KEY);
 		});
 	});
 });

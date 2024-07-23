@@ -1,4 +1,4 @@
-import FontAwesomeService from '.';
+import * as FontAwesomeService from '.';
 
 jest.mock('@fortawesome/free-solid-svg-icons', () => ({
 	fas: {
@@ -27,7 +27,7 @@ describe('Font Awesome Service', () => {
 
 	describe('getIconList', () => {
 		beforeEach(() => {
-			FontAwesomeService.resetCache();
+			FontAwesomeService.resetIconCache();
 		});
 
 		it('should return a list of filtered and formatted icons', () => {

@@ -1,4 +1,4 @@
-import JsonFileService from '.';
+import * as JsonFileService from '.';
 
 describe('JSON File Service', () => {
 	describe('download', () => {
@@ -16,7 +16,7 @@ describe('JSON File Service', () => {
 			const inputData = { foo: 'bar' };
 			const expectedFilename = 'test';
 			const expectedData = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(inputData, null, 2))}`;
-			JsonFileService.download(expectedFilename, inputData);
+			JsonFileService.downloadJson(expectedFilename, inputData);
 
 			expect(createElementSpy).toHaveBeenCalledWith('a');
 			expect(linkMock.setAttribute).toHaveBeenCalledWith('href', expectedData);
@@ -32,21 +32,21 @@ describe('JSON File Service', () => {
 			it('should resolve with parsed data', async () => {
 				const expectedData = { foo: 'bar' };
 				const file = new Blob([JSON.stringify(expectedData)], { type: 'application/json' });
-				await expect(JsonFileService.read(file)).resolves.toEqual(expectedData);
+				await expect(JsonFileService.readJson(file)).resolves.toEqual(expectedData);
 			});
 		});
 
 		describe('if file type is not application/json', () => {
 			it('should reject with an error', async () => {
 				const file = new Blob(['Hello world'], { type: 'plain/text' });
-				await expect(JsonFileService.read(file)).rejects.toThrow('Wrong file type: must be JSON');
+				await expect(JsonFileService.readJson(file)).rejects.toThrow('Wrong file type: must be JSON');
 			});
 		});
 
 		describe('if file content is invalid JSON', () => {
 			it('should reject with an error', async () => {
 				const file = new Blob(['Hello world'], { type: 'application/json' });
-				await expect(JsonFileService.read(file)).rejects.toThrow('Invalid JSON');
+				await expect(JsonFileService.readJson(file)).rejects.toThrow('Invalid JSON');
 			});
 		});
 	});

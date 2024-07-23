@@ -3,7 +3,7 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import FormLabel from '../../Label';
 import RadioGroup from '../../RadioGroup';
 import FormIconPicker from '../../IconPicker';
-import UrlService from '../../../../services/UrlService';
+import { isUrlValid } from '../../../../services/UrlService';
 import { AppDataContext } from '../../../../contexts/AppData';
 
 export const defaultValues = {
@@ -40,7 +40,7 @@ const FormEditBookmark = () => {
 					{...register('link', {
 						required: 'This field is required',
 						validate: {
-							validUrl: (value) => UrlService.isValid(value) || 'Invalid URL'
+							validUrl: (value) => isUrlValid(value) || 'Invalid URL'
 						}
 					})}
 				/>
@@ -113,7 +113,7 @@ const FormEditBookmark = () => {
 						{...register('favicon.data.websiteUrl', {
 							required: 'This field is required',
 							validate: {
-								validUrl: (value) => UrlService.isValid(value) || 'Invalid URL'
+								validUrl: (value) => isUrlValid(value) || 'Invalid URL'
 							}
 						})}
 					/>
@@ -127,7 +127,7 @@ const FormEditBookmark = () => {
 						{...register('favicon.data.url', {
 							required: 'This field is required',
 							validate: {
-								validUrl: (value) => UrlService.isValid(value) || 'Invalid URL'
+								validUrl: (value) => isUrlValid(value) || 'Invalid URL'
 							}
 						})}
 					/>

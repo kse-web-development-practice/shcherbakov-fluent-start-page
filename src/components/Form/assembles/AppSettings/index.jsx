@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import RadioGroup from '../../RadioGroup';
 import FormFileImport from '../../FileImport';
-import JsonFileService from '../../../../services/JsonFileService';
+import { downloadJson, readJson } from '../../../../services/JsonFileService';
 import { AppDataContext } from '../../../../contexts/AppData';
 import defaultData from '../../../../constants/defaultData';
 
@@ -22,11 +22,11 @@ const FormAppSettings = () => {
 
 	const handleExportData = () => {
 		const date = new Date().toISOString().split('T')[0];
-		JsonFileService.download(`fluent-start-page_${date}`, state);
+		downloadJson(`fluent-start-page_${date}`, state);
 	};
 
 	const handleImportData = ([file]) => {
-		JsonFileService.read(file)
+		readJson(file)
 			.then((data) => {
 				if (!data.settings || !data.groups) {
 					alert('Invalid data: no settings and/or bookmark groups');
