@@ -73,7 +73,7 @@ const ViewBookmarkFormEdit = () => {
 				Cancel
 			</button>
 			<button type="submit" onClick={form.handleSubmit(handleFormSubmit)} disabled={!form.formState.isValid}>
-				Edit
+				Save
 			</button>
 		</>
 	);

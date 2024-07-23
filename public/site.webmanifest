@@ -1,6 +1,6 @@
 {
-	"name": "",
-	"short_name": "",
+	"name": "Fluent Start Page",
+	"short_name": "Start Page",
 	"icons": [
 		{
 			"src": "/android-chrome-192x192.png",

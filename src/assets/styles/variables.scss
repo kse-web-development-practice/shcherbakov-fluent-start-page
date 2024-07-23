@@ -1,11 +1,9 @@
+@import './utils';
+
 @mixin desktop-styling {
 	@media only screen and (min-width: $breakpoint-desktop) {
 		@content;
 	}
-}
-
-@function themed($theme, $key) {
-	@return map-get(map-get($themes, $theme), $key);
 }
 
 $themes: (
