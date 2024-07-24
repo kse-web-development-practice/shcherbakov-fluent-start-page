@@ -15,7 +15,7 @@ class FaviconGrabberService {
 	 * and checks if it exists by response status
 	 * @param {string} url Website URL
 	 * @param {string} faviconFileName
-	 * @returns {Promise<string>} A full favicon URL if it exists and otherwise rejects
+	 * @returns {Promise<string>} A full favicon URL if it exists and otherwise rejects. It is implemented like that because of the tryAllPossibleCases method
 	 */
 	static getFromWebsite(url, faviconFileName) {
 		const faviconUrl = this.#fixCorsError(combineUrls(url, `/${faviconFileName}`));
