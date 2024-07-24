@@ -10,43 +10,7 @@
 
 	overflow: hidden;
 
-	&_theme {
-		&_light {
-			background-color: themed('light', 'sidebarCoveredBackgroundColor');
-
-			@include desktop-styling {
-				&:hover {
-					background-color: themed('light', 'sidebarUncoveredBackgroundColor');
-				}
-			}
-
-			& .sidebar__item {
-				color: themed('light', 'sidebarItemColor');
-
-				&:hover {
-					background-color: themed('light', 'sidebarItemHoverBackgroundColor');
-				}
-			}
-		}
-
-		&_dark {
-			background-color: themed('dark', 'sidebarCoveredBackgroundColor');
-
-			@include desktop-styling {
-				&:hover {
-					background-color: themed('dark', 'sidebarUncoveredBackgroundColor');
-				}
-			}
-
-			& .sidebar__item {
-				color: themed('dark', 'sidebarItemColor');
-
-				&:hover {
-					background-color: themed('dark', 'sidebarItemHoverBackgroundColor');
-				}
-			}
-		}
-	}
+	background-color: var(--sidebar-covered-background-color);
 
 	@include desktop-styling {
 		top: 0;
@@ -54,6 +18,7 @@
 
 		&:hover {
 			width: $sidebar-uncovered-width;
+			background-color: var(--sidebar-uncovered-background-color);
 
 			.sidebar__item {
 				justify-content: start;
@@ -88,6 +53,12 @@
 
 		height: $sidebar-item-height;
 		text-decoration: none;
+
+		color: var(--sidebar-item-color);
+
+		&:hover {
+			background-color: var(--sidebar-item-hover-background-color);
+		}
 
 		&-icon {
 			width: $sidebar-covered-width;

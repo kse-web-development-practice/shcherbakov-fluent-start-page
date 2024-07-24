@@ -5,28 +5,6 @@
 	grid-template-columns: 1fr;
 	gap: 2rem;
 
-	&_theme {
-		&_light {
-			& .bookmark-container__new-group-button {
-				color: themed('light', 'bookmarkGroupNewButtonColor');
-
-				&:hover {
-					background-color: themed('light', 'bookmarkGroupNewButtonBackgroundColor');
-				}
-			}
-		}
-
-		&_dark {
-			& .bookmark-container__new-group-button {
-				color: themed('dark', 'bookmarkGroupNewButtonColor');
-
-				&:hover {
-					background-color: themed('dark', 'bookmarkGroupNewButtonBackgroundColor');
-				}
-			}
-		}
-	}
-
 	@include desktop-styling {
 		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	}
@@ -44,5 +22,11 @@
 		border: 0;
 		border-radius: 6px;
 		background-color: transparent;
+
+		color: var(--bookmark-group-new-button-color);
+
+		&:hover {
+			background-color: var(--bookmark-group-new-button-background-color);
+		}
 	}
 }

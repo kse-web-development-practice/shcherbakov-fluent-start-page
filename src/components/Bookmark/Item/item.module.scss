@@ -5,52 +5,6 @@
 	width: 100%;
 	height: 100%;
 
-	&_theme {
-		&_light {
-			& .bookmark-item__link {
-				color: themed('light', 'bookmarkItemColor');
-				background-color: themed('light', 'bookmarkItemBackgroundColor');
-
-				&:hover {
-					border-color: themed('light', 'bookmarkItemHoverBorderColor');
-				}
-			}
-
-			& .bookmark-item__favicon {
-				&_text,
-				&_icon {
-					color: themed('light', 'bookmarkItemColor');
-				}
-			}
-
-			& .bookmark-item__edit-button {
-				color: themed('light', 'bookmarkItemColor');
-			}
-		}
-
-		&_dark {
-			& .bookmark-item__link {
-				color: themed('dark', 'bookmarkItemColor');
-				background-color: themed('dark', 'bookmarkItemBackgroundColor');
-
-				&:hover {
-					border-color: themed('dark', 'bookmarkItemHoverBorderColor');
-				}
-			}
-
-			& .bookmark-item__favicon {
-				&_text,
-				&_icon {
-					color: themed('dark', 'bookmarkItemColor');
-				}
-			}
-
-			& .bookmark-item__edit-button {
-				color: themed('dark', 'bookmarkItemColor');
-			}
-		}
-	}
-
 	&__link {
 		display: flex;
 		width: 100%;
@@ -65,8 +19,12 @@
 		border-radius: 6px;
 		border: 3px solid transparent;
 
+		color: var(--bookmark-item-color);
+		background-color: var(--bookmark-item-background-color);
+
 		&:hover {
 			border-radius: 0;
+			border-color: var(--bookmark-item-hover-border-color);
 		}
 	}
 
@@ -112,6 +70,8 @@
 			font-size: 14cqw;
 			font-weight: bold;
 			text-align: center;
+
+			color: var(--bookmark-item-color);
 		}
 
 		&_icon {
@@ -120,6 +80,8 @@
 			max-width: 62%;
 			max-height: 62%;
 			margin: auto;
+
+			color: var(--bookmark-item-color);
 		}
 	}
 
@@ -130,5 +92,7 @@
 		background: transparent;
 		border: 0;
 		cursor: ne-resize;
+
+		color: var(--bookmark-item-color);
 	}
 }

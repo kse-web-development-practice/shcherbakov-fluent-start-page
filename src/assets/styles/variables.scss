@@ -1,114 +1,93 @@
-@import './utils';
+// Light theme
+:root {
+    --page-background: #e4e4e4;
 
-@mixin desktop-styling {
-	@media only screen and (min-width: $breakpoint-desktop) {
-		@content;
-	}
+    --input-color: #000;
+    --input-background-color: #f0f0f0;
+    --input-border-color: #ccc;
+
+    --bookmark-group-header-color: #333;
+    --bookmark-group-header-state-edit-background-color: #e6e6e6;
+    --bookmark-group-header-control-button-color: #333;
+    --bookmark-group-header-control-button-hover-background-color: #efefef;
+
+    --bookmark-group-new-button-color: #333;
+    --bookmark-group-new-button-background-color: #efefef;
+
+    --bookmark-item-color: #333;
+    --bookmark-item-background-color: #efefef;
+    --bookmark-item-hover-border-color: #bbb;
+
+    --icon-picker-background-color: #f9f9f9;
+    --icon-picker-border-color: #bbb;
+    --icon-picker-item-color: #333;
+    --icon-picker-item-hover-border-color: #bbb;
+    --icon-picker-item-selected-border-color: #bbb;
+    --icon-picker-item-selected-background-color: #e0e0e0;
+
+    --file-import-background-color: #f5f5f5;
+    --file-import-border-color: #bbb;
+    --file-import-text-color: #333;
+
+    --modal-content-background-color: #fff;
+    --modal-content-color: #333;
+    --modal-footer-background-color: #f1f1f1;
+
+    --sidebar-covered-background-color: #e4e4e4;
+    --sidebar-uncovered-background-color: #e9e9e9;
+    --sidebar-item-color: #333;
+    --sidebar-item-hover-background-color: #f6f6f6;
 }
 
-$themes: (
-	light: (
-		pageBackground: #e4e4e4,
+:root.dark {
+    --page-background: #1f1f1f;
 
-		inputColor: #000,
-		inputBackgroundColor: #f0f0f0,
-		inputBorderColor: #ccc,
+    --input-color: #fff;
+    --input-background-color: #535353;
+    --input-border-color: #6b6b6b;
 
-		bookmarkGroupHeaderColor: #333,
-		bookmarkGroupHeaderStateEditBackgroundColor: #e6e6e6,
-		bookmarkGroupHeaderControlButtonColor: #333,
-		bookmarkGroupHeaderControlButtonHoverBackgroundColor: #efefef,
+    --bookmark-group-header-color: #fff;
+    --bookmark-group-header-state-edit-background-color: #666;
+    --bookmark-group-header-control-button-color: #fff;
+    --bookmark-group-header-control-button-hover-background-color: #3c3c3c;
 
-		bookmarkGroupNewButtonColor: #333,
-		bookmarkGroupNewButtonBackgroundColor: #efefef,
+    --bookmark-group-new-button-color: #fff;
+    --bookmark-group-new-button-background-color: #3c3c3c;
 
-		bookmarkItemColor: #333,
-		bookmarkItemBackgroundColor: #efefef,
-		bookmarkItemHoverBorderColor: #bbb,
+    --bookmark-item-color: #fff;
+    --bookmark-item-background-color: #3c3c3c;
+    --bookmark-item-hover-border-color: #9d9d9d;
 
-		iconPickerBackgroundColor: #f9f9f9,
-		iconPickerBorderColor: #bbb,
-		iconPickerItemColor: #333,
-		iconPickerItemHoverBorderColor: #bbb,
-		iconPickerItemSelectedBorderColor: #bbb,
-		iconPickerItemSelectedBackgroundColor: #e0e0e0,
+    --icon-picker-background-color: #3c3c3c;
+    --icon-picker-border-color: #9d9d9d;
+    --icon-picker-item-color: #fff;
+    --icon-picker-item-hover-border-color: #9d9d9d;
+    --icon-picker-item-selected-border-color: #9d9d9d;
+    --icon-picker-item-selected-background-color: #4b4b4b;
 
-		fileImportBackgroundColor: #f5f5f5,
-		fileImportBorderColor: #bbb,
-		fileImportTextColor: #333,
+    --file-import-background-color: #575757;
+    --file-import-border-color: #9d9d9d;
+    --file-import-text-color: #fff;
 
-		modalContentBackgroundColor: #fff,
-		modalContentColor: #333,
-		modalFooterBackgroundColor: #f1f1f1,
+    --modal-content-background-color: #202020;
+    --modal-content-color: #fff;
+    --modal-footer-background-color: #2b2b2b;
 
-		sidebarCoveredBackgroundColor: #e4e4e4,
-		sidebarUncoveredBackgroundColor: #e9e9e9,
-		sidebarItemColor: #333,
-		sidebarItemHoverBackgroundColor: #f6f6f6
-	),
-	dark: (
-		pageBackground: #1f1f1f,
-
-		inputColor: #fff,
-		inputBackgroundColor: #535353,
-		inputBorderColor: #6b6b6b,
-
-		bookmarkGroupHeaderColor: #fff,
-		bookmarkGroupHeaderStateEditBackgroundColor: #666,
-		bookmarkGroupHeaderControlButtonColor: #fff,
-		bookmarkGroupHeaderControlButtonHoverBackgroundColor: #3c3c3c,
-
-		bookmarkGroupNewButtonColor: #fff,
-		bookmarkGroupNewButtonBackgroundColor: #3c3c3c,
-
-		bookmarkItemColor: #fff,
-		bookmarkItemBackgroundColor: #3c3c3c,
-		bookmarkItemHoverBorderColor: #9d9d9d,
-
-		iconPickerBackgroundColor: #3c3c3c,
-		iconPickerBorderColor: #9d9d9d,
-		iconPickerItemColor: #fff,
-		iconPickerItemHoverBorderColor: #9d9d9d,
-		iconPickerItemSelectedBorderColor: #9d9d9d,
-		iconPickerItemSelectedBackgroundColor: #4b4b4b,
-
-		fileImportBackgroundColor: #575757,
-		fileImportBorderColor: #9d9d9d,
-		fileImportTextColor: #fff,
-
-		modalContentBackgroundColor: #202020,
-		modalContentColor: #fff,
-		modalFooterBackgroundColor: #2b2b2b,
-
-		sidebarCoveredBackgroundColor: #1f1f1f,
-		sidebarUncoveredBackgroundColor: #2c2c2c,
-		sidebarItemColor: #fff,
-		sidebarItemHoverBackgroundColor: #414141
-	)
-);
+    --sidebar-covered-background-color: #1f1f1f;
+    --sidebar-uncovered-background-color: #2c2c2c;
+    --sidebar-item-color: #fff;
+    --sidebar-item-hover-background-color: #414141;
+}
 
 body {
-	&.light {
-		background-color: themed('light', 'pageBackground');
+	background-color: var(--page-background);
+}
 
-		select,
-		input {
-			color: themed('light', 'inputColor');
-			background-color: themed('light', 'inputBackgroundColor');
-			border-color: themed('light', 'inputBorderColor');
-		}
-	}
-
-	&.dark {
-		background-color: themed('dark', 'pageBackground');
-
-		select,
-		input {
-			color: themed('dark', 'inputColor');
-			background-color: themed('dark', 'inputBackgroundColor');
-			border-color: themed('dark', 'inputBorderColor');
-		}
-	}
+select,
+input {
+	color: var(--input-color);
+	background-color: var(--input-background-color);
+	border-color: var(--input-border-color);
 }
 
 $sidebar-covered-width: 56px;
@@ -116,3 +95,9 @@ $sidebar-uncovered-width: 250px;
 $sidebar-item-height: $sidebar-covered-width;
 
 $breakpoint-desktop: 576px;
+
+@mixin desktop-styling {
+	@media only screen and (min-width: $breakpoint-desktop) {
+		@content;
+	}
+}

@@ -11,6 +11,7 @@
 		flex: 1;
 		font-weight: 400;
 		font-size: 16px;
+		color: var(--bookmark-group-header-color);
 	}
 
 	button {
@@ -20,49 +21,17 @@
 		background-color: transparent;
 		cursor: pointer;
 		font-size: 16px;
-	}
+		color: var(--bookmark-group-header-control-button-color);
 
-	&_theme {
-		&_light {
-			h1 {
-				color: themed('light', 'bookmarkGroupHeaderColor');
-			}
-
-			button {
-				color: themed('light', 'bookmarkGroupHeaderControlButtonColor');
-
-				&:hover {
-					background-color: themed('light', 'bookmarkGroupHeaderControlButtonHoverBackgroundColor');
-				}
-			}
-
-			&.bookmark-group__header_state_edit {
-				background-color: themed('light', 'bookmarkGroupHeaderStateEditBackgroundColor');
-			}
-		}
-
-		&_dark {
-			h1 {
-				color: themed('dark', 'bookmarkGroupHeaderColor');
-			}
-
-			button {
-				color: themed('dark', 'bookmarkGroupHeaderControlButtonColor');
-
-				&:hover {
-					background-color: themed('dark', 'bookmarkGroupHeaderControlButtonHoverBackgroundColor');
-				}
-			}
-
-			&.bookmark-group__header_state_edit {
-				background-color: themed('dark', 'bookmarkGroupHeaderStateEditBackgroundColor');
-			}
+		&:hover {
+			background-color: var(--bookmark-group-header-control-button-hover-background-color);
 		}
 	}
 
 	&_state {
 		&_edit {
 			padding: 10px;
+			background-color: var(--bookmark-group-header-state-edit-background-color);
 
 			input {
 				width: 100%;

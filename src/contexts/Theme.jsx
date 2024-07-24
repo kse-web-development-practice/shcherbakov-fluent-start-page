@@ -10,8 +10,8 @@ const ThemeProvider = ({ children }) => {
 	const theme = state.settings.theme === 'auto' ? autoDarkMode : state.settings.theme;
 
 	useEffect(() => {
-		document.body.classList.remove('light', 'dark');
-		document.body.classList.add(theme);
+		document.documentElement.classList.remove('light', 'dark');
+		document.documentElement.classList.add(theme);
 	}, [theme]);
 
 	return (
