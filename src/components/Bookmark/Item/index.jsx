@@ -10,18 +10,16 @@ import FaviconAuto from '../../Favicon/Auto';
 import FaviconIcon from '../../Favicon/Icon';
 import FaviconText from '../../Favicon/Text';
 import FaviconImage from '../../Favicon/Image';
-import { ThemeContext } from '../../../contexts/Theme';
 
 const BookmarkItem = ({ id, text, link, size, showDraggableHandle, showEditButton = true, favicon }) => {
 	const { onGroupItemEditButtonClick } = useContext(BookmarkContainerContext);
-	const { themeCapitalized } = useContext(ThemeContext);
 
 	const handleEditButtonClick = () => {
 		onGroupItemEditButtonClick?.(id);
 	};
 
 	return (
-		<div className={classNames(styles.bookmarkItem, styles[`bookmarkItemTheme${themeCapitalized}`])}>
+		<div className={styles.bookmarkItem}>
 			{showDraggableHandle && <button className="draggable-handle" aria-hidden></button>}
 			{showEditButton && (
 				<button className={styles.bookmarkItemEditButton} onClick={handleEditButtonClick}>

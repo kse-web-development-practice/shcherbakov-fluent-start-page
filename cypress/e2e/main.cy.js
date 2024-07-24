@@ -151,20 +151,20 @@ describe('e2e test', () => {
 		describe('Change theme', () => {
 			it('should change app appearance to light and save', () => {
 				cy.get('label').contains('Mode').get('input[value="light"]').check();
-				cy.get('body.light').should('exist');
+				cy.get('html.light').should('exist');
 
 				cy.reload();
-				cy.get('body.light').should('exist');
+				cy.get('html.light').should('exist');
 			});
 		});
 
 		describe('Clearing data', () => {
 			it('should reset data after changing a color theme', () => {
 				cy.get('label').contains('Mode').get('input[value="light"]').check();
-				cy.get('body.light').should('exist');
+				cy.get('html.light').should('exist');
 
 				cy.get('button').contains('Clear').click();
-				cy.get('body.dark').should('exist');
+				cy.get('html.dark').should('exist');
 			});
 		});
 	});

@@ -14,16 +14,7 @@ const ThemeProvider = ({ children }) => {
 		document.documentElement.classList.add(theme);
 	}, [theme]);
 
-	return (
-		<ThemeContext.Provider
-			value={{
-				theme,
-				themeCapitalized: theme.charAt(0).toUpperCase() + theme.slice(1) // Used for easier usage in className because styles are imported like "componentNameThemeWhite" or `componentNameTheme${themeCapitalized}`
-			}}
-		>
-			{children}
-		</ThemeContext.Provider>
-	);
+	return <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>;
 };
 
 ThemeProvider.propTypes = {

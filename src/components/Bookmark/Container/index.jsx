@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +7,6 @@ import BookmarkGroup, { groupStructureProps, publicProps as publicGroupProps } f
 import { publicProps as publicGroupHeaderProps } from '../Group/Header';
 import { publicProps as publicItemProps } from '../Item';
 import { AppDataContext } from '../../../contexts/AppData';
-import { ThemeContext } from '../../../contexts/Theme';
 import styles from './container.module.scss';
 import BookmarkContainerContext from './context';
 
@@ -22,7 +20,6 @@ const BookmarkContainer = ({
 	onGroupItemEditButtonClick
 }) => {
 	const { dispatch } = useContext(AppDataContext);
-	const { themeCapitalized } = useContext(ThemeContext);
 
 	const handleShiftGroups = (moveBy) => {
 		if (!editAppData) return;
@@ -133,7 +130,7 @@ const BookmarkContainer = ({
 				onGroupItemEditButtonClick
 			}}
 		>
-			<article className={classNames(styles.bookmarkContainer, styles[`bookmarkContainerTheme${themeCapitalized}`])}>
+			<article className={styles.bookmarkContainer}>
 				{groups.map(
 					(
 						group,

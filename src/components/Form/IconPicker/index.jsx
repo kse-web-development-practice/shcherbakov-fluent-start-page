@@ -1,16 +1,13 @@
-import React, { useMemo, useState, useContext } from 'react';
+import React, { useMemo, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getIconList } from '../../../services/FontAwesomeService';
-import { ThemeContext } from '../../../contexts/Theme';
 import styles from './icon-picker.module.scss';
 
 const icons = getIconList();
 
 const FormIconPicker = ({ selectedIconName, onPick }) => {
-	const { themeCapitalized } = useContext(ThemeContext);
-
 	const [searchValue, setSearchValue] = useState('');
 	const [selectedIcon, setSelectedIcon] = useState(selectedIconName);
 
@@ -29,7 +26,7 @@ const FormIconPicker = ({ selectedIconName, onPick }) => {
 	);
 
 	return (
-		<fieldset className={classNames(styles.iconPicker, styles[`iconPickerTheme${themeCapitalized}`])}>
+		<fieldset className={styles.iconPicker}>
 			<legend className="screenreader">Select an icon</legend>
 			<label className="screenreader" htmlFor="icon-search">
 				Search by icon name
