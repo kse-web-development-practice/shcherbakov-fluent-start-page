@@ -1,4 +1,4 @@
-import useMobileUserAgentCheck from '.';
+import isMobile from '.';
 
 const userAgents = [
 	{
@@ -40,7 +40,7 @@ const userAgents = [
 	}
 ];
 
-describe('useMobileUserAgentCheck', () => {
+describe('isMobile', () => {
 	describe.each(userAgents)('test for $name', (item) => {
 		const { userAgent: originalUserAgent } = window.navigator;
 
@@ -62,7 +62,7 @@ describe('useMobileUserAgentCheck', () => {
 		});
 
 		it(`returns ${item.isMobile}`, () => {
-			expect(useMobileUserAgentCheck()).toBe(item.isMobile);
+			expect(isMobile()).toBe(item.isMobile);
 		});
 	});
 });
