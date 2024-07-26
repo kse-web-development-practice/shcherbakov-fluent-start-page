@@ -5,10 +5,12 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	transition: all 0.25s ease;
+	transition: all 0.15s ease;
+	z-index: 998;
 
 	overflow: hidden;
-	background-color: $sidebar-covered-background-color;
+
+	background-color: var(--sidebar-covered-background-color);
 
 	@include desktop-styling {
 		top: 0;
@@ -16,7 +18,7 @@
 
 		&:hover {
 			width: $sidebar-uncovered-width;
-			background-color: $sidebar-uncovered-background-color;
+			background-color: var(--sidebar-uncovered-background-color);
 
 			.sidebar__item {
 				justify-content: start;
@@ -51,10 +53,11 @@
 
 		height: $sidebar-item-height;
 		text-decoration: none;
-		color: $sidebar-item-color;
+
+		color: var(--sidebar-item-color);
 
 		&:hover {
-			background-color: $sidebar-item-hover-background-color;
+			background-color: var(--sidebar-item-hover-background-color);
 		}
 
 		&-icon {

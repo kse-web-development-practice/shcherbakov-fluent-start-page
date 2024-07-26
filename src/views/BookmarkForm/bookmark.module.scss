@@ -1,0 +1,32 @@
+@import '../../assets/styles/variables';
+
+.bookmark-form-layout {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 1rem;
+
+	@include desktop-styling {
+		flex-direction: row;
+		gap: 1.5rem;
+		padding: 0 0.5rem;
+
+		&__form {
+			flex: 1;
+		}
+
+		&__preview {
+			display: block;
+			flex: 0.5;
+
+			&-title {
+				margin: 0 0 10px;
+			}
+
+			&-content {
+				position: sticky;
+				top: 0;
+				bottom: 0;
+			}
+		}
+	}
+}

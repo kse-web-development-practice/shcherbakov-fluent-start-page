@@ -1,27 +1,17 @@
-class UrlService {
-	static getUrlWithProtocol(url) {
-		return url.startsWith('http') ? url : `https://${url}`;
-	}
+export const getUrlWithProtocol = (url) => {
+	return url.startsWith('http') ? url : `https://${url}`;
+};
 
-	static isValid(url) {
-		try {
-			return Boolean(new URL(this.getUrlWithProtocol(url)));
-		} catch (e) {
-			return false;
-		}
+export const isUrlValid = (url) => {
+	try {
+		return Boolean(new URL(getUrlWithProtocol(url)));
+	} catch (e) {
+		return false;
 	}
+};
 
-	static getOrigin(url) {
-		return new URL(this.getUrlWithProtocol(url)).origin;
-	}
+export const getUrlOrigin = (url) => new URL(getUrlWithProtocol(url)).origin;
 
-	static getHost(url) {
-		return new URL(this.getUrlWithProtocol(url)).host;
-	}
+export const getUrlHost = (url) => new URL(getUrlWithProtocol(url)).host;
 
-	static combine(url1, url2) {
-		return new URL(url2, this.getOrigin(url1));
-	}
-}
-
-export default UrlService;
+export const combineUrls = (url1, url2) => new URL(url2, getUrlOrigin(url1));

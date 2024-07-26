@@ -1,7 +1,6 @@
 import React from 'react';
-
-import BookmarkGroup from '../Group';
 import BookmarkItem from '.';
+import BookmarkContainer from '../Container';
 
 export default {
 	title: 'Bookmark/Item',
@@ -9,7 +8,12 @@ export default {
 	decorators: [
 		(Story, { args }) => (
 			<div style={{ width: 400 }}>
-				<BookmarkGroup id="0" renderGroupHeader={null} bookmarks={[args]} />
+				<BookmarkContainer
+					groups={[{ id: '0', bookmarks: [args] }]}
+					groupItemProps={{ showEditButton: false }}
+					groupProps={{ showHeader: false, maxColumns: 4 }}
+					showCreateGroupButton={false}
+				/>
 			</div>
 		)
 	],

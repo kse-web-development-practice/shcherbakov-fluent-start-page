@@ -1,0 +1,14 @@
+@import '../../assets/styles/variables';
+
+$page-content-mobile-padding: 10px 15px 80px 15px;
+$page-content-desktop-padding: 10px 15px 10px $sidebar-covered-width + 15px;
+
+.page-content {
+	padding: $page-content-mobile-padding;
+	height: 100%;
+	box-sizing: border-box;
+
+	@include desktop-styling {
+		padding: $page-content-desktop-padding;
+	}
+}

@@ -2,6 +2,7 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const EslintWebpackPlugin = require('eslint-webpack-plugin');
 const { DefinePlugin } = require('webpack');
 
@@ -28,7 +29,18 @@ module.exports = (env) => ({
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: 'public/index.html'
+			template: 'public/index.html',
+			publicUrl: process.env.BASE_URL ?? '/'
+		}),
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: 'public',
+					globOptions: {
+						ignore: ['**/index.html']
+					}
+				}
+			]
 		}),
 		new EslintWebpackPlugin({
 			exclude: ['node_modules', 'dist', 'public'],

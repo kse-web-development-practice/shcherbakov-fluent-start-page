@@ -1,14 +1,15 @@
 import React from 'react';
 import BookmarkGroup from '.';
 import defaultData from '../../../constants/defaultData';
+import BookmarkContainer from '../Container';
 
 export default {
 	title: 'Bookmark/Group',
 	component: BookmarkGroup,
 	decorators: [
-		(Story) => (
+		(Story, { args }) => (
 			<div style={{ width: 'min(100%, 450px)' }}>
-				<Story />
+				<BookmarkContainer groups={[args]} showCreateGroupButton={false} groupHeaderProps={{ showGroupControls: false }} />
 			</div>
 		)
 	],
@@ -19,7 +20,5 @@ export default {
 };
 
 export const SampleGroup = {
-	args: {
-		...defaultData.groups[0]
-	}
+	args: { ...defaultData.groups[0] }
 };

@@ -9,25 +9,43 @@
 		}
 	},
 	"env": {
+		"node": true,
 		"browser": true,
 		"es2021": true,
 		"webextensions": true,
-		"jest/globals": true
+		"jest/globals": true,
+		"cypress/globals": true
 	},
 	"extends": [
 		"eslint:recommended",
 		"plugin:react/recommended",
-		"plugin:prettier/recommended"
+		"plugin:prettier/recommended",
+		"plugin:cypress/recommended"
 	],
 	"plugins": [
 		"react",
 		"react-hooks",
-		"jest"
+		"jest",
+		"cypress"
 	],
 	"rules": {
 		"react/react-in-jsx-scope": "off",
 		"react/no-unescaped-entities": 0,
-		"react/prop-types": "off"
+		"react/prop-types": "off",
+		"react/no-unknown-property": [
+			"error",
+			{
+				"ignore": [
+					"gs-id",
+					"gs-x",
+					"gs-y",
+					"gs-min-w",
+					"gs-max-w",
+					"gs-min-h",
+					"gs-max-h"
+				]
+			}
+		]
 	},
 	"ignorePatterns": [
 		"**/*.svg",

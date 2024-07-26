@@ -6,7 +6,7 @@ $front-bg: #2b2b2b;
 $back-bg: #202020;
 
 .modal {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -17,8 +17,7 @@ $back-bg: #202020;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
-
-		color: #fff;
+		color: var(--modal-content-color);
 	}
 
 	&__header {
@@ -27,9 +26,10 @@ $back-bg: #202020;
 
 		gap: 0.5rem;
 		padding: $content-padding * 1.2 $content-padding;
-		background-color: $back-bg;
 		font-weight: 500;
 		font-size: 18px;
+
+		background-color: var(--modal-content-background-color);
 	}
 
 	&__close-button {
@@ -38,7 +38,7 @@ $back-bg: #202020;
 		background: transparent;
 		border: none;
 		cursor: pointer;
-		color: #fff;
+		color: var(--modal-content-color);
 
 		&_desktop {
 			display: none;
@@ -48,13 +48,14 @@ $back-bg: #202020;
 	&__content {
 		flex: 1;
 		overflow-y: auto;
-		background-color: $back-bg;
 		padding: $content-padding;
+
+		background-color: var(--modal-content-background-color);
 	}
 
 	&__footer {
 		padding: $content-padding;
-		background-color: $front-bg;
+		background-color: var(--modal-footer-background-color);
 	}
 
 	@include desktop-styling {

@@ -2,10 +2,10 @@ import React, { useMemo, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import FontAwesomeService from '../../../services/FontAwesomeService';
+import { getIconList } from '../../../services/FontAwesomeService';
 import styles from './icon-picker.module.scss';
 
-const icons = FontAwesomeService.getIconList();
+const icons = getIconList();
 
 const FormIconPicker = ({ selectedIconName, onPick }) => {
 	const [searchValue, setSearchValue] = useState('');

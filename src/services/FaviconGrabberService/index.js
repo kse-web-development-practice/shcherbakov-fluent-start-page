@@ -1,4 +1,4 @@
-import UrlService from '../UrlService';
+import { combineUrls, getUrlHost } from '../UrlService';
 
 class FaviconGrabberService {
 	/**
@@ -15,10 +15,10 @@ class FaviconGrabberService {
 	 * and checks if it exists by response status
 	 * @param {string} url Website URL
 	 * @param {string} faviconFileName
-	 * @returns {Promise<string>} A full favicon URL if it exists and otherwise rejects
+	 * @returns {Promise<string>} A full favicon URL if it exists and otherwise rejects. It is implemented like that because of the tryAllPossibleCases method
 	 */
 	static getFromWebsite(url, faviconFileName) {
-		const faviconUrl = this.#fixCorsError(UrlService.combine(url, `/${faviconFileName}`));
+		const faviconUrl = this.#fixCorsError(combineUrls(url, `/${faviconFileName}`));
 
 		return new Promise((resolve, reject) => {
 			fetch(faviconUrl)
@@ -39,7 +39,7 @@ class FaviconGrabberService {
 	 * @param {string} url
 	 */
 	static getWithDuckDuckGo(url) {
-		return this.getFromWebsite(`https://external-content.duckduckgo.com`, `ip3/${UrlService.getHost(url)}.ico`);
+		return this.getFromWebsite(`https://external-content.duckduckgo.com`, `ip3/${getUrlHost(url)}.ico`);
 	}
 
 	/**

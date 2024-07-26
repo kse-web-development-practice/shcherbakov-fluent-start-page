@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { AppDataContext } from '../../../../contexts/AppData';
 import FormAppSettings from '.';
 
 export default {
@@ -7,13 +8,8 @@ export default {
 	component: FormAppSettings,
 	decorators: [
 		(Story) => {
-			const methods = useForm({
-				defaultValues: {
-					theme: {
-						mode: 'dark'
-					}
-				}
-			});
+			const { state } = useContext(AppDataContext);
+			const methods = useForm({ values: state.settings });
 
 			return (
 				<FormProvider {...methods}>

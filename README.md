@@ -1,41 +1,53 @@
 # Fluent Start Page
 
-Windows Phone 7 принесла домашню сторінку у вигляді різнокольорових плиток. Ця концепція проіснувала аж до виходу Windows 11.
+## Background
 
-<table>
-	<tr>
-		<td rowspan="2">
-			<figure>
-				<img src="./docs/winphone7-home.jpg" alt="Windows Phone 7" width="200" />
-				<caption>Windows Phone 7</caption>
-			</figure>
-			<figure>
-				<img src="./docs/winphone10-home.png" alt="Windows Phone 10" width="200" />
-				<caption>Windows Phone 10</caption>
-			</figure>
-		</td>
-		<td>
-			<figure>
-				<img src="./docs/win8-start.png" alt="Windows 8" width="200" />
-				<caption>Windows 8 / 8.1</caption>
-			</figure>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<figure>
-				<img src="./docs/win10-start-fullscreen.png" alt="Windows 10" width="200" />
-				<caption>Windows 10 (fullscreen)</caption>
-			</figure>
-		</td>
-	</tr>
-</table>
+I want to create an application for storing bookmarks that will look like the start menu from Windows 10. Windows 10 uses Microsoft’s Fluent Design, so this is where the name of this project comes from - Fluent Start Page.
 
-Хоча я користуюся Windows 11 та Android як основними операційними системами, я дуже сумую за плитками. Також я часто користуюся стартовою сторінкою браузера для швидкого доступу до сайтів.
+On desktop, the application should be available as a browser extension to make it easy to install.
 
-І тут виникла ідея зробити стартову сторінку браузера, але яка буде майже *точно* виглядати як Пуск з Windows 10 (тому що вона виглядає краще).
+## Technical requirements
 
-## Нотатки
+1. Work as a browser extension for popular desktop browsers
+2. Host the app on the domain to make it available on mobile devices (because browser extensions on mobile can’t change the new tab page)
+3. Be able to import, export, and locally store user’s bookmarks and settings
 
-- Референс для структури даних плиток: <https://learn.microsoft.com/en-us/windows/configuration/start/layout?pivots=windows-10&tabs=intune-10%2Cintune-11#start-layout-example>
-- Отримання іконки сайту нативно через браузер (ненадійно, для Chromium браузерів): <https://superuser.com/questions/532616/grab-favicon-ico-using-google-chrome-dev-tools/1443114#1443114>, <https://stackoverflow.com/a/68423764>
+## Stories
+
+### Story1
+
+As a browser user, I want to add bookmarks and organize them in groups so I can be more productive by quickly accessing the websites I need.
+
+### Story2
+
+As a browser user, I want to edit my bookmarks so I can change my new tab page according to my new preferences.
+
+### Story3
+
+As a browser user, I want to delete my bookmarks so I can free the space on my new tab page from the bookmarks I don’t visit anymore.
+
+### Story4
+
+As a browser user, I want to be able to export and import my new tab page’s bookmarks to easily move to another browser or share my configuration with someone.
+
+### Story5
+
+As a browser user, I want to customize the appearance and functions of the new tab page to make it look better.
+
+## UI
+
+See [draw.io](https://drive.google.com/file/d/10v3QcEAvQOjWphO6h3XzgWVWlb_bbT1j/view?usp=sharing)
+
+## Plan of attack
+
+- [x] Setup the project
+- [x] Create a Windows 10 start menu-like grid system
+- [x] Create a Bookmark Item component
+- [x] Create a Bookmark Group component
+- [x] Implement drag and drop system for Bookmark Item and Bookmark Group components
+- [x] Create an Add Bookmark Form
+- [x] Create an Edit Bookmark Form
+- [x] Create Settings Form
+- [x] Implement saving and loading data
+- [x] Implement support of light and dark color themes, including detecting the system’s color theme
+- [x] Implement importing and exporting existing configurations (JSON files)
